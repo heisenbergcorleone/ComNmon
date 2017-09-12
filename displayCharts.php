@@ -1,4 +1,5 @@
-<select id="displayCharts">
+
+<select id="displayCharts" multiple>
     <option selected="">Choose one</option>
 <?php
 
@@ -12,23 +13,29 @@ foreach($files as $name) { ?>
 
 ?>
 </select>
-<button id="displayData"></button>
+<button id="displayData">Display</button>
 <script>
 var array = [];
-var doc = document.getElementById("displayCharts");
-console.log(doc);
+var button = document.getElementById("displayData");
 
-// Event listner to check if a value has been changed? if yes, it pushes the value to the array
-doc.addEventListener("change", function() {
-    if(array.length < 4) {
-        var value = this.value;
-        // checks for a condition: that the value has been already added to the array or no!
-        if(array[0] != value && array[1] != value && array[2] != value && array[3] != value){
-            array.push(this.value);
-        }
-        console.log(array)
+button.addEventListener("click", function(){
+    var select = document.getElementsByTagName('select')[0];
+    var result = [];
+    var options = select && select.options;
+    var opt;
+    console.log(options)
+
+  for (var i=0; i<options.length; i++) {
+    opt = options[i];
+
+    if (opt.selected && result.length <4) {
+      result.push(opt.value || opt.text);
     }
-    
+  }
+  console.log(result);
+
+
 })
+
 
 </script>
