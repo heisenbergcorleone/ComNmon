@@ -27,7 +27,7 @@
 			<input type="button" id="reset-live-search" value="Reset">
 		</div><br/>
 		
-		<form class="tagsFilter" >
+		<form class="tagsFilter">
 			
 			<div>
 				Date:-<input id="choosedate" type="date" placeholder="Date" >

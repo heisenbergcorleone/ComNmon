@@ -1,16 +1,11 @@
 <?php 
 
 $jsonData = file_get_contents("Assets\sampleData.json");
-echo $jsonData;
+#echo $jsonData;
 
-
-?>
-
-
-<!-- <?php
-$dir    = 'D:\UniServerZ\www\Livechart';
+$dir    = 'F:\UniServerZ\www\servers\Templates';
 
 $files2 = scandir($dir, 1);
 
-<!-- print_r($files2); -->
-?> -->
+print_r($files2);
+?>
