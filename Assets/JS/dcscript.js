@@ -26,8 +26,11 @@ button.addEventListener("click", function(){
   for(var i = 0; i < result.length; i++) {
     var frame = document.createElement("iframe");
     frame.src= "templates/"+result[i];
+    console.log(frame);
     console.log(frame.src);
-    frame.width = "600"; frame.height = "600";
+    frame.width = (window.innerWidth/2.20);
+    console.log(window.innerWidth,window.innerHeight)
+    frame.height = (window.innerHeight/1.90);
     displayFrames.appendChild(frame);
   }
 
