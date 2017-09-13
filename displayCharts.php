@@ -7,8 +7,8 @@
     <option selected="">Choose one</option>
 <?php
 
-$dir    = 'F:\UniServerZ\www\servers\Templates';
-$files = scandir($dir);
+$dir    = '..\servers\Templates';
+$files = scandir($dir, 1);
 foreach($files as $name) { ?>
     <option value="<?php echo $name ?>"><?php echo $name ?></option>
 <?php

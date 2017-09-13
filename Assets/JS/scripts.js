@@ -98,8 +98,7 @@ $("#reset-live-search").click(function(){
 	
 	
 
-	console.timeEnd("Mytime");
-});
+	});
 
 	
 //
