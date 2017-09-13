@@ -8,7 +8,7 @@
 <?php
 
 $dir    = '..\servers\Templates';
-$files = scandir($dir, 1);
+$files = scandir($dir,1);
 foreach($files as $name) { ?>
     <option value="<?php echo $name ?>"><?php echo $name ?></option>
 <?php

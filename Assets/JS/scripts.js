@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-	console.time("Mytime");  // for check the time performance 
+	  //$('button').hide();
 	$(".tagsToggle").click(function(){
 		 
 		 $(".tagContainer").fadeToggle();

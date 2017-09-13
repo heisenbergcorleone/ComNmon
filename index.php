@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="Assets/CSS/styles.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js"></script>
 <script defer="defer" type="text/javascript"  src="Assets/JS/scripts.js"  ></script>
 
 
