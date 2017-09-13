@@ -16,8 +16,8 @@
 	<div style="width:20%;" >
 		<div>
 			<button class="tagsToggle"  >
-			<!-- <img src="Assets/images/burger.png" height="50"> -->
-			<canvas> </canvas>
+			<img src="Assets/images/burger.png" height="50">
+<!-- 			<canvas> </canvas> -->
 			</button>
 		</div>
 		<div class="tagContainer">
