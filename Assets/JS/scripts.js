@@ -1,16 +1,35 @@
 
 $(document).ready(function(){
-
-	//$('h2').hide();  
-	//$("button").hide();
+		$('h2').hide();  
+		$("button:not(#displayData)").hide();
+		$('.myTable td').hide();
 
 	$(".tagsToggle").click(function(){
-		 
 		 $(".tagContainer").fadeToggle();
 		 		
 	})
-	
-	// $(document).snowfall({flakeColor:'#ff0000', maxSize: 10});
+//for teigger the chart button
+$('#topSummary').click(function(){
+    $('iframe').each(function(index){
+    	var sum_button=$(this).contents().find('button#draw_TOPSUM');
+    	if(sum_button.length){
+        	sum_button.trigger('click');
+    	}
+	});
+});
+
+$('#topCommands').click(function(){
+    $('iframe').each(function(index){
+    	var sum_button=$(this).contents().find('button#draw_TOPCMD');
+    	if(sum_button.length){
+        	sum_button.trigger('click');
+    	}
+	});
+});
+
+
+
+
 	
 // Live search 
 	$("#live-search").keyup(function(){
@@ -106,15 +125,15 @@ $("#reset-live-search").click(function(){
 	
 //
 
-window.onload = ()=>{
+// window.onload = ()=>{
 	
 
-console.time("My operation");
-maxCount = 100000;
-for(var n = 0; n < maxCount; n++){
-/*perform the operation to be measured*/
-}
-console.timeEnd("My operation");
+// console.time("My operation");
+// maxCount = 100000;
+// for(var n = 0; n < maxCount; n++){
+// /*perform the operation to be measured*/
+// }
+// console.timeEnd("My operation");
 
 
-}
+// }
