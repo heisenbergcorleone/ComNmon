@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  var result = [];
+
+var result = [];
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
@@ -24,6 +25,13 @@ button.addEventListener("click", function(){
 
   for(var i = 0; i < result.length; i++) {
     var frame = document.createElement("iframe");
+    
+  if(i == result.length-1) {
+    frame.onload =function () {
+      $("div.buttons").show();
+    }
+  }
+
     frame.src= "templates/"+result[i];
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);

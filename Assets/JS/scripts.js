@@ -1,7 +1,12 @@
 
 $(document).ready(function(){
-		$('h2').hide();  
-		$("button:not(#displayData)").hide();
+		$('h2').hide();
+		//$("div.buttons").hide();		
+		if($("iframes").context != undefined){
+			var iframebody = ($("iframes").context.body);
+			$(iframebody).find("button").hide();
+		};
+
 		$('.myTable td').hide();
 
 	$(".tagsToggle").click(function(){
@@ -9,16 +14,17 @@ $(document).ready(function(){
 		 		
 	})
 //for teigger the chart button
-$('#topSummary').click(function(){
+$('#draw_TOPSUM').click(function(){
     $('iframe').each(function(index){
-    	var sum_button=$(this).contents().find('button#draw_TOPSUM');
+		var sum_button=$(this).contents().find('button#draw_TOPSUM');
+		console.log(sum_button)
     	if(sum_button.length){
         	sum_button.trigger('click');
     	}
 	});
 });
 
-$('#topCommands').click(function(){
+$('#draw_TOPCMD').click(function(){
     $('iframe').each(function(index){
     	var sum_button=$(this).contents().find('button#draw_TOPCMD');
     	if(sum_button.length){
