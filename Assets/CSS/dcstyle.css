@@ -1,0 +1,21 @@
+@media screen and (max-width:1300px){
+    .frames iframe{
+        height:720px;
+        width: 1200px;
+        }
+    }
+ 
+ 
+ @media screen and (min-width:1310px){
+    .frames iframe{
+        height:720px;
+        width: 730px;
+        }
+    }
+ 
+ @media screen and (min-width:1610px){
+    .frames iframe{
+        height:1000px;
+        width: 1400px;
+        }
+    }
