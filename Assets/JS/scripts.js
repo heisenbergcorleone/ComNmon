@@ -1,8 +1,8 @@
 
 $(document).ready(function(){
 
-	$('h2').hide();  
-	$("button").hide();
+	//$('h2').hide();  
+	//$("button").hide();
 
 	$(".tagsToggle").click(function(){
 		 
