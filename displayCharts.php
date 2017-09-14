@@ -10,9 +10,12 @@
 
 $dir    = '..\servers\Templates';
 $files = scandir($dir,1);
-foreach($files as $name) { ?>
+foreach($files as $name) { 
+    if($name != "." && $name != "..") {
+    ?>
     <option value="<?php echo $name ?>"><?php echo $name ?></option>
 <?php
+    }
   } ?>
 
 ?>
