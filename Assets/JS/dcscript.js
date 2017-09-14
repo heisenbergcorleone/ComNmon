@@ -1,4 +1,5 @@
-var result = [];
+$(document).ready(function(){
+  var result = [];
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
@@ -31,5 +32,11 @@ button.addEventListener("click", function(){
     displayFrames.appendChild(frame);
   }
 
+var x = document.getElementsByTagName('button');
+console.log(x);
 result=[];
+
 })
+
+  $('#frames > button').hide();
+});

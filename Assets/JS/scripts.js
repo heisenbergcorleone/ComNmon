@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
 	  //$('button').hide();
+	  //$('h2').hide();  
 	$(".tagsToggle").click(function(){
 		 
 		 $(".tagContainer").fadeToggle();
