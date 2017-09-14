@@ -24,7 +24,8 @@ foreach($files as $name) {
 </select>
 <button id="displayData">Display</button><br>
 
-<div class = "buttons" style = "display:none;">   
+<div class = "buttons" style = "display:none;">
+    <button ><b>Configuration</b></button>  
     <button id="draw_TOPSUM" style="color:black;"  ><b>Top Summary</b></button>
     <button id="draw_TOPCMD" style="color:black;" ><b>Top Commands</b></button>
     <br>
@@ -43,6 +44,22 @@ foreach($files as $name) {
     <button id="draw_FSCACHE" style="color:blue;"><b>FS Cache</b></button>
     <button id="draw_PAGING" style="color:blue;"><b>Paging</b></button>
     <button id="draw_SWAPIN" style="color:blue;"><b>Swaping </b></button>
+    <button id="draw_NET" style="color:purple;"><b>Network</b></button>
+	<button id="draw_NETPACKET" style="color:purple;"><b>Net Packets</b></button>
+	<button id="draw_NETSIZE" style="color:purple;"><b>Net Size</b></button>
+	<button id="draw_ADAPT_KBS" style="color:green;"><b>Adapter KBs</b></button>
+	<button id="draw_ADAPT_TPS" style="color:green;"><b>Adapter Tps</b></button>
+	<button id="draw_DISKBUSY" style="color:brown;"><b>Disk Busy</b></button>
+	<button id="draw_DISKBUSYu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKREAD" style="color:brown;"><b>Disk Read</b></button>
+	<button id="draw_DISKREADu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKWRITE" style="color:brown;"><b>Disk Write</b></button>
+	<button id="draw_DISKWRITEu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKBSIZE" style="color:brown;"><b>Disk BSize</b></button>
+	<button id="draw_DISKXFER" style="color:brown;"><b>Disk Xfer</b></button>
+	<button id="draw_JFS" style="color:brown;"><b>JFS</b></button>
+	<button id="draw_IPC" style="color:black;"><b>IPC</b></button>
+
 </div>
 
 <div id="frames"></div>

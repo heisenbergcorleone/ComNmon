@@ -13,25 +13,20 @@ $(document).ready(function(){
 		 $(".tagContainer").fadeToggle();
 		 		
 	})
-//for teigger the chart button
-$('#draw_TOPSUM').click(function(){
-    $('iframe').each(function(index){
-		var sum_button=$(this).contents().find('button#draw_TOPSUM');
-		console.log(sum_button)
-    	if(sum_button.length){
-        	sum_button.trigger('click');
-    	}
-	});
-});
+//for trigger the chart button
 
-$('#draw_TOPCMD').click(function(){
-    $('iframe').each(function(index){
-    	var sum_button=$(this).contents().find('button#draw_TOPCMD');
-    	if(sum_button.length){
-        	sum_button.trigger('click');
-    	}
-	});
-});
+$("div.buttons > button").click(function(e){
+	if(this.innerText == "Configuration") {
+		return console.log("config");
+	}
+	var buttonId = this.id;
+	$("iframe").each(function(){
+		var sum_button = $(this).contents().find('button#'+buttonId);
+		if(sum_button.length){
+			sum_button.trigger("click");
+		}
+	})
+})
 
 
 
