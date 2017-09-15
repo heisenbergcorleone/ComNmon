@@ -27,8 +27,25 @@ button.addEventListener("click", function(){
     var frame = document.createElement("iframe");
     
   if(i == result.length-1) {
-    frame.onload =function () {
-      $("div.buttons").show();
+    frame.onload = function () {
+      var iframeArray = $("iframe").map(function(){return this});
+
+      // syncs the scrollbars of all the iframes
+      iframeArray.each(function(e){
+        var frElement = iframeArray[e];
+        frElement.contentWindow.onscroll = function() {
+          var xPos = frElement.contentWindow.scrollX;
+          var yPos = frElement.contentWindow.scrollY;
+          // applies the positions of scrollbar of one iframe element to the rest
+          iframeArray.each(function(x){
+            if(frElement != iframeArray[x]){ // optional!
+              iframeArray[x].contentWindow.scrollTo(xPos,yPos);
+            }
+          })
+        }
+      })
+
+      $("div.buttons").show(); 
     }
   }
 

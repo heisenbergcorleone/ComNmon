@@ -1,7 +1,6 @@
 
 $(document).ready(function(){
-		$('h2').hide();
-		//$("div.buttons").hide();		
+		$('h2').hide();	
 		if($("iframes").context != undefined){
 			var iframebody = ($("iframes").context.body);
 			$(iframebody).find("button").hide();
