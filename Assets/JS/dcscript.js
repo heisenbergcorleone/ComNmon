@@ -27,6 +27,7 @@ button.addEventListener("click", function(){
   var loadIframe = function() {
     if (fileNameCounter == result.length){
       syncScroll();
+      syncCursor();
       $("div.buttons").show(); 
       result=[];
       return;
@@ -37,10 +38,11 @@ button.addEventListener("click", function(){
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);
     displayFrames.appendChild(frame);
-
-    fileNameCounter++;
+    
     
     frame.onload = function() {
+      console.log(result[fileNameCounter]);
+      fileNameCounter++;
       loadIframe();
     }
 
@@ -66,6 +68,21 @@ button.addEventListener("click", function(){
       }
     })
   };
+
+  function syncCursor() {
+
+    var iframeEl = document.getElementsByTagName("iframe");
+    iframeEl[0].contentWindow.document.body.addEventListener("click", function(event){
+      console.log(event.clientX,event.clientY);
+    });
+
+  }
+
+
+
+
+
+
 })
 
   $('#frames > button').hide();
