@@ -12,5 +12,5 @@ $dir    = 'D:\UniServerZ\www\Livechart';
 
 $files2 = scandir($dir, 1);
 
-<!-- print_r($files2); -->
+ //print_r($files2);
 ?> -->

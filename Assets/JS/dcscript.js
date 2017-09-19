@@ -22,42 +22,50 @@ button.addEventListener("click", function(){
     }
   }
 
+  var fileNameCounter = 0;
 
-  for(var i = 0; i < result.length; i++) {
-    var frame = document.createElement("iframe");
-    
-  if(i == result.length-1) {
-    frame.onload = function () {
-      var iframeArray = $("iframe").map(function(){return this});
-
-      // syncs the scrollbars of all the iframes
-      iframeArray.each(function(e){
-        var frElement = iframeArray[e];
-        frElement.contentWindow.onscroll = function() {
-          var xPos = frElement.contentWindow.scrollX;
-          var yPos = frElement.contentWindow.scrollY;
-          // applies the positions of scrollbar of one iframe element to the rest
-          iframeArray.each(function(x){
-            if(frElement != iframeArray[x]){ // optional!
-              iframeArray[x].contentWindow.scrollTo(xPos,yPos);
-            }
-          })
-        }
-      })
-
+  var loadIframe = function() {
+    if (fileNameCounter == result.length){
+      syncScroll();
       $("div.buttons").show(); 
+      result=[];
+      return;
     }
-  }
-
-    frame.src= "templates/"+result[i];
+    
+    var frame = document.createElement("iframe");
+    frame.src = "templates/"+ result[fileNameCounter];
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);
     displayFrames.appendChild(frame);
-  }
 
-var x = document.getElementsByTagName('button');
-result=[];
+    fileNameCounter++;
+    
+    frame.onload = function() {
+      loadIframe();
+    }
 
+  };
+
+  loadIframe();
+
+  function syncScroll() {
+    console.log("scrollbars will be synced!");
+    var iframeArray = $("iframe").map(function(){return this});
+     // syncs the scrollbars of all the iframes
+     iframeArray.each(function(e){
+      var frElement = iframeArray[e];
+      frElement.contentWindow.onscroll = function() {
+        var xPos = frElement.contentWindow.scrollX;
+        var yPos = frElement.contentWindow.scrollY;
+        // applies the positions of scrollbar of one iframe element to the rest
+        iframeArray.each(function(x){
+          if(frElement != iframeArray[x]){ // optional!
+            iframeArray[x].contentWindow.scrollTo(xPos,yPos);
+          }
+        })
+      }
+    })
+  };
 })
 
   $('#frames > button').hide();
