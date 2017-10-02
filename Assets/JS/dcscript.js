@@ -34,7 +34,7 @@ button.addEventListener("click", function(){
     }
     
     var frame = document.createElement("iframe");
-    frame.src = "templates/"+ result[fileNameCounter];
+    frame.src = "Templates/"+ result[fileNameCounter];
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);
     displayFrames.appendChild(frame);

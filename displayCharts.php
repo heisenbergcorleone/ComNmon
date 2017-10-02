@@ -1,8 +1,8 @@
 <html>
     <head>
-    <link rel="stylesheet" href="./assets/css/dcstyle.css">
+    <link rel="stylesheet" href="./Assets/CSS/dcstyle.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src ="./assets/js/scripts.js" ></script>
+    <script src ="./Assets/JS/scripts.js" ></script>
     </head>
     <body>
 
@@ -13,7 +13,7 @@
         <option selected="">Select File(s)</option>
     <?php
 
-    $dir    = '..\servers\Templates';
+    $dir    = './Templates';
     $files = scandir($dir,1);
     foreach($files as $name) { 
         if($name != "." && $name != "..") {
@@ -69,7 +69,7 @@
 <div id="frames"></div>
 
 
-<script src ="./assets/js/dcscript.js"></script>
+<script src ="./Assets/JS/dcscript.js"></script>
 
 </body>
 </html>
