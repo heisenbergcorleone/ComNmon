@@ -42,6 +42,7 @@ button.addEventListener("click", function(){
     frame.onload = function() {
       currentFrame = frame;
       fetchTable(result[fileNameCounter]);
+      fecthFileName(result,fileNameCounter);
       fileNameCounter++;
       loadIframe();
     }
@@ -67,6 +68,12 @@ button.addEventListener("click", function(){
         })
       }
     })
+  };
+
+  function fecthFileName (result,fileNameCounter) {
+    var frame = document.getElementsByTagName("iframe")[fileNameCounter];
+    var frame_dom = frame.contentWindow.document;
+    frame_dom.getElementById("filename").innerText = result[fileNameCounter];
   };
 
 function fetchTable (filename) {
