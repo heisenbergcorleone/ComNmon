@@ -41,7 +41,7 @@ $("iframe").each(function(){
 	}
 });
 
-},2000)
+},1000)
 
 
 });
@@ -75,13 +75,25 @@ function appendData (i,chart_data_function) {
 var iframe = document.getElementsByTagName("iframe")[i];
 var iframe_dom = iframe.contentWindow.document;
 
-var chart_data = iframe_dom.getElementById("chart_data");
-var chart_function = iframe_dom.getElementById("chart_function");
-chart_data.innerHTML = "";
-chart_function.innerHTML = "";
+if(iframe_dom.getElementById("chart_data") != null && iframe_dom.getElementById("chart_function") != null) {
+	iframe_dom.getElementById("chart_data").remove();
+	iframe_dom.getElementById("chart_function").remove();
+}
 
-chart_data.innerHTML = "var dataPHP = ["+ dataPHP +"]";
-chart_function.innerHTML = chart_data_function;
+//var chart_data = iframe_dom.getElementById("chart_data");
+//var chart_function = iframe_dom.getElementById("chart_function");
+var script_data = document.createElement("script");
+script_data.id = "chart_data";
+script_data.innerHTML =  "var dataPHP = ["+ dataPHP +"]";
+iframe_dom.body.insertBefore(script_data,iframe_dom.body.lastElementChild);
+
+var script_function = document.createElement("script");
+script_function.id = "chart_function";
+script_function.innerHTML = chart_data_function;
+iframe_dom.body.appendChild(script_function);
+
+//chart_data.innerHTML = "var dataPHP = ["+ dataPHP +"]";
+//chart_function.innerHTML = chart_data_function;
 
 };
 

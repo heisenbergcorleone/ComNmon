@@ -2,9 +2,15 @@
 	<head>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			</head>
+		<div id = "buttons" style="display: none;">
 			<button id="draw_CPU_UTIL" style="color:red;"><b>CPU Util.</b></button>
 			<button id="draw_CPU_USE" style="color:red;"><b>CPU Use</b></button>
-			
+			<button id="draw_RUNQ" style="color:red;"><b>RunQ</b></button>
+			<button id="draw_PSWITCH" style="color:red;"><b>pSwitch</b></button>
+			<button id="draw_FORKEXEC" style="color:red;"><b>ForkExec</b></button>
+			<button id="draw_MEM_LINUX" style="color:blue;"><b>Memory</b></button>
+			<button id="draw_SWAP_LINUX" style="color:blue;"><b>Swap</b></button>
+		</div>
 <body bgcolor="#EEEEFF">
 nmon_file name: <b id = "filename"></b>
 
@@ -13,8 +19,8 @@ nmon_file name: <b id = "filename"></b>
 <div id = "table" ></div>
 
 
-<script id = "chart_data"></script>
+<!-- <script id = "chart_data"></script> -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script id = "chart_function"></script>
+<!-- <script id = "chart_function"></script> -->
 </body>
 </html>
