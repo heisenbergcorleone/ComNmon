@@ -138,6 +138,16 @@ function readTextFile(file)
 }) // button click event closes
 
 
+$(window).resize(function() {
+  if($("iframe").length){
+    $("iframe").each(function() {
+      this.height = window.innerHeight/1.90;
+      this.width = window.innerWidth/2.20;
+    })
+  }; 
+});
+
+
 
 
 

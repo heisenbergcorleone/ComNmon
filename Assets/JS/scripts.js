@@ -20,7 +20,7 @@ dataPHP[2] = '"' + this.id + '"';
 if(this.innerText == "Configuration") {
 	return console.log("config");
 }
-console.log("hello")
+
 var core_id = (this.id).slice(5);
 
 
@@ -35,7 +35,6 @@ var buttonId = this.id;
 
 $("iframe").each(function(){
 	var sum_button = $(this).contents().find('button#'+buttonId);
-	console.log(buttonId);
 	if(sum_button.length){
 		sum_button.trigger("click");
 	}
@@ -80,8 +79,6 @@ if(iframe_dom.getElementById("chart_data") != null && iframe_dom.getElementById(
 	iframe_dom.getElementById("chart_function").remove();
 }
 
-//var chart_data = iframe_dom.getElementById("chart_data");
-//var chart_function = iframe_dom.getElementById("chart_function");
 var script_data = document.createElement("script");
 script_data.id = "chart_data";
 script_data.innerHTML =  "var dataPHP = ["+ dataPHP +"]";
@@ -91,9 +88,6 @@ var script_function = document.createElement("script");
 script_function.id = "chart_function";
 script_function.innerHTML = chart_data_function;
 iframe_dom.body.appendChild(script_function);
-
-//chart_data.innerHTML = "var dataPHP = ["+ dataPHP +"]";
-//chart_function.innerHTML = chart_data_function;
 
 };
 
@@ -153,20 +147,20 @@ var option_id = "options_" + core_id;
 var pos_of_option = (filetext.indexOf(option_id)+(option_id.length));
 var option_contents = ""; var option_condition = false;
 
-for(var i = pos_of_option; i < filetext.length ; i++) {
-	if(filetext.charAt(i-1) == "}" && filetext.charAt(i) == ";") {
-		dataPHP[1] = option_contents;
-		break;
-	}
-	if(filetext.charAt(i) == "{") {
-		option_condition = true;
+	for(var i = pos_of_option; i < filetext.length ; i++) {
+		if(filetext.charAt(i-1) == "}" && filetext.charAt(i) == ";") {
+			dataPHP[1] = option_contents;
+			break;
+		}
+		if(filetext.charAt(i) == "{") {
+			option_condition = true;
+		}
+
+		if (option_condition) {
+			option_contents += filetext.charAt(i);
+		}
 	}
 
-	if (option_condition) {
-		option_contents += filetext.charAt(i);
-	}
-}
-//console.log(option_contents);
 };
 
 

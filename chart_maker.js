@@ -1,4 +1,3 @@
-console.log("something");
 //google.load("visualization", "1.1", {packages:["corechart"], callback: function(){setupCharts();}});
 
 		//google.setOnLoadCallback(setupCharts);rts);
@@ -18,9 +17,8 @@ console.log("something");
 
 		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
 		chart.draw( data, options);
-		console.log("something within the function");
 		});
 
 	};
 
-	setupCharts();
+setupCharts();
