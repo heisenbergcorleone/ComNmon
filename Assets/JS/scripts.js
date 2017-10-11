@@ -31,7 +31,7 @@ for (var i = 0 ; i < result.length; i++) {
 	//appendData(i);
 };
 var buttonId = this.id;
-setTimeout(function(){
+//setTimeout(function(){
 
 $("iframe").each(function(){
 	var sum_button = $(this).contents().find('button#'+buttonId);
@@ -41,7 +41,7 @@ $("iframe").each(function(){
 	}
 });
 
-},1000)
+//},1000)
 
 
 });
