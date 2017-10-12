@@ -4,7 +4,8 @@ $(document).ready(function(){
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
-var currentFrame; 
+var currentFrame;
+window.iframe_charts = [];
 
 button.addEventListener("click", function(){
     result = [];
@@ -34,7 +35,7 @@ button.addEventListener("click", function(){
     
     var frame = document.createElement("iframe");
     frame.src = "default_file.html";
-    frame.id = (fileNameCounter+1)+"frame";
+    frame.id = parseInt((fileNameCounter));
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);
     displayFrames.appendChild(frame);
