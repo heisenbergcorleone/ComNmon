@@ -10,7 +10,8 @@
 
 		var data = google.visualization.arrayToDataTable(dataPHP[0]);
         var options = dataPHP[1];
-        options.tooltip = { trigger: 'selection' };
+		options.tooltip = { trigger: 'selection' }; 
+		if(options.explorer){options.explorer.actions = [];};
 		const element_id = (window.frameElement.id);
 
 		document.getElementById(dataPHP[2]).addEventListener("click", function() {
