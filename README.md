@@ -8,4 +8,4 @@ To achieve the aim, two comparison method are adopted:
 2. Overlapping the charts. (status: going to be started soon!)
 
 
-Feel free to suggest an idea/feature. :)
+Feel free to suggest any idea/feature. :)
