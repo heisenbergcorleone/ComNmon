@@ -1,11 +1,11 @@
-var result = [];
+var result = []; // this global array stores the selected file names
 
 $(document).ready(function(){
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
 var currentFrame;
-window.iframe_charts = [];
+window.iframe_charts = []; // this array stores chart data -> used for syncing the mouse click event
 
 button.addEventListener("click", function(){
     result = [];
@@ -25,16 +25,16 @@ button.addEventListener("click", function(){
   }
 
   var fileNameCounter = 0;
-
+// a recursive loadIframe function is used in order to make the iframes load synchronously
   var loadIframe = function() {
     if (fileNameCounter == result.length){
       syncScroll();
-      $("div.buttons").show(); 
+      $("div.buttons").show();  //  the buttons are only displayed when all the iframes are loaded
       return;
     }
     
     var frame = document.createElement("iframe");
-    frame.src = "default_file.html";
+    frame.src = "default_file.html"; // a single html file is used as a blueprint for all the iframes -> data of different iframes will appened into this file
     frame.id = parseInt((fileNameCounter));
     frame.width = (window.innerWidth/2.20);
     frame.height = (window.innerHeight/1.90);
@@ -43,7 +43,7 @@ button.addEventListener("click", function(){
     
     frame.onload = function() {
       currentFrame = frame;
-      fetchTable(result[fileNameCounter]);
+      fetchTable(result[fileNameCounter]); // this function fetches the table element along with its children and appends it into the default file
       fecthFileName(result,fileNameCounter);
       fileNameCounter++;
       loadIframe();
@@ -80,31 +80,27 @@ button.addEventListener("click", function(){
 
 function fetchTable (filename) {
   var filelocation = "./Templates/"+filename;
-  readTextFile(filelocation);
+  readTextFile(filelocation); 
 };
 
 
-function readTextFile(file)
-{
+function readTextFile(file) {
+  // ajax is used to convert the whole file into string and extract the required information
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
+    rawFile.onreadystatechange = function () {
+        if(rawFile.readyState === 4) {
+            if(rawFile.status === 200 || rawFile.status == 0) {
                 var allText = rawFile.responseText;
                 //alert(allText);
-                get_table_contents(allText);
-
+                get_table_contents(allText); 
             }
         }
     }
     rawFile.send(null);
 }
 
-  function get_table_contents (filetext) {
+  function get_table_contents (filetext) { // this function reads the data and selects the required information
     var table_contents = "";
     var condition = false;
 
@@ -139,7 +135,7 @@ function readTextFile(file)
 
 }) // button click event closes
 
-
+// the resize jquery method syncs the window's size with the iframes
 $(window).resize(function() {
   if($("iframe").length){
     $("iframe").each(function() {
