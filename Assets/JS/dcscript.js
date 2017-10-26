@@ -1,14 +1,6 @@
 var result = []; // this global array stores the selected file names
 console.log(Object.prototype.constructor)
 
-Object.prototype.isEmpty = function() {
-  for(var key in this) {
-      if(this.hasOwnProperty(key))
-          return false;
-  }
-  return true;
-};
-
 $(document).ready(function(){
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
