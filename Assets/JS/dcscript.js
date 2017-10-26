@@ -1,13 +1,22 @@
 var result = []; // this global array stores the selected file names
+console.log(Object.prototype.constructor)
+
+Object.prototype.isEmpty = function() {
+  for(var key in this) {
+      if(this.hasOwnProperty(key))
+          return false;
+  }
+  return true;
+};
 
 $(document).ready(function(){
 var button = document.getElementById("displayData");
 var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
 var currentFrame;
-window.iframe_charts = []; // this array stores chart data -> used for syncing the mouse click event
 
 button.addEventListener("click", function(){
+    var table_object = {};
     result = [];
     var divElem = document.getElementById("frames");
     $("#frames").empty();
@@ -19,131 +28,121 @@ button.addEventListener("click", function(){
   for (var i=0; i<options.length; i++) {
     opt = options[i];
 
-    if (opt.selected && result.length < 4 && opt.value != "Select File(s)") {
+    if (opt.selected && opt.value != "Select File(s)") {
       result.push(opt.value);
     }
   }
 
   var fileNameCounter = 0;
-// a recursive loadIframe function is used in order to make the iframes load synchronously
-  var loadIframe = function() {
-    if (fileNameCounter == result.length){
-      syncScroll();
-      $("div.buttons").show();  //  the buttons are only displayed when all the iframes are loaded
+  var tableCounter = 1;
+
+
+  function fetch_table_contents() {
+
+    if(fileNameCounter == result.length) {
+      append_table_details();
       return;
-    }
-    
-    var frame = document.createElement("iframe");
-    frame.src = "default_file.html"; // a single html file is used as a blueprint for all the iframes -> data of different iframes will appened into this file
-    frame.id = parseInt((fileNameCounter));
-    frame.width = (window.innerWidth/2.20);
-    frame.height = (window.innerHeight/1.90);
-    displayFrames.appendChild(frame);
-    
-    
-    frame.onload = function() {
-      currentFrame = frame;
-      fetchTable(result[fileNameCounter]); // this function fetches the table element along with its children and appends it into the default file
-      fecthFileName(result,fileNameCounter);
-      fileNameCounter++;
-      loadIframe();
-    }
+    };
 
-  };
 
-  loadIframe();
-
-  function syncScroll() {
-    //console.log("scrollbars will be synced!");
-    var iframeArray = $("iframe").map(function(){return this});
-     // syncs the scrollbars of all the iframes
-     iframeArray.each(function(e){
-      var frElement = iframeArray[e];
-      frElement.contentWindow.onscroll = function() {
-        var xPos = frElement.contentWindow.scrollX;
-        var yPos = frElement.contentWindow.scrollY;
-        // applies the positions of scrollbar of one iframe element to the rest
-        iframeArray.each(function(x){
-          if(frElement != iframeArray[x]){ // optional!
-            iframeArray[x].contentWindow.scrollTo(xPos,yPos);
-          }
-        })
+    var file_location = "./Templates/"+result[fileNameCounter]; ;
+    
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file_location, false);
+    
+    rawFile.onreadystatechange = function () {
+      if(rawFile.readyState === 4) {
+        if(rawFile.status === 200 || rawFile.status == 0) {
+          var allText = rawFile.responseText;
+          
+          handleData(allText,result[fileNameCounter]);
+          fileNameCounter++;
+          fetch_table_contents();
+        }
       }
-    })
+    }
+    
+    rawFile.send(null);
   };
 
-  function fecthFileName (result,fileNameCounter) {
-    var frame = document.getElementsByTagName("iframe")[fileNameCounter];
-    var frame_dom = frame.contentWindow.document;
-    frame_dom.getElementById("filename").innerText = result[fileNameCounter];
-  };
 
-function fetchTable (filename) {
-  var filelocation = "./Templates/"+filename;
-  readTextFile(filelocation); 
+  fetch_table_contents();
+
+
+function handleData (data,filename) { // this function fetches the table content from each file and appends it into table_object
+  var table_contents = "";
+  var condition = false;
+
+  for (var i = 0; i < data.length ; i++) {
+    
+    
+    if (data.charAt(i) == "<" && data.charAt(i+1) == "/" && data.charAt(i+2) == "b" && data.charAt(i+3) == "o" ) {
+      if (!Object.keys(table_object).length) { 
+        table_object["tab"+tableCounter] = table_contents;
+        table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
+        tableCounter++;
+      } else  { // if the table_object isn't empty then check for the differnce
+        check_difference(table_contents,filename);
+      }
+      
+      table_contents = "";
+      break;
+    }
+    
+
+
+    if(data.charAt(i) == "<" && data.charAt(i+1) == "t" && data.charAt(i+2) == "a" && data.charAt(i+3) == "b" ) {
+      condition = true;
+    }
+
+    if (condition) {
+      table_contents += data.charAt(i);
+    }
+  
+  
+  };
 };
 
 
-function readTextFile(file) {
-  // ajax is used to convert the whole file into string and extract the required information
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-        if(rawFile.readyState === 4) {
-            if(rawFile.status === 200 || rawFile.status == 0) {
-                var allText = rawFile.responseText;
-                //alert(allText);
-                get_table_contents(allText); 
-            }
-        }
+
+function check_difference (data,filename) {
+
+  var condition = false;
+  var index_of_Interval = data.indexOf("<li>Interval"); // reducing the data as we don't want to include `time` as the basis of camparison 
+  var data_for_comparison = data.slice(index_of_Interval);
+
+
+  Object
+  .keys(table_object)
+  .filter(function (k) { return !/_/.test(k); }) // checks the difference with only the table in the object
+  .forEach(function (k) { 
+    var table_content_for_comparison = table_object[k].slice(table_object[k].indexOf("<li>Interval"));
+
+    if(data_for_comparison == table_content_for_comparison) {
+      table_object[k+"_file"] += ', ' + filename;
+      condition = true;
     }
-    rawFile.send(null);
-}
-
-  function get_table_contents (filetext) { // this function reads the data and selects the required information
-    var table_contents = "";
-    var condition = false;
-
-    for (var i = 0; i < filetext.length ; i++) {
-      
-      
-      if (filetext.charAt(i) == "<" && filetext.charAt(i+1) == "/" && filetext.charAt(i+2) == "b" && filetext.charAt(i+3) == "o" ) {
-        appendTable(table_contents);
-        table_contents = "";
-        break;
-      }
-      
+  
+  });
 
 
-      if(filetext.charAt(i) == "<" && filetext.charAt(i+1) == "t" && filetext.charAt(i+2) == "a" && filetext.charAt(i+3) == "b" ) {
-        condition = true;
-      }
 
-      if (condition) {
-        table_contents += filetext.charAt(i);
-      }
-    
-    
-    };
+  if (condition == false) {
+    table_object["tab"+tableCounter] = data;
+    table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
+    tableCounter++;
   };
+};
 
-  function appendTable (table_contents) {
-    var table_div = currentFrame.contentWindow.document.getElementById("table");
-    table_div.innerHTML = table_contents;
-  }
+function append_table_details() { //table will be appened in the dom
+  console.log(table_object); 
+};
 
 
-}) // button click event closes
 
-// the resize jquery method syncs the window's size with the iframes
-$(window).resize(function() {
-  if($("iframe").length){
-    $("iframe").each(function() {
-      this.height = window.innerHeight/1.90;
-      this.width = window.innerWidth/2.20;
-    })
-  }; 
-});
+  
+
+})// button click closes
 
 
 
