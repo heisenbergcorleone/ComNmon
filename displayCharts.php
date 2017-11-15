@@ -2,7 +2,7 @@
     <head>
     <link rel="stylesheet" href="./Assets/CSS/dcstyle.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src ="./Assets/JS/scripts.js" ></script>
+    <!-- <script src ="./Assets/JS/scripts.js" ></script> -->
     </head>
     <body>
 
@@ -67,7 +67,7 @@
 
 
 <div id="frames"></div>
-
+<div id = "tables"></div>
 
 <script src ="./Assets/JS/dcscript.js"></script>
 

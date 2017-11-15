@@ -1,17 +1,17 @@
 var result = []; // this global array stores the selected file names
-console.log(Object.prototype.constructor)
 
 $(document).ready(function(){
 var button = document.getElementById("displayData");
-var firstFrame = document.getElementById("one");
 var displayFrames = document.getElementById("frames");
+var table_div = document.getElementById("tables");
 var currentFrame;
 
 button.addEventListener("click", function(){
     var table_object = {};
     result = [];
     var divElem = document.getElementById("frames");
-    $("#frames").empty();
+    $("#frames").empty(); // frames div is cleared out
+    $('#tables').empty(); // likewise table div
 
     var select = document.getElementsByTagName('select')[0];
     var options = select && select.options;
@@ -64,16 +64,18 @@ button.addEventListener("click", function(){
 function handleData (data,filename) { // this function fetches the table content from each file and appends it into table_object
   var table_contents = "";
   var condition = false;
-
+  var bodyClosedIndex = data.indexOf("</body>"); // index of the closed body tag
+  var tableOpenedIndex = data.indexOf("<table>") // index of the opened table tag
   for (var i = 0; i < data.length ; i++) {
     
     
-    if (data.charAt(i) == "<" && data.charAt(i+1) == "/" && data.charAt(i+2) == "b" && data.charAt(i+3) == "o" ) {
+    if (i == bodyClosedIndex) {
+       // console.log(i+ "when the index if found via logic"); break;
       if (!Object.keys(table_object).length) { 
-        table_object["tab"+tableCounter] = table_contents;
+        table_object["tab"+parseInt(tableCounter)] = table_contents;
         table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
         tableCounter++;
-      } else  { // if the table_object isn't empty then check for the differnce
+      } else  { // if the table_object isn't empty then check for the difference
         check_difference(table_contents,filename);
       }
       
@@ -83,7 +85,7 @@ function handleData (data,filename) { // this function fetches the table content
     
 
 
-    if(data.charAt(i) == "<" && data.charAt(i+1) == "t" && data.charAt(i+2) == "a" && data.charAt(i+3) == "b" ) {
+    if( i == tableOpenedIndex) {
       condition = true;
     }
 
@@ -100,7 +102,7 @@ function handleData (data,filename) { // this function fetches the table content
 function check_difference (data,filename) {
 
   var condition = false;
-  var index_of_Interval = data.indexOf("<li>Interval"); // reducing the data as we don't want to include `time` as the basis of camparison 
+  var index_of_Interval = data.indexOf("<li>Interval"); // reducing the data to exclude `time` from comparison
   var data_for_comparison = data.slice(index_of_Interval);
 
 
@@ -109,7 +111,6 @@ function check_difference (data,filename) {
   .filter(function (k) { return !/_/.test(k); }) // checks the difference with only the table in the object
   .forEach(function (k) { 
     var table_content_for_comparison = table_object[k].slice(table_object[k].indexOf("<li>Interval"));
-
     if(data_for_comparison == table_content_for_comparison) {
       table_object[k+"_file"] += ', ' + filename;
       condition = true;
@@ -117,19 +118,64 @@ function check_difference (data,filename) {
   
   });
 
-
-
   if (condition == false) {
+      // here the rest of the different tables are checked with the first ones to see if the interval and snapshots are different or no
     table_object["tab"+tableCounter] = data;
     table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
     tableCounter++;
   };
+
+ 
+
+
+
 };
 
+  // an object is created with the table contents and the respective file names
 function append_table_details() { //table will be appened in the dom
-  console.log(table_object); 
-};
+  check_diff_inter_snap();
 
+  
+  Object.keys(table_object).forEach(function(k,index){
+
+    
+    console.log(k,index);
+
+
+  })
+
+
+
+}; 
+
+function check_diff_inter_snap () { // checks if the intervals and snapshots are different between the tables
+  
+  if (Object.keys(table_object).length >= 3) {  // checks for 3 or more means that there are atleast two tables
+    var firstTable = table_object.tab1; // first table is set as the basis for comparison
+    const get_CompIntervalIndex = firstTable.indexOf("Interval"); 
+    const get_CompClosingIndex = firstTable.indexOf('<td>\n<li>Number');
+  
+    const string_for_comp = firstTable.slice(get_CompIntervalIndex,get_CompClosingIndex);
+
+    Object
+    .keys(table_object)
+    .filter(function (k) { return !/_/.test(k); }) 
+    .forEach(function (k,index) { //if the interval and snapshot is different then they are marked red
+      if (index == 0) {return};
+
+      var get_IntervalIndex = table_object[k].indexOf("Interval"); 
+      var get_ClosingIndex = table_object[k].indexOf('<td>\n<li>Number');
+        
+      var table_string = table_object[k].slice(get_IntervalIndex,get_ClosingIndex);
+
+      if(table_string != string_for_comp) {
+        table_object[k] = table_object[k].replace(table_string, ('<font color="red">' + table_string + '</font>'));
+      };
+    });
+
+  };
+
+};
 
 
   
