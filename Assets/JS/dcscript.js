@@ -132,16 +132,17 @@ function check_difference (data,filename) {
 };
 
   // an object is created with the table contents and the respective file names
-function append_table_details() { //table will be appened in the dom
+function append_table_details() { //table will be appended in the dom
   check_diff_inter_snap();
 
   
-  Object.keys(table_object).forEach(function(k,index){
+  Object.keys(table_object).forEach(function(k,index){ // the table along with the file names are appended in the element
 
-    
-    console.log(k,index);
-
-
+      if(index%2){
+        table_div.innerHTML += '<b>' + "FILE(S): " + table_object[k] + '</b>';
+      } else {
+      table_div.innerHTML +=table_object[k]
+    };
   })
 
 
