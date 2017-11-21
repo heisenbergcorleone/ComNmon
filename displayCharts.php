@@ -65,8 +65,13 @@
 </div><br>
 
 
-
-<div id="frames"></div>
+<div id="message" style="display: block;">
+    <h3>For best results make sure that the Interval and Snapshots are the same for each selected file, conflict may arise if they differ.
+    <br></h3><h4>Table(s) for the selected file will be created at the end of this page, and the Interval and Snapshots will be marked red if they differ.</h4>
+    <i>To read more about Snapshots and Interval refer to: <a href = "https://docs.google.com/document/d/1Ire183U4Q42CgNyw6Fea7SLNi590PXV_jlVIoRKEMkY/edit?usp=sharing">WHY SNAPSHOTS ARE IMPORTANT?</a></i>
+</div>
+<div id="frame"><iframe id = "iframe" style="display: none;"></iframe></div>
+<br>
 <div id = "tables"></div>
 
 <script src ="./Assets/JS/dcscript.js"></script>
