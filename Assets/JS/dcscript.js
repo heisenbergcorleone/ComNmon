@@ -4,13 +4,15 @@ $(document).ready(function(){
 var button = document.getElementById("displayData");
 var displayFrames = document.getElementById("frames");
 var table_div = document.getElementById("tables");
+var mess_el = document.getElementById("message");
+var difference_found = false;
 var currentFrame;
 
 button.addEventListener("click", function(){
     var table_object = {};
     result = [];
-    var divElem = document.getElementById("frames");
-    $("#frames").empty(); // frames div is cleared out
+    var iframeEl = document.getElementById("iframe");
+    $("#iframe").empty(); // frames div is cleared out
     $('#tables').empty(); // likewise table div
 
     var select = document.getElementsByTagName('select')[0];
@@ -24,7 +26,7 @@ button.addEventListener("click", function(){
       result.push(opt.value);
     }
   }
-
+  console.log(result) // the selected files are displayed here
   var fileNameCounter = 0;
   var tableCounter = 1;
 
@@ -32,7 +34,7 @@ button.addEventListener("click", function(){
   function fetch_table_contents() {
 
     if(fileNameCounter == result.length) {
-      append_table_details();
+      append_table_iframe();
       return;
     };
 
@@ -73,7 +75,7 @@ function handleData (data,filename) { // this function fetches the table content
        // console.log(i+ "when the index if found via logic"); break;
       if (!Object.keys(table_object).length) { 
         table_object["tab"+parseInt(tableCounter)] = table_contents;
-        table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
+        table_object["tab"+parseInt(tableCounter)+"_file"] = '<li>' + filename;
         tableCounter++;
       } else  { // if the table_object isn't empty then check for the difference
         check_difference(table_contents,filename);
@@ -112,16 +114,16 @@ function check_difference (data,filename) {
   .forEach(function (k) { 
     var table_content_for_comparison = table_object[k].slice(table_object[k].indexOf("<li>Interval"));
     if(data_for_comparison == table_content_for_comparison) {
-      table_object[k+"_file"] += ', ' + filename;
+      table_object[k+"_file"] += '<li>' + filename;
       condition = true;
     }
   
   });
 
   if (condition == false) {
-      // here the rest of the different tables are checked with the first ones to see if the interval and snapshots are different or no
+      // here the rest of the different tables are checked with the first ones to see if the interval and snapshots differ or no
     table_object["tab"+tableCounter] = data;
-    table_object["tab"+parseInt(tableCounter)+"_file"] = filename;
+    table_object["tab"+parseInt(tableCounter)+"_file"] = '<li>' + filename;
     tableCounter++;
   };
 
@@ -132,9 +134,20 @@ function check_difference (data,filename) {
 };
 
   // an object is created with the table contents and the respective file names
-function append_table_details() { //table will be appended in the dom
-  check_diff_inter_snap();
+function append_table_iframe() { //table will be appended in the dom
+  check_diff_inter_snap(); // checks if the interval and snapshots are different
 
+
+
+  iframeEl.width = window.innerWidth/1.1;
+  iframeEl.height = window.innerHeight/1.1;
+  mess_el.style = 'display: none;'
+  iframeEl.style = 'display: block';
+  (iframe.contentWindow.document.getElementsByTagName("body")[0]).setAttribute("bgcolor", "#EEEEFF"); 
+  var iframe_message = '<h2 style="color:blue">Click on a Graph button above, to display that graph</h2>';
+  difference_found == true ? iframe_message += '<br><h3>Interval/Snapshots are different. Check tables!</h3>' : iframe_message;
+  (iframe.contentWindow.document.getElementsByTagName("body")[0]).innerHTML = iframe_message;  
+  
   
   Object.keys(table_object).forEach(function(k,index){ // the table along with the file names are appended in the element
 
@@ -143,10 +156,7 @@ function append_table_details() { //table will be appended in the dom
       } else {
       table_div.innerHTML +=table_object[k]
     };
-  })
-
-
-
+  });
 }; 
 
 function check_diff_inter_snap () { // checks if the intervals and snapshots are different between the tables
@@ -171,6 +181,7 @@ function check_diff_inter_snap () { // checks if the intervals and snapshots are
 
       if(table_string != string_for_comp) {
         table_object[k] = table_object[k].replace(table_string, ('<font color="red">' + table_string + '</font>'));
+        difference_found = true;
       };
     });
 
