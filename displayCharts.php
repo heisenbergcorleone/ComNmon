@@ -13,7 +13,7 @@
         <option selected="">Select File(s)</option>
     <?php
 
-    $dir    = './Templates';
+    $dir    = './Temp';
     $files = scandir($dir,1);
     foreach($files as $name) { 
         if($name != "." && $name != "..") {

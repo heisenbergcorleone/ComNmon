@@ -26,9 +26,34 @@ button.addEventListener("click", function(){
       result.push(opt.value);
     }
   }
-  console.log(result) // the selected files are displayed here
+  
   var fileNameCounter = 0;
   var tableCounter = 1;
+
+  function fileReader() {
+    if(result.length != 0) { // checks if the array isn't empty
+      //console.log(result) // the selected files are displayed here
+      $.ajax({
+				type: "POST",
+				url: "./Assets/JS/filereader.py",
+				data: {'filenames': result.toString()}, // or use result.toString() to convert the JS array into string
+				dataType: "text"
+			}).done(function(response) {
+        //var storageunit = JSON.parse(response);
+        //console.log((storageunit));
+        console.log(response);
+      });
+      
+    }
+  };
+
+  fileReader();
+
+
+
+
+
+
 
 
   function fetch_table_contents() {
@@ -39,7 +64,7 @@ button.addEventListener("click", function(){
     };
 
 
-    var file_location = "./Templates/"+result[fileNameCounter]; ;
+    var file_location = "./Temp/"+result[fileNameCounter]; ;
     
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file_location, false);
@@ -60,7 +85,7 @@ button.addEventListener("click", function(){
   };
 
 
-  fetch_table_contents();
+  //fetch_table_contents(); // stopped the fetching a table function
 
 
 function handleData (data,filename) { // this function fetches the table content from each file and appends it into table_object
