@@ -1,11 +1,14 @@
 body {
     background-color: powderblue;
 }
+#homepage{
+    position: relative;
+}
 
 .center{
-    position: absolute;
+    position: fixed;
     left: 0;
-    top: 40%;
+    top: 35%;
     width: 100%;
     text-align: center;
     font-size: 18px;
@@ -30,4 +33,11 @@ body {
 
 a:link {
     color: rgb(128, 0, 0);
+}
+
+.topleft {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
 }
