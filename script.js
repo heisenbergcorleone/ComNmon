@@ -1,4 +1,4 @@
-window.onload = function() {
+
     var dir_location = document.getElementById("directory");
     var dir_log_table = document.getElementById("dir_log");
     var storeDirArray = []; // this array stores the last 3 directory locations
@@ -24,10 +24,12 @@ window.onload = function() {
             
                 var sel_button = document.createElement("button");
                 sel_button.innerText = "SEL";
+                sel_button.setAttribute('class','sel'); // class added
                 sel_button.setAttribute("onclick", 'selButton(this)'); // select function attribute added
                 cell2.appendChild(sel_button);
                 
                 var del_button = document.createElement("button");
+                del_button.setAttribute('class','del'); // class added
                 del_button.setAttribute("onclick", 'delButton(this)'); // delete function attribute added
                 del_button.innerText = "DEL";
                 cell3.appendChild(del_button);
@@ -124,5 +126,5 @@ window.onload = function() {
             });
         }
     }
-} // window.onload finished
+
     
