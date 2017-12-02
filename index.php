@@ -20,9 +20,11 @@
             <div class="center">
                 <b id="sysadmin">SysAdmin's</b><br>
                 <b id="project_name">comNmon</b><br><br>
-                Enter the path to the nmon Directory:<br>
-                <input type="text" id="directory" />
-                <button id='submit' onclick="getFolder()">Submit</button>
+                Enter the path to the nmon directory:<br>
+                <div>
+                    <input type="text" id="directory" />
+                    <button id='location_button' onclick='getFolder(this.previousSibling.previousSibling.value)'>Submit</button>
+                </div>
             </div>
             
             <!-- Doucmentation -->
