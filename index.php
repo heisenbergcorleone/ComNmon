@@ -20,7 +20,7 @@
             <div class="center">
                 <b id="sysadmin">SysAdmin's</b><br>
                 <b id="project_name">comNmon</b><br><br>
-                Enter the path to the nmon directory:<br>
+                Enter the path of the nmon directory:<br>
                 <div>
                     <input type="text" id="directory" />
                     <button id='location_button' onclick='getFolder(this.previousSibling.previousSibling.value)'>Submit</button>
