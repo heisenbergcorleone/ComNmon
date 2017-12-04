@@ -1,3 +1,7 @@
+head {
+    background-color: moccasin;
+}
+
 body {
     background-color: powderblue;
 }
@@ -22,12 +26,16 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#documentation {
+
+.information {
     position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
     background-color: Moccasin;
+    width: 100%;
+    left: 0;
+}
+
+#documentation {
+    bottom: 0;
     text-align: center;
 }
 

@@ -29,7 +29,7 @@
             
             <!-- Doucmentation -->
             
-            <div id="documentation"><a href="lintodocs"><b>Documentation</b></a></div>
+            <div class="information" id="documentation"><a href="lintodocs"><b>Documentation</b></a></div>
         
         </div>
         <script src="script.js"></script>
