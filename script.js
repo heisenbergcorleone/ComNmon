@@ -118,7 +118,7 @@ function getFolder(folderVal) {
                     };
                     
                     // redirecting to the page that opens the directory
-                    window.location = "./real.php?nmonDirectory="+location_val;
+                    window.location = "./nmonDirectory.php?nmonDirectory="+location_val;
             }
                 
         });
