@@ -1,0 +1,48 @@
+body {
+    background-color: powderblue;
+    overflow-x:hidden;
+}
+
+.header {
+  position: static;
+  background-color: Moccasin;
+  left: 0;
+  width : 100%;
+}
+
+.directorylist {
+  top: 20px;
+
+  margin: 0;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  border-style: inset;
+}
+
+.footer {
+
+  position: absolute;
+  background-color: Moccasin;
+  bottom: 0;
+  margin-right: 20px;
+  width : 100%;
+  text-align: center;
+}
+
+
+.footer a {
+  color: rgb(128, 0, 0);
+}
+
+ .button {
+   position: relative;
+   left:48%;
+ }
+
+.top {
+  top : 10px;
+}
+.bottom {
+  top: 30px;
+}
