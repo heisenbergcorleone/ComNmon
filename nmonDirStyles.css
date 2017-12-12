@@ -10,18 +10,17 @@ body {
   width : 100%;
 }
 
-.directorylist {
+.content {
   top: 20px;
-
   margin: 0;
   margin-right: 20px;
   margin-left: 20px;
   position: relative;
+  background-color: #AEC6CF;
   border-style: inset;
 }
 
 .footer {
-
   position: absolute;
   background-color: Moccasin;
   bottom: 0;
@@ -45,4 +44,20 @@ body {
 }
 .bottom {
   top: 30px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: #dddddd;
 }
