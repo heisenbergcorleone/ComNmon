@@ -12,13 +12,13 @@
         die;
     }
 ?>
-
 <html>
     <head>
         <title>
             comNmon: Directory
         </title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>var dirList_array = <?php echo json_encode($dates) ?>;</script>
         <link rel="stylesheet" href="nmonDirStyles.css">
     </head>
     <body>
@@ -26,27 +26,42 @@
       <?php include_once('header.php') ?>
     </div>
     <div class="button top">
-        <button>Submit</button>
+        <button id="some" onclick="heya(this)">Submit</button>
     </div>
-    <div class="directorylist">
-        -some-data-here-
+    <div class="content"><br>
+      <div>
+        <!-- add the two or three buttons here -->
+      </div>
+      <div class="main">
+          <div class="directorylist" style="width:35%; float:left">
+            <button id="loadall" onclick="addDirectory(this)" style="position:relative; left:48%;">Load All</button>
+            <br><br>
+            <table id="directory_list_table">
+              <tr>
+                <th>Directory List</th>
+                <th>Checkbox all: <input type="checkbox" onchange="checkall(this)" id="checkbox_all"></th>
+              </tr>
+            </table>
+          </div>
+          <div class="calendar" style="width: 35%; float:right">
+            CALENDAR
+          </div>
+          <br style="clear:both;"/>
+          <br>
+      </div>
+
+
     </div>
     <div class="button bottom">
-        <button >Submit</button>
+        <button onclick="handleEvents()">Submit</button>
     </div>
-    <br>
+    <br><br>
     <div class ="footer">
       <footer>
-      <?php include_once('footer.php') ?>
+        <?php include_once('footer.php') ?>
       </footer>
     </div>
 
-
-    <script>
-      var dirlist = document.getElementsByClassName("directorylist")[0];
-      var footer = document.getElementsByClassName("footer")[0];
-      const docheight = $(document).height();
-    </script>
-
+    <script src="nmondir.js" charset="utf-8"></script>
     </body>
 </html>
