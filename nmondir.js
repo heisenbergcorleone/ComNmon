@@ -65,11 +65,6 @@ function addDirectory(element) {
   //alert(limit);
 };
 
-
 function checkall(that) {
-  if (that.checked == true) {
-      $('table#directory_list_table input').attr('checked', true);
-  } else {
-      $('table#directory_list_table input').attr('checked', false);
-  }
+  $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
 };
