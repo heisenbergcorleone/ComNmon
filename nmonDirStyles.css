@@ -1,6 +1,7 @@
 body {
     background-color: powderblue;
     overflow-x:hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .header {
@@ -34,15 +35,36 @@ body {
   color: rgb(128, 0, 0);
 }
 
- .button {
+button {
+      border: none;
+      color: white;
+      padding: 6px;
+      font-size: 10px;
+      margin: 4px 2px;
+      background-color: Green;
+}
+
+
+.button, #loadall {
    position: relative;
    left:48%;
- }
+}
+
+.submitbutton {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#loadall, .loadtable{
+  border-radius: 8px;
+  background-color: SeaGreen ;
+}
 
 .top {
   top : 10px;
 }
-.bottom {
+.bottom { /*the bottom button*/
   top: 30px;
 }
 

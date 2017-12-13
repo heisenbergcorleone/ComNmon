@@ -26,7 +26,7 @@
       <?php include_once('header.php') ?>
     </div>
     <div class="button top">
-        <button id="some" onclick="heya(this)">Submit</button>
+        <button class='submitbutton' id="some">Submit</button>
     </div>
     <div class="content"><br>
       <div>
@@ -34,7 +34,7 @@
       </div>
       <div class="main">
           <div class="directorylist" style="width:35%; float:left">
-            <button id="loadall" onclick="addDirectory(this)" style="position:relative; left:48%;">Load All</button>
+            <button  id="loadall" onclick="addDirectory(this)">Load All</button>
             <br><br>
             <table id="directory_list_table">
               <tr>
@@ -43,7 +43,6 @@
               </tr>
             </table>
             <div class="chartButton">
-
             </div>
           </div>
           <div class="calendar" style="width: 35%; float:right">
@@ -56,7 +55,7 @@
 
     </div>
     <div class="button bottom">
-        <button onclick="handleEvents()">Submit</button>
+        <button class='submitbutton' onclick="handleEvents()">Submit</button>
     </div>
     <br><br>
     <div class ="footer">
