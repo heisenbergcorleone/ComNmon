@@ -24,6 +24,8 @@ function addDirectory(element) {
     } else {
       $(element).remove();
     };
+  } else if(limit > dirList_array.length) { // if the limit is greater than the array length
+    limit = dirList_array.length;
   };
 
     for(var i = 0; i < limit; i++) {
