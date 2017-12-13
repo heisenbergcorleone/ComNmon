@@ -7,7 +7,7 @@ const docheight = $(document).height();
 
 
 function addDirectory(element) {
-  var dirList_div = document.getElementsByClassName("directorylist")[0];
+  var dirList_button = document.getElementsByClassName("chartButton")[0];
   var dirList_table = document.getElementById('directory_list_table');
   var limit = 3; // limit defines the number of items to be shown at a time
   var condition = false;
@@ -46,12 +46,12 @@ function addDirectory(element) {
 
 
     if (!element) { // element doesn't exist
-      dirList_div.innerHTML += '<br><button id="3" class="loadtable" onclick="addDirectory(this)">Next 3..</button>'; // id defines how many times the button is going to be displayed
+      dirList_button.innerHTML += '<br><button id="3" class="loadtable" onclick="addDirectory(this)">Next 3..</button>'; // id defines how many times the button is going to be displayed
     } else { // element exists
       if(element.id == 1) {
-        dirList_div.innerHTML += "<button id='"+ (element.id-1) +"' class='loadtable' onclick='addDirectory(this)'>ALL </button>";
+        dirList_button.innerHTML += "<button id='"+ (element.id-1) +"' class='loadtable' onclick='addDirectory(this)'>ALL </button>";
       } else if (element.id > 1) { // that means element.id is not 0 -> because load all button has 0 id
-        dirList_div.innerHTML += "<button id='"+ (element.id-1)  +"' class='loadtable' onclick='addDirectory(this)'>Next 3..</button>";
+        dirList_button.innerHTML += "<button id='"+ (element.id-1)  +"' class='loadtable' onclick='addDirectory(this)'>Next 3..</button>";
       };
     };
 
