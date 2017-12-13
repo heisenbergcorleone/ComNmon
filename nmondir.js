@@ -59,7 +59,7 @@ function addDirectory(element) {
 
     // the footer becomes relative when the table size is more than the window size
     if ($(document).height() > docheight) {
-      footer.style = 'position:relative;';
+      footer.style = 'position:relative; width:100%';
     }; // makes the position relative
 
   //alert(limit);
