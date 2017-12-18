@@ -133,3 +133,28 @@ header {
 .bottom { /*the bottom button*/
  top: 30px;
 }
+.secondtab {
+  top: 20px;
+  margin: 0;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  background-color: #AEC6CF;
+  border-style: inset;
+}
+
+.secondtab table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+
+}
+
+.secondtab td, .secondtab th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+.secondtab tr:nth-child(odd) {
+  background-color: #dddddd;
+}

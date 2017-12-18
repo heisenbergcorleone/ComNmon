@@ -17,7 +17,7 @@
       </div>
 
       <form id="content" action="server.php" method="post" onsubmit="return false">
-        <!-- index page -->
+<!-- index page -->
         <div class="tab">
           <!-- directory log table -->
           <div class="topleft">
@@ -35,15 +35,36 @@
                   </div>
               </div>
         </div>
-        <!-- date directory page -->
+<!-- date directory page -->
         <div class="tab">
-          The second tab
+          <div class="secondtab"><br>
+            <div class="main">
+              <div class="directorylist" style="width:35%; float:left">
+                <button  id="loadall" onclick="addDirectory(this)">Load All</button>
+                <br><br>
+                <table id="directory_list_table">
+                  <tr>
+                    <th>Directory List</th>
+                    <th>Check all: <input type="checkbox" onchange="checkall(this)" id="checkbox_all"></th>
+                  </tr>
+                </table>
+                <div class="chartButton">
+                </div>
+              </div>
+              <div class="calendar" style="width: 35%; float:right">
+                CALENDAR
+              </div>
+              <br style="clear:both;"/>
+              <br>
+            </div>
+          </div>
+
         </div>
-        <!-- time directory page -->
+<!-- time directory page -->
         <div class="tab">
           the third tab
         </div>
-        <!-- optional conditon page -->
+<!-- optional conditon page -->
         <div class="tab">
           <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         </div>

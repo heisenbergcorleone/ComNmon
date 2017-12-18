@@ -6,5 +6,15 @@ if(isset($_GET['directory_location'])) { // the value is again checked if it's e
         } else {
             echo "not_available";
         };
-    } 
+    }
+if(isset($_GET['directory_path'])){
+    $nmonDir = $_GET['directory_path'];
+    $dates = scandir($nmonDir,1);
+        // removes dot and double dot from the array
+        if (($dotkey = array_search('.', $dates)) && ($doubledotkey = array_search('..', $dates))) {
+            unset($dates[$dotkey]);
+            unset($dates[$doubledotkey]);
+        }
+        echo json_encode($dates);
+}
 ?>
