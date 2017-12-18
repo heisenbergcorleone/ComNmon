@@ -76,7 +76,6 @@ dir_location.addEventListener("keydown",function(e){
     if (e.keyCode == 13) {
       e.preventDefault();
         getFolder(dir_location.value);
-        console.log(dir_location.value);
     }
 })
 
@@ -98,33 +97,28 @@ function getFolder(folderVal) {
     if(folderVal == ""){return}// checks if the value isn't empty
 
         var location_val = fixString(folderVal); // the fixString function manipulates the string and returns the value
+        var ajaxResponse = ajaxCall("directory_location",location_val);
+        
+        if(ajaxResponse == "not_available"){
+            alert("Directory isn't available")
+        } else if (ajaxResponse = "available") {
+            // checks the duplication
+            if(!checkDuplication(storeDirArray,location_val)) {
+                if(storeDirArray.length == 3) { // deletes the last element if the length is equal to 3
+                    storeDirArray.pop();
+                }
+                storeDirArray.unshift(location_val);
+                localStorage.setItem("comNmonDir", JSON.stringify(storeDirArray));
+            };
 
-        $.ajax({
-            type: "GET",
-            url: "./server.php",
-            data: {'directory_location': location_val },
-            dataType: "text"
-            }).done(function(response) {
-                if(response == "not_available"){
-                    alert("Directory isn't available")
-                } else if (response = "available") {
-                    // checks the duplication
-                    if(!checkDuplication(storeDirArray,location_val)) {
-                        if(storeDirArray.length == 3) { // deletes the last element if the length is equal to 3
-                            storeDirArray.pop();
-                        }
-                        storeDirArray.unshift(location_val);
-                        localStorage.setItem("comNmonDir", JSON.stringify(storeDirArray));
-                    };
+            // calls the nextPrev function
+            nextPrev(1,location_val);
 
-                    // redirecting to the page that opens the directory
-                    //window.location = "./nmonDirectory.php?nmonDirectory="+location_val;
-                    nextPrev(1,location_val);
+        }
 
-            }
 
-        });
-} // folder closed
+
+} // getfolder function closed
 
 // this function checks if any of the array's element is equal to the value
 function checkDuplication(array,value) {
@@ -132,6 +126,20 @@ function checkDuplication(array,value) {
             return value == e;
     }));
 }
+
+function ajaxCall(keyname,locationValue,method="GET") {
+    var serverResponse;
+    $.ajax({
+        type: method,
+        async: false,
+        url: "./server.php",
+        data:{[keyname]:locationValue},
+        dataType: "text"
+        }).done(function(response) {
+            serverResponse = response;   
+    });
+    return serverResponse;
+};
 
 
 
@@ -156,7 +164,6 @@ function nextPrev(n,value) {
     x[currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;
-    console.log(currentTab)
     // hanlde the current tab data
     handleCurrentTab(currentTab,n,value);
     // Display the correct tab:
@@ -189,4 +196,32 @@ function handleCurrentTab(currentTab,n,directory_path) {
     document.getElementsByClassName("button top")[0].style = "display:none";
     document.getElementsByClassName("button bottom")[0].style = "display:none";
     };
+
+
+    // return if n is -1
+    if(n === -1) {return;};
+    // switch condition populates the tab
+    switch(currentTab){
+
+        case 1:
+            // the second tab
+            console.log("first next"); 
+            
+            break;
+        case 2:
+            // the third tab
+            console.log("second next"); 
+            
+            break;
+        case 3:
+            // the fourth tab
+            console.log("last next"); 
+            
+            break;
+    };
+    
+
+
+
+
 };
