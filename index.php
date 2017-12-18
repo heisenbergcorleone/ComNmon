@@ -55,10 +55,10 @@
       <div class ="footer">
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">
-          <span class="step"></span>
-          <span class="step"></span>
-          <span class="step"></span>
-          <span class="step" style="background-color:red;"></span>
+          <span class="step" title="Nmon Directory"></span>
+          <span class="step" title="Dates"></span>
+          <span class="step" title="Time"></span>
+          <span class="step" title="Optional tab - displays when multiple file types are selected" style="background-color:red;"></span>
         </div>
         <footer>
           <a href='someimportant'><b>Documentation</b></a>
