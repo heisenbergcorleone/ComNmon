@@ -111,3 +111,25 @@ button:hover{
 header {  
   background-color: Moccasin;
 }
+
+.button {
+  display: none;
+}
+
+.button, #loadall {
+  position: relative;
+  left:48%;
+}
+
+
+#loadall, .loadtable{
+ border-radius: 8px;
+ background-color: SeaGreen ;
+}
+
+.top {
+ top : 10px;
+}
+.bottom { /*the bottom button*/
+ top: 30px;
+}

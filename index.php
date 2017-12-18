@@ -6,12 +6,15 @@
     </head>
 
     <body>
-    <div class="header">
-      <header>
-      Directory Selected: <b><span id='selected_directory'></span></b>
-      </header>
-    </div>
-
+      <div class="header">
+        <header>
+        Directory Selected: <b><span id='selected_directory'></span></b>
+        </header>
+      </div>
+      <div class="button top">
+        <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
 
       <form id="content" action="server.php" method="post" onsubmit="return false">
         <!-- index page -->
@@ -34,16 +37,11 @@
         </div>
         <!-- date directory page -->
         <div class="tab">
-          HEY There 
-          <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
-          <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
-
-
+          The second tab
         </div>
         <!-- time directory page -->
         <div class="tab">
-          <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
-    <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
+          the third tab
         </div>
         <!-- optional conditon page -->
         <div class="tab">
@@ -51,7 +49,10 @@
         </div>
           
       </form>
-
+      <div class="button bottom">
+        <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
       <div class ="footer">
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">

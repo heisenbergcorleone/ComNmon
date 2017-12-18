@@ -136,46 +136,57 @@ function checkDuplication(array,value) {
 
 
 function showTab(n) {
-  // This function will display the specified tab of the form...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
+    // This function will display the specified tab of the form...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
 
 
-  //... and run a function that will display the correct step indicator:
-  fixStepIndicator(n)
+    //... and run a function that will display the correct step indicator:
+    fixStepIndicator(n)
 }
 
 function nextPrev(n,value) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // change the step color
-  if(n === 1){
-     document.getElementsByClassName("step")[currentTab].className += " finish";
-  }
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-
-  // toggle the display
-  if(currentTab == 1 && n == 1){
-      document.getElementsByClassName("header")[0].style = "display:block;";
-      document.getElementById("selected_directory").innerText = value;    
-  } else if (currentTab == 0) {
-    document.getElementsByClassName("header")[0].style = "display:none;";
-  }
-
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // change the step color
+    if(n === 1){
+        document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    console.log(currentTab)
+    // hanlde the current tab data
+    handleCurrentTab(currentTab,n,value);
+    // Display the correct tab:
+    showTab(currentTab);
 }
 
 
 function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
-  }
-  //... and adds the "active" class on the current step:
-  x[n].className += " active";
+    }
+    //... and adds the "active" class on the current step:
+    x[n].className += " active";
 }
+
+function handleCurrentTab(currentTab,n,directory_path) {
+    // inputs the value
+    if(currentTab == 1 && n === 1) {
+        document.getElementById("selected_directory").innerText = directory_path;
+    }
+    // toggle the display
+    if(currentTab > 0 && currentTab < 3){
+        document.getElementsByClassName("header")[0].style = "display:block;";
+        document.getElementsByClassName("button top")[0].style = "display:block";    
+        document.getElementsByClassName("button bottom")[0].style = "display:block";
+    } else if (currentTab == 0 || currentTab==3) {
+    document.getElementsByClassName("header")[0].style = "display:none;";
+    document.getElementsByClassName("button top")[0].style = "display:none";
+    document.getElementsByClassName("button bottom")[0].style = "display:none";
+    };
+};
