@@ -1,16 +1,10 @@
-head {
-    background-color: moccasin;
-}
-
 body {
     background-color: powderblue;
-}
-#homepage{
-    position: relative;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .center{
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 35%;
     width: 100%;
@@ -22,25 +16,45 @@ body {
     font-family:Courier New, Courier, monospace;
     font-size: 50px;
 }
-#sysadmin {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+/* Hide all steps by default: */
+.tab {
+  display: none;
 }
 
-
-.information {
-    position: fixed;
-    background-color: Moccasin;
-    width: 100%;
-    left: 0;
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
 }
 
-#documentation {
-    bottom: 0;
-    text-align: center;
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
 }
 
-a:link {
-    color: rgb(128, 0, 0);
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0%;
+  width : 99%;
+  text-align: center;
+}
+
+footer {
+  background-color: Moccasin;
+}
+
+.footer a {
+  color: rgb(128, 0, 0);
 }
 
 .topleft {
@@ -52,10 +66,16 @@ a:link {
 
 button{
     border: none;
+    outline: none;
     color: white;
     padding: 6px;
     font-size: 10px;
     margin: 4px 2px;
+    background-color: green;
+}
+
+button:hover{
+  opacity: 0.7;
 }
 
 .sel {
@@ -68,9 +88,15 @@ button{
 	background-color: 	#990000;
 }
 
-#location_button {
+.nextBtn {
     border-radius: 12px;
-    background-color: Green;
     padding: 10px;
     font-size: 15px;
+}
+
+.prevBtn {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 15px;
+  background-color: #bbbbbb;
 }

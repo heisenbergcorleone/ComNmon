@@ -2,6 +2,7 @@ var dir_location = document.getElementById("directory");
 var dir_log_table = document.getElementById("dir_log");
 var storeDirArray = []; // this array stores the last 3 directory locations
 //console.log(localStorage)
+var currentTab = 0; // Current tab is set to be the first tab (0)
 
 function handleLog () {
     if (localStorage["comNmonDir"] == undefined) {return} // when comNmonDir is found i.e if the directory location is available
@@ -35,7 +36,7 @@ function handleLog () {
         });
 }; // handle log closed
 
-handleLog(); // called
+
 
 function selButton (button) {
     getFolder(button.parentNode.parentNode.firstChild.innerText);
@@ -117,7 +118,8 @@ function getFolder(folderVal) {
                     };
 
                     // redirecting to the page that opens the directory
-                    window.location = "./nmonDirectory.php?nmonDirectory="+location_val;
+                    //window.location = "./nmonDirectory.php?nmonDirectory="+location_val;
+                    nextPrev(1,location_val);
 
             }
 
@@ -129,4 +131,45 @@ function checkDuplication(array,value) {
     return (array.some(function(e){
             return value == e;
     }));
+}
+
+
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+
+
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n,value) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // change the step color
+  if(n === 1){
+     document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+
+  //add the form data
+
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
 }
