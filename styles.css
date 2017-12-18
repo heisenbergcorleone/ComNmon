@@ -118,7 +118,7 @@ header {
 
 .button, #loadall {
   position: relative;
-  left:48%;
+  left:45%;
 }
 
 
@@ -133,7 +133,7 @@ header {
 .bottom { /*the bottom button*/
  top: 30px;
 }
-.secondtab {
+#secondtab {
   top: 20px;
   margin: 0;
   margin-right: 20px;
@@ -143,18 +143,18 @@ header {
   border-style: inset;
 }
 
-.secondtab table {
+#secondtab table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
 
 }
 
-.secondtab td, .secondtab th {
+#secondtab td, #secondtab th {
   border: 1px solid black;
   text-align: left;
   padding: 8px;
 }
 
-.secondtab tr:nth-child(odd) {
+#secondtab tr:nth-child(odd) {
   background-color: #dddddd;
 }

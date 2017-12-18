@@ -5,6 +5,7 @@ var storeDirArray = []; // this array stores the last 3 directory locations
 var currentTab = 0; // Current tab is set to be the first tab (0)
 var dirList_array;
 const docheight = $(document).height();
+const secondTab = $("#secondtab").clone();
 
 function handleLog () {
     if (localStorage["comNmonDir"] == undefined) {return} // when comNmonDir is found i.e if the directory location is available
@@ -208,7 +209,8 @@ function handleCurrentTab(currentTab,n,directory_path) {
             // the second tab 
             //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
             dirList_array = JSON.parse(ajaxCall("directory_path",directory_path));
-            console.log(dirList_array);
+            $("#secondtab").replaceWith(secondTab.clone());
+            console.log(secondTab)
             addDirectory();
             break;
         case 2:
@@ -232,7 +234,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
 // functions for creating second tab
 
 function addDirectory(element) {
-    var dirList_button = document.getElementsByClassName("chartButton")[0];
+    var dirList_button = document.getElementsByClassName("tableButton")[0];
     var dirList_table = document.getElementById('directory_list_table');
     var limit = 3; // limit defines the number of items to be shown at a time
     var condition = false;

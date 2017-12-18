@@ -37,7 +37,7 @@
         </div>
 <!-- date directory page -->
         <div class="tab">
-          <div class="secondtab"><br>
+          <div id="secondtab"><br>
             <div class="main">
               <div class="directorylist" style="width:35%; float:left">
                 <button  id="loadall" onclick="addDirectory(this)">Load All</button>
@@ -48,7 +48,7 @@
                     <th>Check all: <input type="checkbox" onchange="checkall(this)" id="checkbox_all"></th>
                   </tr>
                 </table>
-                <div class="chartButton">
+                <div class="tableButton">
                 </div>
               </div>
               <div class="calendar" style="width: 35%; float:right">
