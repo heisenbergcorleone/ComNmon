@@ -100,3 +100,14 @@ button:hover{
   font-size: 15px;
   background-color: #bbbbbb;
 }
+
+.header {
+  position: static;
+  display: none;
+  left: 0;
+  width : 100%;
+}
+
+header {  
+  background-color: Moccasin;
+}

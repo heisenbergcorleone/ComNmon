@@ -157,7 +157,13 @@ function nextPrev(n,value) {
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
 
-  //add the form data
+  // toggle the display
+  if(currentTab == 1 && n == 1){
+      document.getElementsByClassName("header")[0].style = "display:block;";
+      document.getElementById("selected_directory").innerText = value;    
+  } else if (currentTab == 0) {
+    document.getElementsByClassName("header")[0].style = "display:none;";
+  }
 
   // Otherwise, display the correct tab:
   showTab(currentTab);

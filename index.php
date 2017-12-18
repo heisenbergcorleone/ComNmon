@@ -6,8 +6,14 @@
     </head>
 
     <body>
+    <div class="header">
+      <header>
+      Directory Selected: <b><span id='selected_directory'></span></b>
+      </header>
+    </div>
 
-      <form action="server.php" method="post" onsubmit="return false">
+
+      <form id="content" action="server.php" method="post" onsubmit="return false">
         <!-- index page -->
         <div class="tab">
           <!-- directory log table -->
@@ -28,8 +34,9 @@
         </div>
         <!-- date directory page -->
         <div class="tab">
-          HEY There <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
-    <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
+          HEY There 
+          <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
 
 
         </div>
@@ -42,21 +49,21 @@
         <div class="tab">
           <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         </div>
-          <div class ="footer">
-            <!-- Circles which indicates the steps of the form: -->
-            <div style="text-align:center;margin-top:40px;">
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step" style="background-color:red;"></span>
-            </div>
-
-
-            <footer>
-              <a href='someimportant'><b>Documentation</b></a>
-            </footer>
-          </div>
+          
       </form>
+
+      <div class ="footer">
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step"></span>
+          <span class="step" style="background-color:red;"></span>
+        </div>
+        <footer>
+          <a href='someimportant'><b>Documentation</b></a>
+        </footer>
+      </div>
         <script src="script.js"></script>
         <script type="text/javascript">
           $(document).ready(function(){
