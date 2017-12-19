@@ -3,7 +3,8 @@ var dir_log_table = document.getElementById("dir_log");
 var storeDirArray = []; // this array stores the last 3 directory locations
 //console.log(localStorage)
 var currentTab = 0; // Current tab is set to be the first tab (0)
-var dirList_array;
+var timeStampArray; var checked_timestamps = [];
+var dateListArray = []; var print_dateListArray = []; // dateListArray has duplications print is used to make the list and has no duplications
 const docheight = $(document).height();
 const secondTab = $("#secondtab").clone();
 
@@ -201,21 +202,44 @@ function handleCurrentTab(currentTab,n,directory_path) {
 
 
     // return if n is -1
-    if(n === -1) {return;};
+    if(n === -1) {
+        if(currentTab==1){
+            (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
+            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
+        }
+        return;};
     // switch condition populates the tab
     switch(currentTab){
 
         case 1:
             // the second tab 
             //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
-            dirList_array = JSON.parse(ajaxCall("directory_path",directory_path));
+            timeStampArray = JSON.parse(ajaxCall("directory_path",directory_path));
+            
+            timeStampArray.forEach(function(e){
+                var d = new Date(Number(e));
+                var dirDate = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
+                dateListArray.push(dirDate);
+            })
+
+            // create an array with no duplicate dates - this array will be used to create tables
+            print_dateListArray = dateListArray.filter(function(item, pos) {
+                return dateListArray.indexOf(item) == pos;
+            });
+            console.log(print_dateListArray);
+            
             $("#secondtab").replaceWith(secondTab.clone());
-            console.log(secondTab)
+            
             addDirectory();
+            //document.getElementsByClassName("nextBtn")[0].onclick = 'secondToThird(this)';
+            (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
+            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
+
             break;
         case 2:
             // the third tab
             console.log("second next"); 
+            console.log(checked_timestamps);
             
             break;
         case 3:
@@ -241,18 +265,18 @@ function addDirectory(element) {
     //alert(limit);
     if(element) {
       if(element.id == 0) {
-          limit = dirList_array.length; // the limit exceeds to the length of the array to put all the elements in the table
+          limit = print_dateListArray.length; // the limit exceeds to the length of the array to put all the elements in the table
           //element.id = element.id - 1;
       };
   
       if(element.id == 'loadall') { // if the button load all is clicked
-        limit = dirList_array.length; // limit is all
+        limit = print_dateListArray.length; // limit is all
         $(".loadtable").remove(); // the load more button/ all button is removed
       } else {
         $(element).remove();
       };
-    } else if(limit > dirList_array.length) { // if the limit is greater than the array length
-      limit = dirList_array.length;
+    } else if(limit > print_dateListArray.length) { // if the limit is greater than the array length
+      limit = print_dateListArray.length;
     };
   
       for(var i = 0; i < limit; i++) {
@@ -262,14 +286,14 @@ function addDirectory(element) {
           var cell1 = row.insertCell(0); // date directory Name
           var cell2 = row.insertCell(1); // checkbox
   
-          cell1.innerHTML = '<label>' + dirList_array[0] + '</label>';
-          cell2.innerHTML = '<input type="checkbox" name="checkbox[]" value='+ dirList_array[0] +' ></input>';
-          dirList_array.shift();
+          cell1.innerHTML = '<label>' + print_dateListArray[0] + '</label>';
+          cell2.innerHTML = '<input type="checkbox" name="checkbox[]" value='+ print_dateListArray[0] +' ></input>';
+          print_dateListArray.shift();
       };
   
   
   
-      if(dirList_array.length){ // button should be created
+      if(print_dateListArray.length){ // button should be created
   
   
       if (!element) { // element doesn't exist
@@ -295,3 +319,38 @@ function addDirectory(element) {
   function checkall(that) {
     $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
   };
+
+ 
+
+  function secondToThird(that) {
+    
+    var selectedIndex = [];
+    var checked_dates = $("#directory_list_table :checkbox:checked");
+    if(!checked_dates.length){return;}
+    checked_dates.each(function(i,e){
+        if(e.value){
+        count(dateListArray,e.value,selectedIndex);
+        };
+    })
+    
+    
+    checked_timestamps = [];
+    selectedIndex.forEach(function(i){
+        checked_timestamps.push(timeStampArray[i]);
+    });
+
+    (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'nextPrev(1)');
+    (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'nextPrev(1)');
+    nextPrev(1);
+    }
+
+   
+
+  function count(array,element,store){
+    for (i = 0; i < array.length; i++){
+      if (array[i] === element) {  
+        store.push(i);
+      }
+    }
+  return;
+}

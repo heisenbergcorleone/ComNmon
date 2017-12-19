@@ -8,7 +8,7 @@
     <body>
       <div class="header">
         <header>
-        Directory Selected: <b><span id='selected_directory'></span></b>
+        Selected Directory: <b><span id='selected_directory'></span></b>
         </header>
       </div>
       <div class="button top">
