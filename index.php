@@ -36,8 +36,7 @@
               </div>
         </div>
 <!-- date directory page -->
-        <div class="tab">
-          <div id="secondtab"><br>
+        <div class="tab" id="secondtab"><br>
             <div class="main">
               <div class="directorylist" style="width:35%; float:left">
                 <button  id="loadall" onclick="addDirectory(this)">Load All</button>
@@ -56,13 +55,15 @@
               </div>
               <br style="clear:both;"/>
               <br>
-            </div>
           </div>
 
         </div>
 <!-- time directory page -->
-        <div class="tab">
-          the third tab
+        <div class="tab" id="thirdtab">
+          <div id="thirdtabcontent">
+              
+          </div>
+          <!-- this tab will be built up by the javascript function -->
         </div>
 <!-- optional conditon page -->
         <div class="tab">

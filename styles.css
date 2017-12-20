@@ -133,7 +133,7 @@ header {
 .bottom { /*the bottom button*/
  top: 30px;
 }
-#secondtab {
+#secondtab, #thirdtab {
   top: 20px;
   margin: 0;
   margin-right: 20px;
@@ -157,4 +157,11 @@ header {
 
 #secondtab tr:nth-child(odd) {
   background-color: #dddddd;
+}
+
+#thirdtabcontent{
+  margin-left:20px;
+}
+.timeformat {
+  margin-left:40px;
 }

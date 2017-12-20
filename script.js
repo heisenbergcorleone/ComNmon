@@ -202,8 +202,9 @@ function handleCurrentTab(currentTab,n,directory_path) {
 
 
     // return if n is -1
-    if(n === -1) {
+    if(n === -1) { 
         if(currentTab==1){
+            checked_timestamps = [];
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
         }
@@ -211,7 +212,9 @@ function handleCurrentTab(currentTab,n,directory_path) {
     // switch condition populates the tab
     switch(currentTab){
 
-        case 1:
+        case 1: 
+            console.log(checked_timestamps);
+            timeStampArray =[]; dateListArray = []; print_dateListArray =[];
             // the second tab 
             //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
             timeStampArray = JSON.parse(ajaxCall("directory_path",directory_path));
@@ -238,7 +241,8 @@ function handleCurrentTab(currentTab,n,directory_path) {
             break;
         case 2:
             // the third tab
-            console.log("second next"); 
+            console.log("second next");
+            buildThirdTab(checked_timestamps); 
             console.log(checked_timestamps);
             
             break;
@@ -336,12 +340,13 @@ function addDirectory(element) {
     
     checked_timestamps = [];
     selectedIndex.forEach(function(i){
+        //console.log(timeStampArray); 
         checked_timestamps.push(timeStampArray[i]);
     });
 
     (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'nextPrev(1)');
     (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'nextPrev(1)');
-    nextPrev(1);
+    nextPrev(1); 
     }
 
    
@@ -354,3 +359,34 @@ function addDirectory(element) {
     }
   return;
 }
+
+// functions for third tab
+
+function buildThirdTab(x){
+    var thirdtabcontent = document.getElementById("thirdtabcontent");
+    thirdtabcontent.innerHTML = "";
+    
+    x.forEach(function(stamp){
+    var d = new Date(Number(stamp));
+    var dates = document.getElementsByClassName("date");
+    var dateFormat = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
+    var timeFormat = (((d.getHours()<10?'0':'') + d.getHours()) + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ':' + ((d.getSeconds()<10?'0':'') + d.getSeconds()));
+    dates = [].slice.call(dates);
+
+    if(dates.length){
+        dates.some(function(e){
+            if(e.id == dateFormat){
+                e.parentElement.innerHTML += '<div class="timeformat" id='+ stamp +'>'+ timeFormat +'</div>';
+                
+                return;
+            } else if (e==dates[dates.length-1]) {
+                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'</div></div><br><br><br>';
+            };
+        });
+    } else {
+        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'</div></div><br><br><br>';
+    };
+
+    });
+
+};
