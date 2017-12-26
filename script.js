@@ -207,6 +207,8 @@ function handleCurrentTab(currentTab,n,directory_path) {
             checked_timestamps = [];
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
+        } else if (currentTab==2) {
+            console.log("change the buttons onclick event");
         }
         return;};
     // switch condition populates the tab
@@ -242,6 +244,8 @@ function handleCurrentTab(currentTab,n,directory_path) {
             console.log("second next");
             buildThirdTab(checked_timestamps); 
             console.log(checked_timestamps);
+            (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'checkFileType(this)');
+            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'checkFileType(this)');
             
             break;
         case 3:
@@ -324,7 +328,6 @@ function addDirectory(element) {
         var table_body = that.closest("tbody");
         ($(table_body).find("."+that.className)).filter(':checkbox').prop('checked', that.checked);
     } else {
-        console.log(that.parentElement)
         $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
     }
 };
@@ -386,11 +389,11 @@ function buildThirdTab(x){
                 
                 return;
             } else if (e==dates[dates.length-1]) {
-                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table directory ="'+ stamp +'"></table></div></div></div><br><br><br>';
+                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
             };
         });
     } else {
-        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table directory ="'+ stamp +'"></table></div></div></div><br><br><br>';
+        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
     };
 
     });
@@ -434,7 +437,8 @@ function displayFiles(n,that){
 }
 
 function contentSetUp(nmonFiles,parentDiv){
-    nmonFiles.sort();
+    // the array is first sorted then reversed
+    nmonFiles.sort();nmonFiles.reverse();
 
     var nmonHeader = [];
     nmonFiles.forEach(function(e,i){
@@ -479,5 +483,42 @@ function contentSetUp(nmonFiles,parentDiv){
         };
 
     };
+
+};
+
+function checkFileType(that) {
+    var checked_files = $(".files :checkbox[id]:checked");
+    if(!checked_files.length){return;}
+    console.log(checked_files);
+    // initialise a javascript object to store the selected files
+    var selectedFiles = {};
+
+    checked_files.each(function(i,e){
+
+        var filetypeExists = (checkDuplication(Object.keys(selectedFiles),e.className));
+        // if the filetype exists
+        if(filetypeExists) {
+            var timestampExists = (checkDuplication(Object.keys(selectedFiles[e.className]),(e.closest("div[id]")).id));
+            if(timestampExists){
+                selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);
+            } else {
+                // define the array that keeps record of the file names
+                selectedFiles[e.className][(e.closest("div[id]")).id] = [];
+                // the selected file name are stored inside the array
+                selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);
+            };
+        // if file type doesn't exist then create one
+        } else {
+            selectedFiles[e.className] = {};
+            // define the array that keeps record of the file names
+            selectedFiles[e.className][(e.closest("div[id]")).id] = [];
+            // the selected file name are stored inside the array
+            selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);  
+        };
+
+    });
+
+    console.log(selectedFiles)
+
 
 };
