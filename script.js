@@ -213,7 +213,6 @@ function handleCurrentTab(currentTab,n,directory_path) {
     switch(currentTab){
 
         case 1: 
-            console.log(checked_timestamps);
             timeStampArray =[]; dateListArray = []; print_dateListArray =[];
             // the second tab 
             //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
@@ -229,7 +228,6 @@ function handleCurrentTab(currentTab,n,directory_path) {
             print_dateListArray = dateListArray.filter(function(item, pos) {
                 return dateListArray.indexOf(item) == pos;
             });
-            console.log(print_dateListArray);
             
             $("#secondtab").replaceWith(secondTab.clone());
             
@@ -291,7 +289,7 @@ function addDirectory(element) {
           var cell2 = row.insertCell(1); // checkbox
   
           cell1.innerHTML = '<label>' + print_dateListArray[0] + '</label>';
-          cell2.innerHTML = '<input type="checkbox" name="checkbox[]" value='+ print_dateListArray[0] +' ></input>';
+          cell2.innerHTML = '<input type="checkbox" value='+ print_dateListArray[0] +' ></input>';
           print_dateListArray.shift();
       };
   
@@ -320,9 +318,16 @@ function addDirectory(element) {
     //alert(limit);
   };
   
-  function checkall(that) {
-    $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
-  };
+  function checkall(that,tabname="secondtab") {
+
+    if(tabname == "thirdtab") {
+        var table_body = that.closest("tbody");
+        ($(table_body).find("."+that.className)).filter(':checkbox').prop('checked', that.checked);
+    } else {
+        console.log(that.parentElement)
+        $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
+    }
+};
 
  
 
@@ -371,22 +376,108 @@ function buildThirdTab(x){
     var dates = document.getElementsByClassName("date");
     var dateFormat = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
     var timeFormat = (((d.getHours()<10?'0':'') + d.getHours()) + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ':' + ((d.getSeconds()<10?'0':'') + d.getSeconds()));
+    // converts into array
     dates = [].slice.call(dates);
 
     if(dates.length){
         dates.some(function(e){
             if(e.id == dateFormat){
-                e.parentElement.innerHTML += '<div class="timeformat" id='+ stamp +'>'+ timeFormat +'</div>';
+                e.parentElement.innerHTML += '<br><div class="timeformat" id='+ stamp +'>'+ timeFormat +'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div>';
                 
                 return;
             } else if (e==dates[dates.length-1]) {
-                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'</div></div><br><br><br>';
+                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table directory ="'+ stamp +'"></table></div></div></div><br><br><br>';
             };
         });
     } else {
-        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'</div></div><br><br><br>';
+        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table directory ="'+ stamp +'"></table></div></div></div><br><br><br>';
     };
 
     });
+    // positioning problem
+    setTimeout(function(){
+            
+    if ($(document).height() > docheight) {
+        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
+      }; // makes the position relative
+
+    }, 1);
+
+};
+
+function displayFiles(n,that){
+    var nmonDir = document.getElementById("selected_directory").innerText;
+    if(n == 1){
+        that.innerHTML=' &#8607;';
+        $(that).siblings('.files')[0].style='display: block;';
+        var nmonFiles = JSON.parse(ajaxCall("directory_path",nmonDir+that.parentElement.id));
+        contentSetUp(nmonFiles,that.parentElement);
+        that.setAttribute("onclick", 'displayFiles(0,this)');
+    } else if (n==0) {
+        that.innerHTML=' &#8609;';
+        $(that).siblings('.files')[0].style='display: none;';
+
+        that.setAttribute("onclick", 'displayFiles(2,this)');
+    } else if (n==2) {
+        that.innerHTML=' &#8607;';
+        $(that).siblings('.files')[0].style='display: block;';
+        that.setAttribute("onclick", 'displayFiles(0,this)');
+    };
+
+    // toggle the footer style to adjust the position
+    if ($(document).height() > docheight) {
+        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
+      }; // makes the position relative
+    if($(document).height() < docheight) {
+        document.getElementsByClassName("footer")[0].style = 'position:absolute; width:99%'
+    } // makes the position absolute
+}
+
+function contentSetUp(nmonFiles,parentDiv){
+    nmonFiles.sort();
+
+    var nmonHeader = [];
+    nmonFiles.forEach(function(e,i){
+        var el = e.substr(0, e.indexOf('_'));
+        if(!nmonHeader.length){
+            nmonHeader.push(el);
+        } else {
+            if(nmonHeader[nmonHeader.length-1] == el){
+                return;
+            } else {
+                nmonHeader.push(el);
+            }
+        };
+    });
+
+    var files_log_table = parentDiv.getElementsByTagName("table")[0];
+    loadTable();
+
+    function loadTable() {
+        for(var i = 0; i < nmonHeader.length; i ++) {
+            
+            //inserts the heading
+            var table_length = files_log_table.rows.length;
+            var row = files_log_table.insertRow(table_length);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = '<b>'+nmonHeader[i]+'</b>';
+            cell2.innerHTML = '<b>Check all:</b> <input type="checkbox" class="'+ nmonHeader[i] +'" onchange="checkall(this,\'thirdtab\')" >';
+
+            //inserts the file names
+            nmonFiles.forEach(function(filename){
+                var el = filename.substr(0, filename.indexOf('_'));
+                if(el == nmonHeader[i]){
+                    var table_length = files_log_table.rows.length;
+                    var row = files_log_table.insertRow(table_length);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = filename;
+                    cell2.innerHTML = '<input type="checkbox" class="'+nmonHeader[i]+'" id="'+ filename +'" ></input>';
+                }; 
+            });
+        };
+
+    };
 
 };

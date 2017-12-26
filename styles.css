@@ -143,19 +143,19 @@ header {
   border-style: inset;
 }
 
-#secondtab table {
+#thirdtab table, #secondtab table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
 
 }
 
-#secondtab td, #secondtab th {
+#thirdtab td, #thirdtab th, #secondtab td, #secondtab th {
   border: 1px solid black;
   text-align: left;
   padding: 8px;
 }
 
-#secondtab tr:nth-child(odd) {
+#thirdtab tr:nth-child(odd), #secondtab tr:nth-child(odd) {
   background-color: #dddddd;
 }
 
@@ -164,4 +164,7 @@ header {
 }
 .timeformat {
   margin-left:40px;
+}
+.files{
+  display: none;
 }

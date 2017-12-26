@@ -59,10 +59,8 @@
 
         </div>
 <!-- time directory page -->
-        <div class="tab" id="thirdtab">
-          <div id="thirdtabcontent">
-              
-          </div>
+        <div class="tab" id="thirdtab"><br>
+          <div id="thirdtabcontent"></div>
           <!-- this tab will be built up by the javascript function -->
         </div>
 <!-- optional conditon page -->
