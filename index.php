@@ -16,7 +16,7 @@
         <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
       </div>
 
-      <form id="content" action="server.php" method="post" onsubmit="return false">
+      <div id="content">
 <!-- index page -->
         <div class="tab">
           <!-- directory log table -->
@@ -68,11 +68,13 @@
           <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         </div>
           
-      </form>
+      </div>
       <div class="button bottom">
         <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
       </div>
+      <form action="chartMaker.php" target="_blank" method="post">
+      </form>
       <div class ="footer">
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">

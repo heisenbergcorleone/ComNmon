@@ -9,12 +9,12 @@ if(isset($_GET['directory_location'])) { // the value is again checked if it's e
     }
 if(isset($_GET['directory_path'])){
     $nmonDir = $_GET['directory_path'];
-    $dates = scandir($nmonDir,1);
+    $subdir = scandir($nmonDir,1);
         // removes dot and double dot from the array
-        if (($dotkey = array_search('.', $dates)) && ($doubledotkey = array_search('..', $dates))) {
-            unset($dates[$dotkey]);
-            unset($dates[$doubledotkey]);
+        if (($dotkey = array_search('.', $subdir)) && ($doubledotkey = array_search('..', $subdir))) {
+            unset($subdir[$dotkey]);
+            unset($subdir[$doubledotkey]);
         }
-        echo json_encode($dates);
+        echo json_encode($subdir);
 }
 ?>

@@ -520,5 +520,30 @@ function checkFileType(that) {
 
     console.log(selectedFiles)
 
+    scrutiniseObject(selectedFiles);
+};
+
+function scrutiniseObject(filesObject) {
+    if(Object.keys(filesObject).length == 1){
+        console.log("single file type");
+    } else { // else multiple files type exist
+
+        // both the types have are from a single timestamp directory -> then make a chart within directory
+        if(singleDirectory(filesObject)){
+            console.log("multiple file type + single directory");
+        } else {
+            console.log("multiple file type + multiple directory")
+        };
+    };
+
+    function singleDirectory(obj){
+        // saves the timestamp of the first key
+        var timestamp = Object.keys(obj[Object.keys(obj)[0]])[0];
+        // returns true if all the files are from only one timestamp directory
+        return (Object.keys(obj).every(function(e){
+        // if the length of the key object is one and the timestamp match -> means that files from a single timestamp directory are selected
+        if((Object.keys(obj[e]).length==1)&&(Object.keys(obj[e])[0]==timestamp)){return true;}
+        }));   
+    };
 
 };
