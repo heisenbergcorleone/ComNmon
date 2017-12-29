@@ -73,8 +73,13 @@
         <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
       </div>
-      <form action="chartMaker.php" target="_blank" method="post">
-      </form>
+<!-- form that sends the data to the server -->
+      <div class='tab'>
+        <form action="displayCharts.php" target="_blank" method="POST">
+          <input id ="submitInput" name="fileobject" value="" type="text">
+          <input type="submit" id="submitform">
+        </form>
+      </div>
       <div class ="footer">
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">

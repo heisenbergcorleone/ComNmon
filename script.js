@@ -206,7 +206,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
         if(currentTab==1){
             checked_timestamps = [];
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
-            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
+            (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
         } else if (currentTab==2) {
             console.log("change the buttons onclick event");
         }
@@ -236,7 +236,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
             addDirectory();
             //document.getElementsByClassName("nextBtn")[0].onclick = 'secondToThird(this)';
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
-            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'secondToThird(this)');
+            (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
 
             break;
         case 2:
@@ -245,7 +245,8 @@ function handleCurrentTab(currentTab,n,directory_path) {
             buildThirdTab(checked_timestamps); 
             console.log(checked_timestamps);
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'checkFileType(this)');
-            (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'checkFileType(this)');
+            console.log((document.getElementsByClassName("nextBtn")[2]));
+            (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'checkFileType(this)');
             
             break;
         case 3:
@@ -353,7 +354,7 @@ function addDirectory(element) {
     });
 
     (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'nextPrev(1)');
-    (document.getElementsByClassName("nextBtn")[1]).setAttribute("onclick", 'nextPrev(1)');
+    (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'nextPrev(1)');
     nextPrev(1); 
     }
 
@@ -526,13 +527,20 @@ function checkFileType(that) {
 function scrutiniseObject(filesObject) {
     if(Object.keys(filesObject).length == 1){
         console.log("single file type");
+        console.log("file type wise");
+        var filesData = {files: filesObject, sorting:"filetype"};
+        sendData(filesData);
+
     } else { // else multiple files type exist
 
         // both the types have are from a single timestamp directory -> then make a chart within directory
         if(singleDirectory(filesObject)){
-            console.log("multiple file type + single directory");
+            var filesData = {files: filesObject, sorting:"timestamp"};
+            sendData(filesData);
         } else {
             console.log("multiple file type + multiple directory")
+            console.log("ask the user if he wants the charts to make timestamp wise or file type wise");
+            console.log("take to the next tab to ask");
         };
     };
 
@@ -547,3 +555,13 @@ function scrutiniseObject(filesObject) {
     };
 
 };
+
+// send data via post method to make chart
+function sendData(filesData){
+    console.log(filesData);
+    console.log($("#submitInput"));
+    $("#submitInput").attr('value',JSON.stringify(filesData));
+    $( "#submitform" ).trigger( "click" );
+};
+
+// functions for the fourth tab
