@@ -242,10 +242,9 @@ function handleCurrentTab(currentTab,n,directory_path) {
         case 2:
             // the third tab
             console.log("second next");
-            buildThirdTab(checked_timestamps); 
+            buildThirdTab(checked_timestamps);
             console.log(checked_timestamps);
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'checkFileType(this)');
-            console.log((document.getElementsByClassName("nextBtn")[2]));
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'checkFileType(this)');
             
             break;
@@ -327,7 +326,24 @@ function addDirectory(element) {
 
     if(tabname == "thirdtab") {
         var table_body = that.closest("tbody");
-        ($(table_body).find("."+that.className)).filter(':checkbox').prop('checked', that.checked);
+        // unlike prev, prevAll selects all the previous elements and then we can sort the first one out of them
+        var selectedNumberSpan = ($(that).closest(".files").prevAll(".selectedByTotal:first").children(".selectedNumbers"))[0];
+
+        if(that.checked){
+            // keeps record of the unchecked checkbox
+            var toBeChecked = ((($(table_body).find("."+that.className).not(that)).filter(":checkbox:not(:checked)")).length);
+            // add the selected file number i.e all the number of listed files
+            selectedNumberSpan.innerHTML = Number(selectedNumberSpan.innerText)+toBeChecked;
+        } else {
+            // keeps record of the checked checkbox
+            var toBeUnchecked = ((($(table_body).find("."+that.className).not(that)).filter(":checkbox:checked")).length);
+            // subtract the unselected file number i.e all the number of listed files
+            selectedNumberSpan.innerHTML = Number(selectedNumberSpan.innerText)-toBeUnchecked;
+        };
+        
+        // every checkbox is checked/unchecked now
+        ($(table_body).find("."+that.className).not(that)).filter(':checkbox').prop('checked', that.checked);
+
     } else {
         $('table#directory_list_table td input').filter(':checkbox').prop('checked', that.checked);
     }
@@ -386,15 +402,15 @@ function buildThirdTab(x){
     if(dates.length){
         dates.some(function(e){
             if(e.id == dateFormat){
-                e.parentElement.innerHTML += '<br><div class="timeformat" id='+ stamp +'>'+ timeFormat +'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div>';
+                e.parentElement.innerHTML += '<br><div class="timeformat" id='+ stamp +'>'+ timeFormat +'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div>';
                 
                 return;
             } else if (e==dates[dates.length-1]) {
-                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
+                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
             };
         });
     } else {
-        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
+        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
     };
 
     });
@@ -415,6 +431,11 @@ function displayFiles(n,that){
         that.innerHTML=' &#8607;';
         $(that).siblings('.files')[0].style='display: block;';
         var nmonFiles = JSON.parse(ajaxCall("directory_path",nmonDir+that.parentElement.id));
+        
+        // sets the div to show number of files selected
+        ($(that).prev('.selectedByTotal')[0]).innerHTML = '&nbsp;(<span class="selectedNumbers">0</span>/'+nmonFiles.length+')';
+        
+        // sets the rest of the contents and table
         contentSetUp(nmonFiles,that.parentElement);
         that.setAttribute("onclick", 'displayFiles(0,this)');
     } else if (n==0) {
@@ -478,7 +499,7 @@ function contentSetUp(nmonFiles,parentDiv){
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
                     cell1.innerHTML = filename;
-                    cell2.innerHTML = '<input type="checkbox" class="'+nmonHeader[i]+'" id="'+ filename +'" ></input>';
+                    cell2.innerHTML = '<input type="checkbox" class="'+nmonHeader[i]+'" id="'+ filename +'" onclick="updateCheckedNumber(this)"></input>';
                 }; 
             });
         };
@@ -486,6 +507,20 @@ function contentSetUp(nmonFiles,parentDiv){
     };
 
 };
+
+function updateCheckedNumber(that) {    
+    var selectedNumberSpan = ($(that).closest(".files").prevAll(".selectedByTotal:first").children(".selectedNumbers"))[0];
+    // update the values
+    if(that.checked) {
+        selectedNumberSpan.innerHTML = (Number(selectedNumberSpan.innerText) + 1);
+    } else {
+        selectedNumberSpan.innerHTML = (Number(selectedNumberSpan.innerText) - 1);
+    };
+};
+
+
+
+
 
 function checkFileType(that) {
     var checked_files = $(".files :checkbox[id]:checked");
