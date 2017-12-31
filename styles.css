@@ -88,7 +88,7 @@ button:hover{
 	background-color: 	#990000;
 }
 
-.nextBtn {
+.nextBtn{
     border-radius: 12px;
     padding: 10px;
     font-size: 15px;
@@ -133,7 +133,7 @@ header {
 .bottom { /*the bottom button*/
  top: 30px;
 }
-#secondtab, #thirdtab {
+#secondtab, #thirdtab, #fourthtab {
   top: 20px;
   margin: 0;
   margin-right: 20px;
@@ -159,12 +159,26 @@ header {
   background-color: #dddddd;
 }
 
-#thirdtabcontent{
+#thirdtabcontent, #fourthtabcontent{
   margin-left:20px;
+  margin-right: 20px;
 }
 .timeformat {
   margin-left:40px;
 }
 .files{
   display: none;
+}
+#lastPrev {
+  position: relative;
+  left: 45%;
+}
+#fourthtabcontent h4 {
+  background-color: #eeadad;
+}
+.submitButton button {
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 15px;
+  width:250px;
 }

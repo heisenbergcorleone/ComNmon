@@ -65,20 +65,34 @@
         </div>
 <!-- optional conditon page -->
         <div class="tab">
-          <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <button type="button" id="lastPrev" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
+          <div  id="fourthtab">
+            <div id ="fourthtabcontent">
+              <h4><i>It seems that the selected files are of Multiple Types and are from different Timestamp directories, kindly choose the sorting mechanism to help the program in making the chart(s) by clicking on one of the buttons below.</i></h4>
+                <br>
+                <div id="form"><h3>Select your option: </h3> <br><br>
+                  <form id="postForm" action="displayCharts.php" target="_blank" method="POST">
+                    <input style="display:none;" id ="submitInput" name="fileobject" value="" type="text">  
+                    <div class="submitButton" style="width: 35%; float:left">
+                      The 'File Types' button will group the selected files according to their file type:
+                      <button id="filetype" class="submit">FILE TYPES</button>
+                    </div>
+                    <div class="submitButton" style="width: 35%; float:right">
+                      The 'Timestamp Directory' Button will group them according to the directories:
+                      <button id="timestamp" class="submit">TIMESTAMP DIRECTORIES</button>
+                    </div>
+                    <br style="clear:both;"/>
+                  </form>
+                </div>
+            </div>
+          </div>
         </div>
           
-      </div>
+      </div> <!-- content -->
+
       <div class="button bottom">
         <button type="button" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
         <button type="button" class="nextBtn" onclick="nextPrev(1)">Next</button>
-      </div>
-<!-- form that sends the data to the server -->
-      <div class='tab'>
-        <form action="displayCharts.php" target="_blank" method="POST">
-          <input id ="submitInput" name="fileobject" value="" type="text">
-          <input type="submit" id="submitform">
-        </form>
       </div>
       <div class ="footer">
         <!-- Circles which indicates the steps of the form: -->
@@ -96,7 +110,7 @@
         <script type="text/javascript">
           $(document).ready(function(){
             handleLog();
-            showTab(currentTab); // Display the crurrent tab
+            showTab(currentTab); // Display the current tab
           })
         </script>
     </body>

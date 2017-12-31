@@ -151,16 +151,25 @@ function showTab(n) {
     // This function will display the specified tab of the form...
     var x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
-    document.getElementsByClassName("footer")[0].removeAttribute("style");
+    // toggle the footer style to adjust the position
+    console.log()
+    if ($(document).height() > docheight) {
+        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
+      }; // makes the position relative
+    if($(document).height() < docheight) {
+        document.getElementsByClassName("footer")[0].style = 'position:absolute; width:99%'
+    } // makes the position absolute
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
 }
 
 function nextPrev(n,value) {
+    // n argument shows that if the next button is pressed or the previous button is pressed
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
     // change the step color
     if(n === 1){
+        // current tab is the global variable -> value is 0 and increments when the tab changes
         document.getElementsByClassName("step")[currentTab].className += " finish";
     }
     // Hide the current tab:
@@ -195,7 +204,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
         document.getElementsByClassName("button top")[0].style = "display:block";    
         document.getElementsByClassName("button bottom")[0].style = "display:block";
     } else if (currentTab == 0 || currentTab==3) {
-    document.getElementsByClassName("header")[0].style = "display:none;";
+    if(currentTab == 0) {document.getElementsByClassName("header")[0].style = "display:none;";};
     document.getElementsByClassName("button top")[0].style = "display:none";
     document.getElementsByClassName("button bottom")[0].style = "display:none";
     };
@@ -232,26 +241,21 @@ function handleCurrentTab(currentTab,n,directory_path) {
             });
             
             $("#secondtab").replaceWith(secondTab.clone());
-            
             addDirectory();
-            //document.getElementsByClassName("nextBtn")[0].onclick = 'secondToThird(this)';
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
 
             break;
         case 2:
             // the third tab
-            console.log("second next");
             buildThirdTab(checked_timestamps);
-            console.log(checked_timestamps);
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'checkFileType(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'checkFileType(this)');
             
             break;
         case 3:
             // the fourth tab
-            console.log("last next"); 
-            
+            document.getElementsByClassName("footer")[0].style = 'position:absolute; width:99%'
             break;
     };
     
@@ -561,21 +565,18 @@ function checkFileType(that) {
 
 function scrutiniseObject(filesObject) {
     if(Object.keys(filesObject).length == 1){
-        console.log("single file type");
-        console.log("file type wise");
-        var filesData = {files: filesObject, sorting:"filetype"};
-        sendData(filesData);
+        sendData(filesObject,"filetype");
 
     } else { // else multiple files type exist
 
         // both the types have are from a single timestamp directory -> then make a chart within directory
         if(singleDirectory(filesObject)){
-            var filesData = {files: filesObject, sorting:"timestamp"};
-            sendData(filesData);
+            sendData(filesObject,"timestamp");
         } else {
-            console.log("multiple file type + multiple directory")
-            console.log("ask the user if he wants the charts to make timestamp wise or file type wise");
-            console.log("take to the next tab to ask");
+            sendData(filesObject);
+            nextPrev(1);
+            $("#filetype").attr('onclick','sendData(JSON.parse(this.value),this.id);');
+            $("#timestamp").attr('onclick','sendData(JSON.parse(this.value),this.id);');
         };
     };
 
@@ -592,11 +593,16 @@ function scrutiniseObject(filesObject) {
 };
 
 // send data via post method to make chart
-function sendData(filesData){
-    console.log(filesData);
-    console.log($("#submitInput"));
-    $("#submitInput").attr('value',JSON.stringify(filesData));
-    $( "#submitform" ).trigger( "click" );
+function sendData(filesObject,sortMethod){
+    if(sortMethod){
+        var filesData = {"files": filesObject, "sorting":sortMethod};
+        $("#submitInput").attr('value',JSON.stringify(filesData));
+        $("#postForm").submit();
+    } else {
+        // when sorting method isn't available
+        //var filesData = {"files": filesObject, "sorting":"pending"};
+        $("#filetype").attr('value',JSON.stringify(filesObject));
+        $("#timestamp").attr('value',JSON.stringify(filesObject));
+    };
+    
 };
-
-// functions for the fourth tab
