@@ -19,18 +19,13 @@
       <div id="content">
 <!-- index page -->
         <div class="tab">
-          <!-- directory log table -->
-          <div class="topleft">
-                  <table id="dir_log" style='display: none;'>
-                  </table>
-          </div>
               <!-- project name -->
               <div class="center">
                   <b>SysAdmin's</b><br>
                   <b id="project_name">comNmon</b><br><br>
-                  Enter the path of the nmon directory:<br>
+                  Change the directory path if needed:<br>
                   <div>
-                      <input type="text" id="directory"></input>
+                      <input placeholder="./nmon" type="text" id="directory"></input>
                       <button class='nextBtn' onclick="return getFolder(this.previousSibling.previousSibling.value);">Next</button>
                   </div>
               </div>
@@ -64,29 +59,25 @@
           <!-- this tab will be built up by the javascript function -->
         </div>
 <!-- optional conditon page -->
-        <div class="tab">
-          <button type="button" id="lastPrev" class="prevBtn" onclick="nextPrev(-1)">Previous</button>
-          <div  id="fourthtab">
-            <div id ="fourthtabcontent">
-              <h4><i>It seems that the selected files are of Multiple Types and are from different Timestamp directories, kindly choose the sorting mechanism to help the program in making the chart(s) by clicking on one of the buttons below.</i></h4>
-                <br>
-                <div id="form"><h3>Select your option: </h3> <br><br>
-                  <form id="postForm" action="displayCharts.php" target="_blank" method="POST">
-                    <input style="display:none;" id ="submitInput" name="fileobject" value="" type="text">  
-                    <div class="submitButton" style="width: 35%; float:left">
-                      The 'File Types' button will group the selected files according to their file type:
-                      <button id="filetype" class="submit">FILE TYPES</button>
-                    </div>
-                    <div class="submitButton" style="width: 35%; float:right">
-                      The 'Timestamp Directory' Button will group them according to the directories:
-                      <button id="timestamp" class="submit">TIMESTAMP DIRECTORIES</button>
-                    </div>
-                    <br style="clear:both;"/>
-                  </form>
+        <div id="formModal" class="modal">
+
+          <div class ="modal-content">
+            <span onclick="modalToggle()" class="close">&times;</span>
+              <form action="chartMaker.php" target="_blank" id="postForm" method="POST">
+                Select a sorting mechanism:
+                <br><br>
+                <input style="display:none;" id ="submitInput" name="fileobject" value="" type="text">
+                <div style="width:35%; float:left">
+                  <button id="filetypewise" class="submit" onclick="sendData(JSON.parse(this.value),this.id)">FILE-TYPE WISE</button>
                 </div>
+                <div style="width:35%; float:right">
+                  <button id="runwise" class="submit" onclick="sendData(JSON.parse(this.value),this.id)">RUN WISE</button>
+                </div>
+                <div style="clear:both;"></div>
+              </form>
             </div>
-          </div>
         </div>
+
           
       </div> <!-- content -->
 
@@ -100,7 +91,6 @@
           <span class="step" title="Nmon Directory"></span>
           <span class="step" title="Dates"></span>
           <span class="step" title="Time"></span>
-          <span class="step" title="Optional tab - displays when multiple file types are selected" style="background-color:red;"></span>
         </div>
         <footer>
           <a href='someimportant'><b>Documentation</b></a>
@@ -109,7 +99,6 @@
         <script src="script.js"></script>
         <script type="text/javascript">
           $(document).ready(function(){
-            handleLog();
             showTab(currentTab); // Display the current tab
           })
         </script>
