@@ -153,7 +153,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
             // the second tab 
             //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
             timeStampArray = JSON.parse(ajaxCall("directory_path",directory_path));
-            
+    
             timeStampArray.forEach(function(e){
                 var d = new Date(Number(e));
                 var dirDate = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
@@ -344,8 +344,7 @@ function displayFiles(n,that){
     if(n == 1){
         that.innerHTML=' &#8607;';
         $(that).siblings('.files')[0].style='display: block;';
-        var nmonFiles = JSON.parse(ajaxCall("directory_path",nmonDir+that.parentElement.id));
-        
+        var nmonFiles = JSON.parse(ajaxCall("timestamp_path",nmonDir+that.parentElement.id));
         // sets the div to show number of files selected
         ($(that).prev('.selectedByTotal')[0]).innerHTML = '&nbsp;(<span class="selectedNumbers">0</span>/'+nmonFiles.length+')';
         
@@ -396,7 +395,7 @@ function contentSetUp(nmonFiles,parentDiv){
     function loadTable() {
         for(var i = 0; i < nmonHeader.length; i ++) {
             
-            //inserts the heading
+            //insert the heading
             var table_length = files_log_table.rows.length;
             var row = files_log_table.insertRow(table_length);
             var cell1 = row.insertCell(0);
@@ -404,7 +403,7 @@ function contentSetUp(nmonFiles,parentDiv){
             cell1.innerHTML = '<b>'+nmonHeader[i]+'</b>';
             cell2.innerHTML = '<b>Check all:</b> <input type="checkbox" class="'+ nmonHeader[i] +'" onchange="checkall(this,\'thirdtab\')" >';
 
-            //inserts the file names
+            //insert the file names
             nmonFiles.forEach(function(filename){
                 var el = filename.substr(0, filename.indexOf('_'));
                 if(el == nmonHeader[i]){
