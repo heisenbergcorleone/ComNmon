@@ -71,6 +71,14 @@ function ajaxCall(keyname,locationValue,method="GET") {
 };
 
 
+function fixFooterPosition() {
+    if ($(document).height() > docheight) {
+        $(".footer").addClass("relative");
+    } else {
+        $(".footer").removeClass("relative");
+    };
+};
+
 
 function showTab(n) {
     // This function will display the specified tab of the form...
@@ -78,12 +86,7 @@ function showTab(n) {
     x[n].style.display = "block";
     // toggle the footer style to adjust the position
     console.log($(document).height(),docheight);
-    if ($(document).height() > docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
-      }; // makes the position relative
-    if($(document).height() <= docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:absolute; width:99%'
-    } // makes the position absolute
+    fixFooterPosition();
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
 }
@@ -92,7 +95,6 @@ function nextPrev(n,value) {
     // n argument shows that if the next button is pressed or the previous button is pressed
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
-    // change the step color
     if(n === 1){
         // current tab is the global variable -> value is 0 and increments when the tab changes
         document.getElementsByClassName("step")[currentTab].className += " finish";
@@ -121,17 +123,17 @@ function fixStepIndicator(n) {
 function handleCurrentTab(currentTab,n,directory_path) {
     // inputs the value
     if(currentTab == 1 && n === 1) {
-        document.getElementById("selected_directory").innerText = directory_path;
+        $("#selected_directory").text(directory_path);
     }
     // toggle the display
-    if(currentTab > 0 && currentTab < 3){
+    if(currentTab > 0){
         document.getElementsByClassName("header")[0].style = "display:block;";
         document.getElementsByClassName("button top")[0].style = "display:block";    
         document.getElementsByClassName("button bottom")[0].style = "display:block";
-    } else if (currentTab == 0 || currentTab==3) {
-    if(currentTab == 0) {document.getElementsByClassName("header")[0].style = "display:none;";};
-    document.getElementsByClassName("button top")[0].style = "display:none";
-    document.getElementsByClassName("button bottom")[0].style = "display:none";
+    } else if (currentTab == 0) {
+        document.getElementsByClassName("header")[0].style = "display:none;";
+        document.getElementsByClassName("button top")[0].style = "display:none";
+        document.getElementsByClassName("button bottom")[0].style = "display:none";
     };
 
 
@@ -232,10 +234,7 @@ function addDirectory(element) {
 
             };
   
-      // the footer becomes relative when the table size is more than the window size
-      if ($(document).height() > docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
-      }; // makes the position relative
+      fixFooterPosition()
 };
   
   function checkall(that,tabname="secondtab") {
@@ -331,9 +330,7 @@ function buildThirdTab(x){
     // positioning problem
     setTimeout(function(){
             
-    if ($(document).height() > docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
-      }; // makes the position relative
+        fixFooterPosition();
 
     }, 1);
 
@@ -362,13 +359,7 @@ function displayFiles(n,that){
         that.setAttribute("onclick", 'displayFiles(0,this)');
     };
 
-    // toggle the footer style to adjust the position
-    if ($(document).height() > docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:relative; width:100%';
-      }; // makes the position relative
-    if($(document).height() < docheight) {
-        document.getElementsByClassName("footer")[0].style = 'position:absolute; width:99%'
-    } // makes the position absolute
+    fixFooterPosition();
 }
 
 function contentSetUp(nmonFiles,parentDiv){
