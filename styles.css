@@ -1,6 +1,7 @@
 body {
     background-color: powderblue;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow-x: hidden;
 }
 
 .center{
@@ -113,9 +114,11 @@ header {
 
 .top {
  top : 10px;
+ display: none;
 }
 .bottom { /*the bottom button*/
  top: 30px;
+ display: none;
 }
 #secondtab, #thirdtab{
   top: 20px;
@@ -198,4 +201,13 @@ header {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.show {
+ display: block;
+}
+
+.relative {
+  position: relative;
+  width: 100%;
 }

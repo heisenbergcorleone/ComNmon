@@ -1,10 +1,9 @@
 var dir_location = document.getElementById("directory");
 var dir_log_table = document.getElementById("dir_log");
-var storeDirArray = []; // this array stores the last 3 directory locations
 //console.log(localStorage)
 var currentTab = 0; // Current tab is set to be the first tab (0)
-var timeStampArray; var checked_timestamps = [];
-var dateListArray = []; var print_dateListArray = []; // dateListArray has duplications print is used to make the list and has no duplications
+var [timeStampArray,checked_timestamps,dateListArray,print_dateListArray] = [[],[],[],[]];
+// constants
 const docheight = $(document).height();
 const secondTab = $("#secondtab").clone();
 
@@ -30,7 +29,7 @@ function fixString(x) { // adds slash at the end of the string also checks for a
                 x = x.slice(1, x.length);
             }
             return x; // returns the value
-        };
+};
 
 function getFolder(folderVal) {
     if(folderVal == ""){folderVal = dir_location.placeholder}// checks if the value isn't empty
@@ -45,11 +44,9 @@ function getFolder(folderVal) {
             nextPrev(1,location_val);
         }
 
+};
 
-
-} // getfolder function closed
-
-// this function checks if any of the array's element is equal to the value
+// check for the duplicated value in the array
 function checkDuplication(array,value) {
     return (array.some(function(e){
             return value == e;
@@ -85,14 +82,12 @@ function showTab(n) {
     var x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
     // toggle the footer style to adjust the position
-    console.log($(document).height(),docheight);
     fixFooterPosition();
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
 }
 
 function nextPrev(n,value) {
-    // n argument shows that if the next button is pressed or the previous button is pressed
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
     if(n === 1){
@@ -123,17 +118,16 @@ function fixStepIndicator(n) {
 function handleCurrentTab(currentTab,n,directory_path) {
     // inputs the value
     if(currentTab == 1 && n === 1) {
+        // sets the directory path to header
         $("#selected_directory").text(directory_path);
     }
     // toggle the display
     if(currentTab > 0){
-        document.getElementsByClassName("header")[0].style = "display:block;";
-        document.getElementsByClassName("button top")[0].style = "display:block";    
-        document.getElementsByClassName("button bottom")[0].style = "display:block";
+        $(".header").addClass("show");
+        $(".button").addClass("show");
     } else if (currentTab == 0) {
-        document.getElementsByClassName("header")[0].style = "display:none;";
-        document.getElementsByClassName("button top")[0].style = "display:none";
-        document.getElementsByClassName("button bottom")[0].style = "display:none";
+        $(".header").removeClass("show");
+        $(".button").removeClass("show");
     };
 
 
@@ -143,10 +137,9 @@ function handleCurrentTab(currentTab,n,directory_path) {
             checked_timestamps = [];
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
-        } else if (currentTab==2) {
-            console.log("change the buttons onclick event");
         }
-        return;};
+        return;
+    };
     // switch condition populates the tab
     switch(currentTab){
 
@@ -426,7 +419,6 @@ function updateCheckedNumber(that) {
 function checkFileType(that) {
     var checked_files = $(".files :checkbox[id]:checked");
     if(!checked_files.length){return;}
-    console.log(checked_files);
     // initialise a javascript object to store the selected files
     var selectedFiles = {};
 
@@ -467,7 +459,22 @@ function scrutiniseObject(filesObject) {
         var runDirectory = filesObject[Object.keys(filesObject)[0]];
         // and if there is only one file selected -> sorting method is none i.e open that file
         if(runDirectory[Object.keys(runDirectory)[0]].length == 1){
-            sendData(filesObject,"none");
+            // sorting method is none 
+            var nmonDir = document.getElementById("selected_directory").innerText;
+            var firstElObj = filesObject[Object.keys(filesObject)[0]];
+            var fileName = (runDirectory[Object.keys(runDirectory)[0]][0]);
+            var timeStampDirectory = (Object.keys(firstElObj)[0]);
+
+            if(1) { // if location is relative
+                var nmonLocation = nmonDir.slice(1,nmonDir.length);
+                // redirect to the file location
+                window.open(location.href+nmonLocation+timeStampDirectory+"/"+fileName);
+            }
+            else { // if location is absolute
+                // copy the header location and redirect to the page
+            }
+
+            //sendData(filesObject,"none");
         } else { // or if there are multiple file -> sort them according to the fileType
             sendData(filesObject,"filetypewise");
         }
