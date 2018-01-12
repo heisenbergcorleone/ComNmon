@@ -450,52 +450,123 @@ function checkFileType(that) {
 };
 
 function scrutiniseObject(filesObject) {
-    console.log(filesObject);
     // if there is only a single file selected then the sorting method should be none
-    console.log(Object.keys(filesObject).length)
 
-    // when there is a single filetype from a single directory
-    if(Object.keys(filesObject).length == 1 && Object.keys(filesObject[Object.keys(filesObject)[0]]).length == 1) {
-        var runDirectory = filesObject[Object.keys(filesObject)[0]];
-        // and if there is only one file selected -> sorting method is none i.e open that file
-        if(runDirectory[Object.keys(runDirectory)[0]].length == 1){
-            // sorting method is none 
-            var nmonDir = document.getElementById("selected_directory").innerText;
-            var firstElObj = filesObject[Object.keys(filesObject)[0]];
-            var fileName = (runDirectory[Object.keys(runDirectory)[0]][0]);
-            var timeStampDirectory = (Object.keys(firstElObj)[0]);
+    // calculate the number of file type
+    /*
+    if (single file type) { // single file type
 
-            if(1) { // if location is relative
-                var nmonLocation = nmonDir.slice(1,nmonDir.length);
-                // redirect to the file location
-                window.open(location.href+nmonLocation+timeStampDirectory+"/"+fileName);
+        if(single directory) { // single directory
+
+        } else { // different/multiple directories
+
+        };
+
+
+    } else { // multiple file type
+
+        if(single directory) { // single directory
+
+        } else { // different/multiple directories
+
+        };
+
+    }; */
+
+    
+
+
+
+
+    if(objectLength(filesObject) == 1) { // single file type
+        
+        // store the selected file type value
+        var selectedFileType = Object.keys(filesObject)[0];
+        // stores the run dir or timestamp object
+        var runDirObj = filesObject[selectedFileType];
+
+        if(objectLength(runDirObj) == 1){           // single directory
+            
+            if(runDirObj[Object.keys(runDirObj)].length == 1) { // *single file*-> special case i.e if just one file is selected 
+                
+                openNmonFile(filesObject,runDirObj);  // open single file
+                console.log("open the file");
+
+            } else { // multiple files
+                //console.log("single directory");
+                sendData(filesObject,"single","single","filetypewise");
             }
-            else { // if location is absolute
-                // copy the header location and redirect to the page
-            }
 
-            //sendData(filesObject,"none");
-        } else { // or if there are multiple file -> sort them according to the fileType
-            sendData(filesObject,"filetypewise");
-        }
-    } else { // if there are more than one filetype or more than one run selected
-        sendData(filesObject);
-        modalToggle(1);
+        } else {                                    // multiple-different directories
+            console.log("multiple directories");
+            // single type from multiple directories
+            sendData(filesObject,"single","multiple");
+        };
+
+    } else {                               // multiple file types
+        console.log("multi file type");
+
+        if(singleDirCheck(filesObject)){            // single directory
+            console.log("single directory");
+            // multiple type -> from single directory
+            sendData(filesObject,"multiple","single");
+
+        } else {                                    // multiple/different directories
+            console.log("multiple directories");
+            // multiple types from multiple directories
+            sendData(filesObject,"multiple","multiple");
+        };
+
     };
 };
 
 // send data via post method to make chart
-function sendData(filesObject,sortMethod){
+function sendData(filesObject,type,directory,sortMethod){
     if(sortMethod){
-        var filesData = {"files": filesObject, "sortingMethod":sortMethod};
+        var filesData = {"files": filesObject,"type":type, "directory":directory ,"sortingMethod":sortMethod};
         $("#submitInput").attr('value',JSON.stringify(filesData));
         $("#postForm").submit();
     } else {
+        $("#filetypewise").attr('onclick',"sendData(JSON.parse(this.value),'"+type+"','"+ directory +"',this.id)"); 
+        $("#runwise").attr('onclick',"sendData(JSON.parse(this.value),'"+type+"','"+ directory +"',this.id)"); 
+
         $("#filetypewise").attr('value',JSON.stringify(filesObject));
         $("#runwise").attr('value',JSON.stringify(filesObject));
+
+        modalToggle();
     };
 };
 
 function modalToggle (value) {
-    value? $("#formModal")[0].style.display = "block": $("#formModal")[0].style.display = "none";
+    $("#formModal").toggleClass("show");
+};
+
+function objectLength(obj) {
+    return Object.keys(obj).length;
+};
+
+function singleDirCheck (obj) {
+    return (Object.keys(obj).every(function(e){
+                return ((Object.keys(obj[e]).length == 1) && (Object.keys(obj[e]) == Object.keys(obj[e])[0])) ;
+    }))
+};
+
+function openNmonFile(filesObject,runDirObj){
+    // fetch relevants details for the path
+    var nmonDir = document.getElementById("selected_directory").innerText;
+    var firstElObj = filesObject[Object.keys(filesObject)[0]];
+    var fileName = (runDirObj[Object.keys(runDirObj)[0]][0]);
+    var timeStampDirectory = (Object.keys(firstElObj)[0]);
+
+    // redirect based on the path type
+    if(true) { // if path is relative
+        var nmonLocation = nmonDir.slice(1,nmonDir.length);
+        // redirect to the file location
+        window.open(location.href+nmonLocation+timeStampDirectory+"/"+fileName);
+    }
+    else { // if path is absolute
+        // window.open(nmonDir+timeStampDirectory+"/"+fileName);
+        // copy the header location and redirect to the page
+    }
+
 };

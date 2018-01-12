@@ -66,12 +66,12 @@
               <form action="chartMaker.php" target="_blank" id="postForm" method="POST">
                 Select a sorting mechanism:
                 <br><br>
-                <input style="display:none;" id ="submitInput" name="fileobject" value="" type="text">
+                <input style="display:none;" id ="submitInput" name="filesData" value="" type="text">
                 <div style="width:35%; float:left">
-                  <button id="filetypewise" class="submit" onclick="sendData(JSON.parse(this.value),this.id)">FILE-TYPE WISE</button>
+                  <button id="filetypewise" class="submit">FILE-TYPE WISE</button>
                 </div>
                 <div style="width:35%; float:right">
-                  <button id="runwise" class="submit" onclick="sendData(JSON.parse(this.value),this.id)">RUN WISE</button>
+                  <button id="runwise" class="submit">RUN WISE</button>
                 </div>
                 <div style="clear:both;"></div>
               </form>
