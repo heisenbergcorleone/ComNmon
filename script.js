@@ -417,156 +417,102 @@ function updateCheckedNumber(that) {
 
 
 function checkFileType(that) {
-    var checked_files = $(".files :checkbox[id]:checked");
-    if(!checked_files.length){return;}
-    // initialise a javascript object to store the selected files
-    var selectedFiles = {};
-
-    checked_files.each(function(i,e){
-
-        var filetypeExists = (checkDuplication(Object.keys(selectedFiles),e.className));
-        // if the filetype exists
-        if(filetypeExists) {
-            var timestampExists = (checkDuplication(Object.keys(selectedFiles[e.className]),(e.closest("div[id]")).id));
-            if(timestampExists){
-                selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);
-            } else {
-                // define the array that keeps record of the file names
-                selectedFiles[e.className][(e.closest("div[id]")).id] = [];
-                // the selected file name are stored inside the array
-                selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);
-            };
-        // if file type doesn't exist then create one
-        } else {
-            selectedFiles[e.className] = {};
-            // define the array that keeps record of the file names
-            selectedFiles[e.className][(e.closest("div[id]")).id] = [];
-            // the selected file name are stored inside the array
-            selectedFiles[e.className][(e.closest("div[id]")).id].push(e.id);  
-        };
-
-    });
-    scrutiniseObject(selectedFiles);
-};
-
-function scrutiniseObject(filesObject) {
-    // if there is only a single file selected then the sorting method should be none
-
-    // calculate the number of file type
-    /*
-    if (single file type) { // single file type
-
-        if(single directory) { // single directory
-
-        } else { // different/multiple directories
-
-        };
-
-
-    } else { // multiple file type
-
-        if(single directory) { // single directory
-
-        } else { // different/multiple directories
-
-        };
-
-    }; */
-
+    var checked_files = ($(".files :checkbox[id]:checked"));
+    if(!checked_files.length){return;};
     
+    if(checked_files.length == 1) { // if only one file is selected
+        // then open the file
+        var nmonDir = document.getElementById("selected_directory").innerText;
+        var dirName =  checked_files[0].closest("div[id]").id;
+        var fileName = checked_files[0].id; 
+        if(1) { // relative path
 
+            var nmonLocation = nmonDir.slice(1,nmonDir.length);
+            // redirect to the file location
+            window.open(location.href+nmonLocation+dirName+"/"+fileName);
 
+        } else { // absolute path
 
-
-    if(objectLength(filesObject) == 1) { // single file type
-        
-        // store the selected file type value
-        var selectedFileType = Object.keys(filesObject)[0];
-        // stores the run dir or timestamp object
-        var runDirObj = filesObject[selectedFileType];
-
-        if(objectLength(runDirObj) == 1){           // single directory
-            
-            if(runDirObj[Object.keys(runDirObj)].length == 1) { // *single file*-> special case i.e if just one file is selected 
-                
-                openNmonFile(filesObject,runDirObj);  // open single file
-                console.log("open the file");
-
-            } else { // multiple files
-                //console.log("single directory");
-                sendData(filesObject,"single","single","filetypewise");
-            }
-
-        } else {                                    // multiple-different directories
-            console.log("multiple directories");
-            // single type from multiple directories
-            sendData(filesObject,"single","multiple");
         };
-
-    } else {                               // multiple file types
-        console.log("multi file type");
-
-        if(singleDirCheck(filesObject)){            // single directory
-            console.log("single directory");
-            // multiple type -> from single directory
-            sendData(filesObject,"multiple","single");
-
-        } else {                                    // multiple/different directories
-            console.log("multiple directories");
-            // multiple types from multiple directories
-            sendData(filesObject,"multiple","multiple");
-        };
-
+        return;
     };
-};
 
-// send data via post method to make chart
-function sendData(filesObject,type,directory,sortMethod){
-    if(sortMethod){
-        var filesData = {"files": filesObject,"type":type, "directory":directory ,"sortingMethod":sortMethod};
-        $("#submitInput").attr('value',JSON.stringify(filesData));
-        $("#postForm").submit();
+    var condition = false; // condition to check is the file type and directory are single
+
+    checked_files.toArray().every(function(element){
+        return element.className == checked_files[0].className && element.closest("div[id]").id == (checked_files[0]).closest("div[id]").id ? condition = true: condition = false; 
+    });
+
+
+    if(condition) { // if the file type and directory are single
+        // then the sorting method is filetypewise
+        // construct the object with respect to the selected sorting method
+        sendData("filetypewise");
     } else {
-        $("#filetypewise").attr('onclick',"sendData(JSON.parse(this.value),'"+type+"','"+ directory +"',this.id)"); 
-        $("#runwise").attr('onclick',"sendData(JSON.parse(this.value),'"+type+"','"+ directory +"',this.id)"); 
-
-        $("#filetypewise").attr('value',JSON.stringify(filesObject));
-        $("#runwise").attr('value',JSON.stringify(filesObject));
-
+        // display modal
         modalToggle();
+        // ask the user for selecting a sorting method -> filetype or runwise
+        
+        // for that callbacks are used
+        $("#filetypewise").unbind().click(sendData);
+        $("#runwise").unbind().click(sendData);
     };
+    
+    function sendData(e) {
+        var sortingMethod;
+        e.target != undefined ? sortingMethod = e.target.id : sortingMethod = e;
+        // construct the object with respect to the selected sorting method
+        var fileData = makeFileObject(checked_files,sortingMethod);
+        // submit the form
+        $("#submitInput").attr('value',JSON.stringify(fileData));
+        $("#postForm").submit();
+        console.log(fileData);
+    };
+    return;    
 };
 
 function modalToggle (value) {
     $("#formModal").toggleClass("show");
 };
 
-function objectLength(obj) {
-    return Object.keys(obj).length;
-};
+function makeFileObject (checked_files,sortingMethod) {
 
-function singleDirCheck (obj) {
-    return (Object.keys(obj).every(function(e){
-                return ((Object.keys(obj[e]).length == 1) && (Object.keys(obj[e]) == Object.keys(obj[e])[0])) ;
-    }))
-};
+    // initialise an empty fileObject object
+    var fileObject = {};
 
-function openNmonFile(filesObject,runDirObj){
-    // fetch relevants details for the path
-    var nmonDir = document.getElementById("selected_directory").innerText;
-    var firstElObj = filesObject[Object.keys(filesObject)[0]];
-    var fileName = (runDirObj[Object.keys(runDirObj)[0]][0]);
-    var timeStampDirectory = (Object.keys(firstElObj)[0]);
+    checked_files.each(function(i,e){
+        // the first and the second keys are used in nested manner to make the object
+        var [firstKey,secondKey] = [e.className,e.closest("div[id]").id] ; // by default -> filetypewise
 
-    // redirect based on the path type
-    if(true) { // if path is relative
-        var nmonLocation = nmonDir.slice(1,nmonDir.length);
-        // redirect to the file location
-        window.open(location.href+nmonLocation+timeStampDirectory+"/"+fileName);
-    }
-    else { // if path is absolute
-        // window.open(nmonDir+timeStampDirectory+"/"+fileName);
-        // copy the header location and redirect to the page
-    }
+        if(sortingMethod == "runwise") {
+            [firstKey,secondKey] = [secondKey,firstKey] // interchange the values;
+        };
 
+        // check if the firstKey exists
+        var firstKeyExists = (checkDuplication(Object.keys(fileObject), firstKey));
+        
+        if (firstKeyExists) {      // is the timestamp already exists
+            var secondKeyExists = (checkDuplication(Object.keys(fileObject[firstKey]),secondKey));
+
+            if(secondKeyExists) { // if the file type already exists inside it then...
+                fileObject[firstKey][secondKey].push(e.id);
+            } else { // if the file type doesn't exist then...
+                // define the array
+                fileObject[firstKey][secondKey] = [];
+                // push the value
+                fileObject[firstKey][secondKey].push(e.id);
+            };
+
+        } else {                     // if it doesn't then add it
+            // add the firstKey in the object
+            fileObject[firstKey] = {};
+            // define the array with the key value of filetype
+            fileObject[firstKey][secondKey]=[];
+            // store the file name inside it
+            fileObject[firstKey][secondKey].push(e.id);
+        };
+
+    }); 
+    // return the object upon completion
+    return {files:fileObject, sortingMethod:sortingMethod};
 };

@@ -68,10 +68,10 @@
                 <br><br>
                 <input style="display:none;" id ="submitInput" name="filesData" value="" type="text">
                 <div style="width:35%; float:left">
-                  <button id="filetypewise" class="submit">FILE-TYPE WISE</button>
+                  <button type="button" id="filetypewise" class="submit">FILE-TYPE WISE</button>
                 </div>
                 <div style="width:35%; float:right">
-                  <button id="runwise" class="submit">RUN WISE</button>
+                  <button type="button" id="runwise" class="submit">RUN WISE</button>
                 </div>
                 <div style="clear:both;"></div>
               </form>
