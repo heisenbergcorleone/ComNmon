@@ -1,7 +1,7 @@
 # comNmon
 comNmon is a comparative tool for Nmon Charts that compares the charts in the browser itself. Users will be asked to group the charts/files in the one of the two ways to make comparison:
 ### 1. Run wise
-A run is a whole specific time in while a bunch of nmon charts/files are made. Each run may have multiple types of files i.e files from different servers. To separate a group of files made in a particular run from another, all the file of a particular run should be placed in a particular directory named after the timestamp at the creation of that run.
+A run is a specific time at which a bunch of nmon charts/files are created. Each run may have multiple types of files i.e files from different servers. To separate a group of files made in a particular run from another, all the file of a particular run should be placed in a particular directory named after the timestamp at the creation of that run.
 
 Files will be grouped considering the run.  For example: All the selected nmon charts in the same run will be compared with each other, if there are more than one file of the same type then points of the those charts will be converted into average points. 
 
