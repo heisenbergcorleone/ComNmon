@@ -68,12 +68,10 @@ if(isset($_POST['filesData'])){
     </div>
     
     <div id="chart">
-        <h2>heading</h2>
         <div id="chart_master">
             <h2>Click on a Graph button above, to display that graph</h2>
         </div>
     </div>
-    
 
     <script src="chartMakerScript.js"></script>
     <script>
@@ -81,44 +79,10 @@ if(isset($_POST['filesData'])){
         $(document).ready(function(){
             $("#sortingMethod").text(filesData.sortingMethod);            
         
-            // single or multiple iframes criteria will be set considering the sorting method-> 
-            //if sorting method is runwise and there are multiple runs, then multiple iframes will be made likewise for FileType sorting method
-            
-            
-            makeIframes(filesData);
-            //parseFilesData(filesData);    
-            
-            
-        
-            
-            // then tables and the files names will be shown
-            
-            // then the buttons will be displayed on the screen to make the charts
-              
+            // makeIframes();  make the iframes as soon as the document is ready -> this function also makes the table for the selected files and displays the headings
+            // prepIframe(); 
+            parseFilesData("CPU_UTIL"); // takes in the default chart Id
         });
-
-
-
-
-        if(filesData.sortingMethod == "filetypewise"){
-            // if the files are from the same timestamp directories
-                // make charts considering the points at the same time
-            
-            
-            
-            
-            
-            // if the files are from multiple directories
-                // make the charts by calculating the average point corresponding to the time 
-
-
-        } else if (filesData.sortingMethod == "runwise") {
-
-        
-        };
-
-        // when the page loads make the tables directly
-        // notice that the table contains detailed data for each file and if there is any difference between the tables, the different table along with its file should be shown below! 
 
 
     </script>

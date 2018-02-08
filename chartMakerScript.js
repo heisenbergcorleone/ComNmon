@@ -1,60 +1,21 @@
 var noOfIframes;
 var currentFrame = 0;
-var filesData;
 
-function makeIframes(filesData) {
-    filesData = filesData; // make the variable global
-    const files = filesData.files;
-    noOfIframes = Object.keys(files).length;
-    var headings;
-    for (key in files) {
-        headings.push(key);
-    };
-
-    if(noOfIframes > 1) {
-        // make iframes
-        // show buttons
-    } else if (noOfIframes == 1) {
-        // current window
-
-        // show buttons
-        $(".chartbuttons").css("display","inline");
-    }
-
-
-
-    // put heading;
-
-
-
-    headings.forEach(function(e){
-
-    })
-
-
-
-
-
-};
-
-$("button").on("click",function(){
+$(".chartbuttons>button").on("click",function(){
     var selectedId = this.id.slice(5); // slice the name to get the correct id
     parseFilesData(selectedId);
 })
 
+function parseFilesData(id){ // parses the selected files with respect to the button id
 
-
-
-
-
-
-
-function parseFilesData(id){ 
-    const files = filesData.files;
-    const sortingMethod = filesData.sortingMethod;
+    const files = filesData.files; // store the selected files
+    const sortingMethod = filesData.sortingMethod; // store the sorting method
     //console.log(files);
+
     // if noOfIframes is one then the same window will be used to make the charts else multiple iframes will be used
     noOfIframes = Object.keys(files).length;
+
+     
 
     prepIframeTable();
     
@@ -66,7 +27,7 @@ function parseFilesData(id){
             if(Object.keys(timestamp).length == 1) {
                 console.log(timestamp);
                 console.log("+++ sorting")
-                sortingPoints(timestamp,key);
+                sortingPoints(timestamp,key,id);
 
             } else {
                 console.log(timestamp);
@@ -80,7 +41,7 @@ function parseFilesData(id){
         for (var key in files) {
             var server = files[key];
             if(Object.keys(server).length == 1) {
-                sortingPoints(server,key);
+                sortingPoints(server,key,id);
             } else {
                 console.log(server);
                 console.log("+++ average")
@@ -95,7 +56,7 @@ function parseFilesData(id){
 
 var once = 0;
 
-function sortingPoints (list,iframeHeading) {
+function sortingPoints (list,iframeHeading,id) {
 
     var fileArray = list[Object.keys(list)[0]];
     var timestampDir;
@@ -112,12 +73,13 @@ if(once) {return}
         type: "POST",
         async: false,
         url: "./fileReader.py",
-        data: {'fileListObj': JSON.stringify(fileArray), 'timestampDir': JSON.stringify(timestampDir) }, // or use result.toString() to convert the JS array into string
+        data: {'fileListObj': JSON.stringify(fileArray), 'timestampDir': JSON.stringify(timestampDir), 'chartId': id }, // or use result.toString() to convert the JS array into string
         dataType: "text"
     }).done(function(response) {
-        console.log(response);
+        console.log(String(response));
     }); 
 
+    one = true;
 
 };
 
