@@ -176,12 +176,12 @@ def combineFiles(): # for a file belonging to a single server type and single ru
 
 
             else: # if no common points are found between the current and previous points
-                for index,datepoints in enumerate(structure):
+                for indexSt,datepoints in enumerate(structure):
                     # add the second column
                     datepoints.append("x")
 
                     # append points
-                    structurePoints[index].append(0.0) 
+                    structurePoints[indexSt].append(0.0) 
 
                 
                 # add the rows 
