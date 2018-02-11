@@ -2,35 +2,22 @@
 # -*- coding: UTF-8 -*-# enable debugging
 print("Content-Type: text/html;charset=utf-8")
 print()
+from collections import OrderedDict
 import cgi,cgitb,json
 cgitb.enable()
 form = cgi.FieldStorage() #stores the get or post request values
 
-# store the relevant file data
-fileListObj = form['fileListObj'].value # fetch the JSON object with the corresponding key
-timestampDir = form['timestampDir'].value  # store the directory name
-chartId = form['chartId'].value # store the chartId
-fileList = json.loads(fileListObj) # convert the json object into python list
-fileList = fileList[::-1] # reversed list
+fileDict = json.loads(form['fileListObj'].value, object_pairs_hook=OrderedDict) # fetch the file object/dict and fix the positions
+chartId = form['chartId'].value # store the chart id/type
+print("")
+
+print(fileDict)
+
+print("")
 
 
-
-print("for directory "+timestampDir+ " the files are:")
-print()
-
-interval = 3
-snapshots = 10
-
-chartLinesList = list()
-chartDatesList = list()
-
-
-once = False
-
-def fileReader(filename):
-    global once, chartDatesList, chartDatesList
-    if once:
-        return
+# function for mergeFiles -> One server One Run
+def oneRunTypeReader(filename, timestampDir ,chartDatesList, chartLinesList):
 
     with open("./nmon/"+str(timestampDir)+"/"+str(filename)) as f:
         content = f.read()
@@ -69,31 +56,15 @@ def fileReader(filename):
             # appends the 100 minus last number of each of the string element-> 100-Idle% or the total consumed %
             temp.append(round(100-float(lines[lines.rfind(char)+len(char):len(lines)-1]),2)) 
         chartLinesList.append(temp)        
-        
 
 
 
-# read the files and store the chart points and dates
-for filename in fileList:
-    fileReader(filename)
 
-
-# the following function assu,ed that the selected files belong to the onerun-onetype group
-
-# and therefore the timelines will be extended and shown in the graph
-
-
-structurePoints = list()
-
-structureDates = list()
-
-structure = list()
-
-def combineFiles(): # for a file belonging to a single server type and single run
-    global chartDatesList, chartLinesList, structure, structurePoints
+# for files belonging to a single server type and single run
+def combineFiles(chartDatesList,chartLinesList,structure,structurePoints): 
 
     for index,datelist in enumerate(chartDatesList):
-        
+
         # for points
         pointList = chartLinesList[index]
 
@@ -104,7 +75,9 @@ def combineFiles(): # for a file belonging to a single server type and single ru
                 structurePoints.append([pointList[i]])
 
         else: # if there are multiple selected files
-
+            
+            
+            
             curPoint = pointList
 
             # current file list
@@ -112,6 +85,8 @@ def combineFiles(): # for a file belonging to a single server type and single ru
 
             # previous list
             prevList = chartDatesList[(index-1)]
+            
+            
 
             # formatted values for comparison
             # first value of the current list
@@ -119,14 +94,13 @@ def combineFiles(): # for a file belonging to a single server type and single ru
             # last value of the prev list
             fprevVal = ((prevList[len(prevList)-1])[(prevList[len(prevList)-1]).find("(")+1:(prevList[len(prevList)-1]).rfind(")")].replace(", ", "").replace(" ", ""))
             
-
+            
             if (fcurVal <= fprevVal): # means the date can be merged
-                
                 diff = list()
                 for prevdate in prevList:
                     fprevdate = (prevdate[prevdate.find("(")+1:prevdate.rfind(")")].replace(", ", "").replace(" ", ""))
                     diff.append(int(fcurVal)-int(fprevdate))                
-
+                
                 closestZero = min((abs(x),x) for x in diff)[0]
                 indexclosestZero = diff.index(closestZero)
 
@@ -139,7 +113,7 @@ def combineFiles(): # for a file belonging to a single server type and single ru
 
                 minIter = 0
                 maxIter = int(breakpoint) + len(curList)
-
+                
 
                 while minIter < maxIter:
                     
@@ -174,7 +148,7 @@ def combineFiles(): # for a file belonging to a single server type and single ru
 
                     minIter = minIter + 1
 
-
+                
             else: # if no common points are found between the current and previous points
                 for indexSt,datepoints in enumerate(structure):
                     # add the second column
@@ -202,61 +176,73 @@ def combineFiles(): # for a file belonging to a single server type and single ru
                     structurePoints.append(rowPoint)
 
 
-# run the function when the selected set of file belong to a particular server and run
-combineFiles()
 
+# merge files if they belong to the same run and type of server
+def mergeFiles(filenameList,timestampDir):
+    # sort the list first
+    filenameList.sort() 
+    chartDatesList = list()
+    chartLinesList = list()
 
-
-# merges all the separeted dates into one single file
-
-i = 0
-for index,dateRow in enumerate(structure):
-    if(dateRow[i] == "x"):
-        i = i + 1
-        structureDates.append([dateRow[i]])
-    else:    
-        structureDates.append([dateRow[i]])
+    for filename in filenameList:
+        # get the contents of the specific chart
+        oneRunTypeReader(filename, timestampDir, chartDatesList, chartLinesList)
     
-mergeList = list()
+    structurePoints = list()
+    structure = list()
 
-for index,dateRow in enumerate(structureDates):
-    mergeList.append(dateRow+(structurePoints[index]))
+    # coombine the data of the files to form a single chart
+    combineFiles(chartDatesList,chartLinesList,structure,structurePoints)
 
+    structureDates = list()
 
-for some in mergeList:
-    print(some)
+    i = 0
+    for index,dateRow in enumerate(structure):
+        if(dateRow[i] == "x"):
+            i = i + 1
+            structureDates.append([dateRow[i]])
+        else:    
+            structureDates.append([dateRow[i]])
+        
+    mergeList = list()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    for index,dateRow in enumerate(structureDates):
+        mergeList.append(dateRow+(structurePoints[index]))
 
 
-
-
+    for data in mergeList:
+        print(data)
 
 
 
 
+# reads the file dictionary and to merge and sort average points from the files
+def parseFileDict(fileDict): 
+    for index,heading in enumerate(fileDict):
+        # print(heading)
+        headingValue = fileDict[heading]
+        print('')
+        print("for heading: "+ str(heading) + ", the length is: " +str(len(headingValue)))
+        print("")
 
 
+        for subHead in headingValue:
+            
+            # set the timestamp directory name
+            timestampDir = subHead if subHead.isdigit() else heading
+            
+
+            if(len(headingValue) == 1):
+                # means the selected file type are of one type of server and belong to a single run too
+                print("")
+                print("merge")
+                mergeFiles(headingValue[subHead],timestampDir)
+                print("")
+            elif(len(headingValue) > 1):
+                print("average")
+                #print(subHead)
+                #print(headingValue[subHead])
 
 
-
-
-
-
-
-#print(json.dumps(fileListDict))
-#fileHeading = (list(fileListDict.keys())[0]) #store the file naem in a variable
-#print(fileHeading)
-#print(((form['fileListObj'].value)).split(','))
+# parse the file dictionary
+parseFileDict(fileDict)

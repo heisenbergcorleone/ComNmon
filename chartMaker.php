@@ -14,7 +14,7 @@ if(isset($_POST['filesData'])){
         body {
             background-color: #EEEEFF;
         }
-        .chartbuttons {
+        .hide {
             display: none;
         }
         #sortingMethod {
@@ -33,7 +33,7 @@ if(isset($_POST['filesData'])){
     </head>
     <body>
     <div>files sorting method: <span id="sortingMethod"></span></div>
-    <div class = "chartbuttons">
+    <div class = "chartbuttons hide">
         <button id="draw_TOPSUM" style="color:black;"><b>Top Summary</b></button>
         <button id="draw_TOPCMD" style="color:black;"><b>Top Commands</b></button>
         <br>
@@ -77,10 +77,9 @@ if(isset($_POST['filesData'])){
     <script>
         var filesData = <?php echo "JSON.parse($filesData);" ?>;
         $(document).ready(function(){
+            // name the sorting method
             $("#sortingMethod").text(filesData.sortingMethod);            
-        
-            // makeIframes();  make the iframes as soon as the document is ready -> this function also makes the table for the selected files and displays the headings
-            // prepIframe(); 
+            // make the default chart type
             parseFilesData("CPU_UTIL"); // takes in the default chart Id
         });
 
