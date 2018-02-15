@@ -308,8 +308,11 @@ def sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, st
 
 
 
-def makeAverage(structure,structurePoints):
-    averageData = list()
+def makeAverage(structure,structurePoints,averageValue):
+    empty = True
+    # means the list isn't empty so there isn't any need to add the dates lists
+    if (len(averageValue) > 0):
+        empty = False
 
     for index,dateRow in enumerate(structure):
         lenRow = len(dateRow)
@@ -320,15 +323,18 @@ def makeAverage(structure,structurePoints):
             else:
                 if(i == (lenRow-1)):
                     # create a temp list to store the date and average data row                    
-                    temp = list()
+                    
                     # append the first element of the dateRow in averageData -> for the x axis
-                    temp.append(dateRow[0])
-                    # also append the average of data points
-                    temp.append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
-                    # append the temp list in the averageDate
-                    averageData.append(temp)
+                    if(empty):
+                        temp = list()
+                        temp.append(dateRow[0])
+                        temp.append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
+                        averageValue.append(temp)
+                    else:
+                        if(averageValue[index]):
+                            averageValue[index].append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
+
                 i = i + 1
-    return averageData
 
 
 
@@ -365,10 +371,8 @@ def groupCommonDates(fileList,timestampDir,averageValue):
     sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist,  structure, structurePoints)
 
 
-    averageData = makeAverage(structure,structurePoints)
-
-    for some in averageData:
-        print(some)
+    makeAverage(structure,structurePoints,averageValue)
+    return
 
 
 
@@ -383,6 +387,7 @@ def groupCommonDates(fileList,timestampDir,averageValue):
 
 # reads the file dictionary and to merge and sort average points from the files
 def parseFileDict(fileDict):
+
     for index,heading in enumerate(fileDict):
         # print(heading)
         headingValue = fileDict[heading]
@@ -391,6 +396,7 @@ def parseFileDict(fileDict):
         print("")
 
         averageValue = list()
+        labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
 
         for index_subHead, subHead in enumerate(headingValue):
             
@@ -403,20 +409,33 @@ def parseFileDict(fileDict):
                 print("")
                 print("merge")
                 mergeFiles(headingValue[subHead],timestampDir)
+                # make the function return something or save it in the argument and make it append the json here
                 print("")
                 break
             elif(len(headingValue) > 1):
                 print()
                 groupCommonDates(headingValue[subHead],timestampDir,averageValue)
+                labelValue[0].append(subHead)
                 print()
                 if(index_subHead == (len(headingValue)-1)):
-                            print(averageValue)
+                            print("make average")
+                            # might not be necessary
+                            # in the case of average files the list should be added to the a average variable first 
+                            # and then when the list ends, the whole variable should be added to the json file here
+                            # after that empty the variable.
+                            averagedList = labelValue + averageValue
+                            
+                            for some in averagedList:
+                                print(some)
+
+
+                            labelValue = list()
                             averageValue = list()
-                            print("make average")        
 
         if(index == (len(fileDict)-1)):
             print("json dump")
             # json.dump the variable to JS file
+            # javascript reads json to fetch all the information and loops over the file to make the charts.
 
 # parse the file dictionary
 parseFileDict(fileDict)
