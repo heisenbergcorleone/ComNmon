@@ -16,8 +16,15 @@ print(fileDict)
 print("")
 
 
+
+###################################### Functions-> Single type of Server and Run ###############################################
+
+
+
+
+
 # function for mergeFiles -> One server One Run
-def oneRunTypeReader(filename, timestampDir ,chartDatesList, chartLinesList):
+def fileReader(filename, timestampDir ,chartDatesList, chartLinesList):
 
     with open("./nmon/"+str(timestampDir)+"/"+str(filename)) as f:
         content = f.read()
@@ -54,7 +61,7 @@ def oneRunTypeReader(filename, timestampDir ,chartDatesList, chartLinesList):
         for lines in linesList:
             char = ","
             # appends the 100 minus last number of each of the string element-> 100-Idle% or the total consumed %
-            temp.append(round(100-float(lines[lines.rfind(char)+len(char):len(lines)-1]),2)) 
+            temp.append(round(100-float(lines[lines.rfind(char)+len(char):len(lines)-1]),1)) 
         chartLinesList.append(temp)        
 
 
@@ -186,7 +193,7 @@ def mergeFiles(filenameList,timestampDir):
 
     for filename in filenameList:
         # get the contents of the specific chart
-        oneRunTypeReader(filename, timestampDir, chartDatesList, chartLinesList)
+        fileReader(filename, timestampDir, chartDatesList, chartLinesList)
     
     structurePoints = list()
     structure = list()
@@ -215,9 +222,167 @@ def mergeFiles(filenameList,timestampDir):
 
 
 
+###################################### Functions-> Multiple type of Servers and Runs ###############################################
+
+
+
+
+
+
+def sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, structure, structurePoints):
+    # arguments -> steps to count the status, chartDatesList data to work upon, fileList to pop out the file named and add into Blacklist to keep record
+
+    # is theres only one file available (or left after reducing the list) then just make average points out of it
+    if(len(fileList)==1):
+        combineFiles(chartDatesList,chartLinesList,structure,structurePoints)
+        return
+
+    # for the purpose of sorting the dates to make average an average line of the whole fileList, the first file will be selected to serve as the basis of comparison
+    if(step == 1):
+        # store the datelist of the first and second files
+        firstList = chartDatesList[0]
+        secondList = chartDatesList[1]
+
+
+        #lDFF = Last Date of First File
+        lDFF = firstList[(len(firstList))-1]
+        # formatted lDFF
+        numberlDFF = (lDFF[lDFF.find("(")+1:lDFF.rfind(")")].replace(", ", "").replace(" ", ""))
+
+        # compare it with the 4th consecutive date of the next/second chart/file
+        # 4th date is selected as it makes three lines on the graph -> this can be changed to greater than 4 too!
+        
+        #tDSF = 4th Date of Second File
+        tDSF = secondList[3]
+        # formatted tDSF
+        numbertDSF = (tDSF[tDSF.find("(")+1:tDSF.rfind(")")].replace(", ", "").replace(" ", ""))
+
+        if numberlDFF >= numbertDSF: # test passed
+            step = 2
+            # run this function again to handle the 2nd Step
+            sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, structure, structurePoints)
+        else: 
+            # TEST FAILED
+            # remove the file, it's datelist and lineslist and put the filename in the blacklist
+            del chartDatesList[0]
+            del chartLinesList[0]
+            blacklist.append(fileList[0])
+            del fileList[0]
+            
+            # run the function again to check the next set of files
+            sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, structure, structurePoints)
+    
+    # the second step checks if the last file is to be included or no for average data, hence making correct range
+    elif(step == 2):
+
+        firstList = chartDatesList[0]
+        lastList = chartDatesList[(len(chartDatesList))-1]
+        #lDFF = Last Date of First File
+        lDFF = firstList[(len(firstList))-1]
+        # formatted lDFF
+        numberlDFF = (lDFF[lDFF.find("(")+1:lDFF.rfind(")")].replace(", ", "").replace(" ", ""))
+
+        # tDLF = 4th Date of Last File
+        tDLF = lastList[3]
+        # formatted tDLF
+        numbertDLF = (tDLF[tDLF.find("(")+1:tDLF.rfind(")")].replace(", ", "").replace(" ", ""))
+
+        # if the last date of the first file is greater or equal to the 4th date of the last file
+        if numberlDFF >= numbertDLF: # TEST PASSED
+            step = 3
+            sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, structure, structurePoints)
+        else: # TEST FAILED
+
+            # remove the last date - the points - and put the file in the blacklist
+            del chartDatesList[(len(chartDatesList))-1]
+            del chartLinesList[(len(chartLinesList))-1]
+            blackList.append(fileList[(len(fileList))-1])
+            del fileList[(len(fileList))-1]
+            
+            #run the function again to check the next set of files
+            sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, structure, structurePoints)
+    # make structured points and date
+    elif (step == 3):
+        combineFiles(chartDatesList,chartLinesList,structure,structurePoints)
+        return
+
+
+
+def makeAverage(structure,structurePoints):
+    averageData = list()
+
+    for index,dateRow in enumerate(structure):
+        lenRow = len(dateRow)
+        i = 0
+        while i < lenRow:
+            if(dateRow[i] == "x"):
+                break
+            else:
+                if(i == (lenRow-1)):
+                    # create a temp list to store the date and average data row                    
+                    temp = list()
+                    # append the first element of the dateRow in averageData -> for the x axis
+                    temp.append(dateRow[0])
+                    # also append the average of data points
+                    temp.append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
+                    # append the temp list in the averageDate
+                    averageData.append(temp)
+                i = i + 1
+    return averageData
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def groupCommonDates(fileList,timestampDir,averageValue):
+    # sort the fileList
+    fileList.sort()
+
+    chartDatesList = list()
+    chartLinesList = list()
+
+    for filename in fileList:
+        fileReader(filename, timestampDir, chartDatesList, chartLinesList)
+
+    # print(chartDatesList)
+    
+    step = 1
+    blacklist = list()
+    structurePoints = list()
+    structure = list()
+    sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist,  structure, structurePoints)
+
+
+    averageData = makeAverage(structure,structurePoints)
+
+    for some in averageData:
+        print(some)
+
+
+
+
+
+
+###################################### Functions-> File Dictionary Parser ###############################################
+
+
+
+
 
 # reads the file dictionary and to merge and sort average points from the files
-def parseFileDict(fileDict): 
+def parseFileDict(fileDict):
     for index,heading in enumerate(fileDict):
         # print(heading)
         headingValue = fileDict[heading]
@@ -225,24 +390,33 @@ def parseFileDict(fileDict):
         print("for heading: "+ str(heading) + ", the length is: " +str(len(headingValue)))
         print("")
 
+        averageValue = list()
 
-        for subHead in headingValue:
+        for index_subHead, subHead in enumerate(headingValue):
             
             # set the timestamp directory name
             timestampDir = subHead if subHead.isdigit() else heading
             
 
             if(len(headingValue) == 1):
-                # means the selected file type are of one type of server and belong to a single run too
+                # means the selected file type belong to one type of server and belong to a single run too
                 print("")
                 print("merge")
                 mergeFiles(headingValue[subHead],timestampDir)
                 print("")
+                break
             elif(len(headingValue) > 1):
-                print("average")
-                #print(subHead)
-                #print(headingValue[subHead])
+                print()
+                groupCommonDates(headingValue[subHead],timestampDir,averageValue)
+                print()
+                if(index_subHead == (len(headingValue)-1)):
+                            print(averageValue)
+                            averageValue = list()
+                            print("make average")        
 
+        if(index == (len(fileDict)-1)):
+            print("json dump")
+            # json.dump the variable to JS file
 
 # parse the file dictionary
 parseFileDict(fileDict)
