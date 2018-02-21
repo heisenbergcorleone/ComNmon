@@ -185,7 +185,7 @@ def combineFiles(chartDatesList,chartLinesList,structure,structurePoints):
 
 
 # merge files if they belong to the same run and type of server
-def mergeFiles(filenameList,timestampDir):
+def mergeFiles(filenameList,timestampDir,labelValue):
     # sort the list first
     filenameList.sort() 
     chartDatesList = list()
@@ -216,9 +216,8 @@ def mergeFiles(filenameList,timestampDir):
     for index,dateRow in enumerate(structureDates):
         mergeList.append(dateRow+(structurePoints[index]))
 
-
-    for data in mergeList:
-        print(data)
+    labelValue[0] = labelValue[0] + filenameList
+    return mergeList
 
 
 
@@ -309,50 +308,43 @@ def sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist, st
 
 
 def makeAverage(structure,structurePoints,averageValue):
-    empty = True
-    # means the list isn't empty so there isn't any need to add the dates lists
-    if (len(averageValue) > 0):
-        empty = False
+
+    commonStructurePoints = list() # keeps the list of common structure points
+    commonStructure = list() # keeps the list of common structures
 
     for index,dateRow in enumerate(structure):
-        lenRow = len(dateRow)
-        i = 0
-        while i < lenRow:
-            if(dateRow[i] == "x"):
+        for i,date in enumerate(dateRow):
+
+            if(date == "x"):
                 break
             else:
-                if(i == (lenRow-1)):
-                    # create a temp list to store the date and average data row                    
-                    
-                    # append the first element of the dateRow in averageData -> for the x axis
-                    if(empty):
-                        temp = list()
-                        temp.append(dateRow[0])
-                        temp.append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
-                        averageValue.append(temp)
-                    else:
-                        if(averageValue[index]):
-                            averageValue[index].append(round(sum(structurePoints[index])/len(structurePoints[index]),1))
-
-                i = i + 1
+                if (i+1 == len(dateRow)):
+                    commonStructure.append(dateRow[0])
+                    commonStructurePoints.append(round(((sum(structurePoints[index])/(len(structurePoints[index])))),1))
 
 
+    if(len(averageValue) == 0): # means the list is empty
+        for i,date in enumerate(commonStructure):
+            row = [date]
+            averageValue.append(row)
+        
+    else: # the average value list is not empty then make comparison and append the required values
+        #comparisons
+        if((len(averageValue)) > (len(commonStructurePoints))): # means averageValue has more elements, then crop it
+            averageValue = averageValue[:(len(commonStructurePoints))]
+        
+        elif((len(averageValue)) < (len(commonStructurePoints))): # means the common Structure has moer elements, then crop it
+            commonStructurePoints = commonStructurePoints[:(len(averageValue))]
 
-
-
-
-
-
-
-
+    
+    for i,value in enumerate(commonStructurePoints):
+        averageValue[i].append(value)
+    
 
 
 
 
-
-
-
-def groupCommonDates(fileList,timestampDir,averageValue):
+def groupCommonDates(fileList,timestampDir,averageValue,blacklist):
     # sort the fileList
     fileList.sort()
 
@@ -363,9 +355,9 @@ def groupCommonDates(fileList,timestampDir,averageValue):
         fileReader(filename, timestampDir, chartDatesList, chartLinesList)
 
     # print(chartDatesList)
+
     
     step = 1
-    blacklist = list()
     structurePoints = list()
     structure = list()
     sortDatePoints(step, chartDatesList, chartLinesList, fileList, blacklist,  structure, structurePoints)
@@ -373,7 +365,6 @@ def groupCommonDates(fileList,timestampDir,averageValue):
 
     makeAverage(structure,structurePoints,averageValue)
     return
-
 
 
 
@@ -397,6 +388,7 @@ def parseFileDict(fileDict):
 
         averageValue = list()
         labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
+        blacklist = list()
 
         for index_subHead, subHead in enumerate(headingValue):
             
@@ -408,29 +400,39 @@ def parseFileDict(fileDict):
                 # means the selected file type belong to one type of server and belong to a single run too
                 print("")
                 print("merge")
-                mergeFiles(headingValue[subHead],timestampDir)
-                # make the function return something or save it in the argument and make it append the json here
+                # returns the mergedValue of the files
+                mergedValue = mergeFiles(headingValue[subHead],timestampDir,labelValue)
+                # setup the mergedList
+                mergedList = labelValue + mergedValue
+                
+                for some in mergedList:
+                    print(some)
+
                 print("")
                 break
             elif(len(headingValue) > 1):
                 print()
-                groupCommonDates(headingValue[subHead],timestampDir,averageValue)
+                groupCommonDates(headingValue[subHead],timestampDir,averageValue,blacklist)
                 labelValue[0].append(subHead)
                 print()
+                # print(averageValue)
+                # break
                 if(index_subHead == (len(headingValue)-1)):
                             print("make average")
                             # might not be necessary
                             # in the case of average files the list should be added to the a average variable first 
                             # and then when the list ends, the whole variable should be added to the json file here
                             # after that empty the variable.
+
                             averagedList = labelValue + averageValue
                             
                             for some in averagedList:
                                 print(some)
 
+                            print(blacklist)
 
-                            labelValue = list()
-                            averageValue = list()
+                            # labelValue = list()
+                            # averageValue = list()
 
         if(index == (len(fileDict)-1)):
             print("json dump")
