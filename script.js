@@ -2,7 +2,7 @@ var dir_location = document.getElementById("directory");
 var dir_log_table = document.getElementById("dir_log");
 //console.log(localStorage)
 var currentTab = 0; // Current tab is set to be the first tab (0)
-var [timeStampArray,checked_timestamps,dateListArray,print_dateListArray] = [[],[],[],[]];
+var [timeStampArray,checked_Dirs,dateListArray,print_dateListArray] = [[],[],[],[]];
 // constants
 const docheight = $(document).height();
 const secondTab = $("#secondtab").clone();
@@ -109,7 +109,7 @@ function fixStepIndicator(n) {
     // This function removes the "active" class of all steps...
     var i, x = document.getElementsByClassName("step");
     for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
+        x[i].className = x[i].className.replace(" active", "");
     }
     //... and adds the "active" class on the current step:
     x[n].className += " active";
@@ -134,7 +134,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
     // return if n is -1
     if(n === -1) { 
         if(currentTab==1){
-            checked_timestamps = [];
+            checked_Dirs = [];
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
         }
@@ -143,32 +143,45 @@ function handleCurrentTab(currentTab,n,directory_path) {
     // switch condition populates the tab
     switch(currentTab){
 
-        case 1: 
-            timeStampArray =[]; dateListArray = []; print_dateListArray =[];
-            // the second tab 
-            //document.getElementById("dirnum").innerText = ajaxCall("directory_path",directory_path);
-            timeStampArray = JSON.parse(ajaxCall("directory_path",directory_path));
-    
-            timeStampArray.forEach(function(e){
-                var d = new Date(Number(e));
-                var dirDate = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
-                dateListArray.push(dirDate);
-            })
+        case 1:
+            // built the timestamp list of all the directories -> take no more buttons
+            // list all the directories
+            // just that -> basically need to change the whole layout of the second tab
 
-            // create an array with no duplicate dates - this array will be used to create tables
-            print_dateListArray = dateListArray.filter(function(item, pos) {
-                return dateListArray.indexOf(item) == pos;
+            // rawTimeStamp records the set of original names of the timestamped directories
+            rawTimeStamp = JSON.parse(ajaxCall("directory_path", directory_path));
+
+            // validate the directory names
+            let excludedDirs = [];
+            timeStampArray = rawTimeStamp.filter(function(e){
+                
+                var unixTimeStamp = e.slice(0,13)
+                var valid = (new Date(Number(unixTimeStamp))).getTime() > 0;       
+                
+                if(valid){
+                    return e
+                } else {
+                    excludedDirs.push(e);
+                };
             });
+
+            // alert the excluded directories name
+
+            if(excludedDirs.length){
+                alert("The excluded directories that don't fit the naming convention are: \n\n"+excludedDirs.join("\n"))
+            }
             
-            $("#secondtab").replaceWith(secondTab.clone());
-            addDirectory();
+            $("#secondtab").replaceWith(secondTab.clone()); // clear the tab
+            addDirectory(timeStampArray); // build the tab
+            
+
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'secondToThird(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'secondToThird(this)');
 
             break;
         case 2:
             // the third tab
-            buildThirdTab(checked_timestamps);
+            buildThirdTab(checked_Dirs);
             (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'checkFileType(this)');
             (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'checkFileType(this)');
             
@@ -179,63 +192,51 @@ function handleCurrentTab(currentTab,n,directory_path) {
 
 // functions for creating second tab
 
-function addDirectory(element) {
-    var dirList_button = document.getElementsByClassName("tableButton")[0];
+
+function addDirectory(timeStampArray){
+
     var dirList_table = document.getElementById('directory_list_table');
-    var limit = 3; // limit defines the number of items to be shown at a time
-    var condition = false;
-    //alert(limit);
-        if(element) {
-            if(element.id == 0) {
-                limit = print_dateListArray.length; // the limit exceeds to the length of the array to put all the elements in the table
-                //element.id = element.id - 1;
-            };
 
-            if(element.id == 'loadall') { // if the button load all is clicked
-            limit = print_dateListArray.length; // limit is all
-            $(".loadtable").remove(); // the load more button/ all button is removed
-            } else {
-            $(element).remove();
-            };
-        } else if(limit > print_dateListArray.length) { // if the limit is greater than the array length
-            limit = print_dateListArray.length;
-        };
-  
-        for(var i = 0; i < limit; i++) {
-            var table_length = dirList_table.rows.length;
 
-            var row = dirList_table.insertRow(table_length);
-            var cell1 = row.insertCell(0); // date directory Name
-            var cell2 = row.insertCell(1); // checkbox
+    timeStampArray.forEach(function(e,index){
 
-            cell1.innerHTML = '<label>' + print_dateListArray[0] + '</label>';
-            cell2.innerHTML = '<input type="checkbox" value='+ print_dateListArray[0] +' ></input>';
-            print_dateListArray.shift();
-        };
-  
-            if(print_dateListArray.length){ // button should be created
+        var unixTimeStamp = e.slice(0,13)
 
-                if (!element) { // element doesn't exist
-                    dirList_button.innerHTML += '<br><button id="3" class="loadtable" onclick="addDirectory(this)">Next 3..</button>'; // id defines how many times the button is going to be displayed
-                } else { // element exists
-                    if(element.id == 1) {
-                    dirList_button.innerHTML += "<button id='"+ (element.id-1) +"' class='loadtable' onclick='addDirectory(this)'>ALL </button>";
-                    } else if (element.id > 1) { // that means element.id is not 0 -> because load all button has 0 id
-                    dirList_button.innerHTML += "<button id='"+ (element.id-1)  +"' class='loadtable' onclick='addDirectory(this)'>Next 3..</button>";
-                    };
-                };
+        var d = new Date(Number(unixTimeStamp));
+        var dateFormat = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
+        var timeFormat = (((d.getHours()<10?'0':'') + d.getHours()) + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ':' + ((d.getSeconds()<10?'0':'') + d.getSeconds()));
 
-            };
-  
-      fixFooterPosition()
+        var directoryFormat =  (dateFormat + "_" + timeFormat + e.slice(13,e.length));
+
+
+
+        var dirTableLength = dirList_table.rows.length;
+
+        var row = dirList_table.insertRow(dirTableLength);
+
+        var cell1 = row.insertCell(0); // for directory's formatted name
+        var cell2 = row.insertCell(1); // for checkbox
+
+        cell1.innerHTML = '<label>' + directoryFormat + '</label>'
+
+        cell2.innerHTML = '<input type="checkbox" value='+ e +'></input>';
+
+    })
+
+
+    fixFooterPosition()
+
 };
+
+
+
   
   function checkall(that,tabname="secondtab") {
 
     if(tabname == "thirdtab") {
         var table_body = that.closest("tbody");
         // unlike prev, prevAll selects all the previous elements and then we can sort the first one out of them
-        var selectedNumberSpan = ($(that).closest(".files").prevAll(".selectedByTotal:first").children(".selectedNumbers"))[0];
+        var selectedNumberSpan = ($(that).closest(".stamp").find(".selectedNumbers"))[0];
 
         if(that.checked){
             // keeps record of the unchecked checkbox
@@ -257,32 +258,28 @@ function addDirectory(element) {
     }
 };
 
-  function secondToThird(that) {
+
+
+
+function secondToThird(that) {
     
     var selectedIndex = [];
     var checked_dates = $("#directory_list_table :checkbox:checked");
-    if(!checked_dates.length){return;}
+    if(!checked_dates.length || (checked_dates.length == 1 && checked_dates[0].value == "on")){return;}
     checked_dates.each(function(i,e){
-        if(e.value){
-        count(dateListArray,e.value,selectedIndex);
-        };
+    
+        if(e.value != "on") {
+            checked_Dirs.push(e.value);
+        }
+
     })
     
-    
-    checked_timestamps = [];
-    selectedIndex.forEach(function(i){
-        //console.log(timeStampArray); 
-        checked_timestamps.push(timeStampArray[i]);
-    });
-
-    (document.getElementsByClassName("nextBtn")[0]).setAttribute("onclick", 'nextPrev(1)');
-    (document.getElementsByClassName("nextBtn")[2]).setAttribute("onclick", 'nextPrev(1)');
-    nextPrev(1); 
-    }
+    nextPrev(1);
+}
 
    
 
-  function count(array,element,store){
+function count(array,element,store){
     for (i = 0; i < array.length; i++){
       if (array[i] === element) {  
         store.push(i);
@@ -293,120 +290,122 @@ function addDirectory(element) {
 
 // functions for third tab
 
-function buildThirdTab(x){
-    var thirdtabcontent = document.getElementById("thirdtabcontent");
-    thirdtabcontent.innerHTML = "";
+function buildThirdTab(runArray){
     
-    x.forEach(function(stamp){
-    var d = new Date(Number(stamp));
-    var dates = document.getElementsByClassName("date");
-    var dateFormat = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
-    var timeFormat = (((d.getHours()<10?'0':'') + d.getHours()) + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ':' + ((d.getSeconds()<10?'0':'') + d.getSeconds()));
-    // converts into array
-    dates = [].slice.call(dates);
+    var nmonDir = document.getElementById("selected_directory").innerText;
+    var thirdtabcontent = document.getElementById("thirdtabcontent");
+    thirdtabcontent.innerHTML = ""; // empty the contents
 
-    if(dates.length){
-        dates.some(function(e){
-            if(e.id == dateFormat){
-                e.parentElement.innerHTML += '<br><div class="timeformat" id='+ stamp +'>'+ timeFormat +'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div>';
-                
-                return;
-            } else if (e==dates[dates.length-1]) {
-                thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
-            };
-        });
-    } else {
-        thirdtabcontent.innerHTML += '<div class = "stamp"><div class="date" id="'+ dateFormat +'">'+ dateFormat +'</div><br><div class="timeformat" id="'+ stamp +'">'+ timeFormat+'<div class="selectedByTotal" style="display: inline;"></div><div style="display:inline; cursor:pointer;" onclick="displayFiles(1,this)"> &#8609;</div><br><div class="files"><br>Files:<br><table></table></div></div></div><br><br><br>';
-    };
+    
+    
+    var tableData = JSON.parse(ajaxCall("directory_array",[nmonDir,runArray]));
+
+
+
+    runArray.forEach(function(e,i){
+
+        var unixTimeStamp = e.slice(0,13)
+
+        var d = new Date(Number(unixTimeStamp));
+        var dateFormat = (((d.getDate()<10?'0':'') + d.getDate()) + '/' + (((d.getMonth()+1)<10?'0':'') + (d.getMonth()+1)) + '/' + d.getFullYear());
+        var timeFormat = (((d.getHours()<10?'0':'') + d.getHours()) + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ':' + ((d.getSeconds()<10?'0':'') + d.getSeconds()));
+
+        var directoryFormat =  (dateFormat + "_" + timeFormat + e.slice(13,e.length));
+
+    
+        // build the third tab    
+        thirdtabcontent.innerHTML += `<div class="stamp" id=${e}>
+            <div class="directoryName">
+                ${directoryFormat}
+                <div class="selectedByTotal" style="display: inline;">
+                    &nbsp;<span class="selectedNumbers">0</span>/<span class="total">${tableData[i].length}</span>
+                </div>
+                <div style="display:inline; cursor:pointer;" onclick="toggleChart(0,this)" class=${i}> &#8607;</div>
+            </div><br>
+            <div class="fileTable">
+                <table id="table${i}"></table>
+            </div>
+        </div><br><br>`;
+
+        // populate the file table
+        prepareTable(tableData[i],"table"+i); // prepare the table
 
     });
-    // positioning problem
-    setTimeout(function(){
-            
-        fixFooterPosition();
 
-    }, 1);
+    fixFooterPosition();
 
 };
 
-function displayFiles(n,that){
-    var nmonDir = document.getElementById("selected_directory").innerText;
-    if(n == 1){
-        that.innerHTML=' &#8607;';
-        $(that).siblings('.files')[0].style='display: block;';
-        var nmonFiles = JSON.parse(ajaxCall("timestamp_path",nmonDir+that.parentElement.id));
-        // sets the div to show number of files selected
-        ($(that).prev('.selectedByTotal')[0]).innerHTML = '&nbsp;(<span class="selectedNumbers">0</span>/'+nmonFiles.length+')';
-        
-        // sets the rest of the contents and table
-        contentSetUp(nmonFiles,that.parentElement);
-        that.setAttribute("onclick", 'displayFiles(0,this)');
-    } else if (n==0) {
-        that.innerHTML=' &#8609;';
-        $(that).siblings('.files')[0].style='display: none;';
 
-        that.setAttribute("onclick", 'displayFiles(2,this)');
-    } else if (n==2) {
-        that.innerHTML=' &#8607;';
-        $(that).siblings('.files')[0].style='display: block;';
-        that.setAttribute("onclick", 'displayFiles(0,this)');
+
+function prepareTable(tableFiles,tableId) {
+
+    tableFiles.sort();tableFiles.reverse(); // sort the tablefiles
+
+    var table = document.getElementById(tableId);
+
+    var nmonHeader = []; // array of all the headings
+
+    tableFiles.forEach(function(filename,i){
+        var fileType = filename.substr(0, filename.indexOf('_')); // is the table heading
+        if(nmonHeader.length == 0 || nmonHeader[nmonHeader.length-1] != fileType ) { // check if the array is empty or if the last element is different
+            nmonHeader.push(fileType); // make filetype heading
+        }
+    });
+
+
+    for(var i = 0; i < nmonHeader.length; i++) {
+        // insert the heading
+        var tableLength = table.rows.length;
+        var row = table.insertRow(tableLength);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        cell1.innerHTML ='<b>'+ nmonHeader[i] +'</b>'
+        cell2.innerHTML = '<b>Check all:</b> <input type="checkbox" class="'+nmonHeader[i]+'" onchange="checkall(this,\'thirdtab\')" >';
+        
+
+        // insert the file names
+        tableFiles.forEach(function(filename){
+            var fileType = filename.substr(0, filename.indexOf('_')); // is the table heading
+
+            if(fileType == nmonHeader[i]){
+                var tableLength = table.rows.length;
+                var row = table.insertRow(tableLength);
+                var cell1 = row.insertCell(0); // cell for filename
+                var cell2 = row.insertCell(1); // cell for checkbox
+
+
+                cell1.innerHTML = filename;
+                cell2.innerHTML = cell2.innerHTML = '<input type="checkbox" class="'+nmonHeader[i]+'" id="'+ filename +'" onclick="updateCheckedNumber(this)"></input>';
+            }
+
+        })
     };
+
+};
+
+
+
+function toggleChart(n,that){
+
+    if(n == 0) { // hide the table
+        that.innerHTML=' &#8609;';
+        $("#table"+that.className)[0].style='display: none;';
+        that.setAttribute("onclick", 'toggleChart(1,this)');
+    } else if (n == 1) { // show the table
+        that.innerHTML=' &#8607;';
+        $("#table"+that.className)[0].style='display: block;';
+        that.setAttribute("onclick", 'toggleChart(0,this)');
+    }
 
     fixFooterPosition();
 }
 
-function contentSetUp(nmonFiles,parentDiv){
-    // the array is first sorted then reversed
-    nmonFiles.sort();nmonFiles.reverse();
 
-    var nmonHeader = [];
-    nmonFiles.forEach(function(e,i){
-        var el = e.substr(0, e.indexOf('_'));
-        if(!nmonHeader.length){
-            nmonHeader.push(el);
-        } else {
-            if(nmonHeader[nmonHeader.length-1] == el){
-                return;
-            } else {
-                nmonHeader.push(el);
-            }
-        };
-    });
 
-    var files_log_table = parentDiv.getElementsByTagName("table")[0];
-    loadTable();
-
-    function loadTable() {
-        for(var i = 0; i < nmonHeader.length; i ++) {
-            
-            //insert the heading
-            var table_length = files_log_table.rows.length;
-            var row = files_log_table.insertRow(table_length);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            cell1.innerHTML = '<b>'+nmonHeader[i]+'</b>';
-            cell2.innerHTML = '<b>Check all:</b> <input type="checkbox" class="'+ nmonHeader[i] +'" onchange="checkall(this,\'thirdtab\')" >';
-
-            //insert the file names
-            nmonFiles.forEach(function(filename){
-                var el = filename.substr(0, filename.indexOf('_'));
-                if(el == nmonHeader[i]){
-                    var table_length = files_log_table.rows.length;
-                    var row = files_log_table.insertRow(table_length);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    cell1.innerHTML = filename;
-                    cell2.innerHTML = '<input type="checkbox" class="'+nmonHeader[i]+'" id="'+ filename +'" onclick="updateCheckedNumber(this)"></input>';
-                }; 
-            });
-        };
-
-    };
-
-};
-
-function updateCheckedNumber(that) {    
-    var selectedNumberSpan = ($(that).closest(".files").prevAll(".selectedByTotal:first").children(".selectedNumbers"))[0];
+function updateCheckedNumber(that) {
+    var selectedNumberSpan = ($(that).closest(".stamp").find(".selectedNumbers"))[0];
     // update the values
     if(that.checked) {
         selectedNumberSpan.innerHTML = (Number(selectedNumberSpan.innerText) + 1);
@@ -417,7 +416,7 @@ function updateCheckedNumber(that) {
 
 
 function checkFileType(that) {
-    var checked_files = ($(".files :checkbox[id]:checked"));
+    var checked_files = ($(".fileTable :checkbox[id]:checked"));
     if(!checked_files.length){return;};
     
     if(checked_files.length == 1) { // if only one file is selected
@@ -428,14 +427,14 @@ function checkFileType(that) {
         if(1) { // relative path
 
             var nmonLocation = nmonDir.slice(1,nmonDir.length);
+            var x = location.href;
             // redirect to the file location
-            window.open(location.href+nmonLocation+dirName+"/"+fileName);
+            window.open(x.slice(0,x.length-9)+nmonLocation+dirName+"/"+fileName);
 
         } else { // absolute path
 
         };
-        return;
-    };
+};
 
     var condition = false; // condition to check is the file type and directory are single
 

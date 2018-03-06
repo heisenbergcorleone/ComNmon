@@ -42,8 +42,6 @@
                     <th>Check all: <input type="checkbox" onchange="checkall(this)" id="checkbox_all"></th>
                   </tr>
                 </table>
-                <div class="tableButton">
-                </div>
               </div>
               <div class="calendar" style="width: 35%; float:right">
                 CALENDAR
