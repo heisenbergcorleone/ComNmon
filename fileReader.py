@@ -393,7 +393,8 @@ def parseFileDict(fileDict):
         for index_subHead, subHead in enumerate(headingValue):
             
             # set the timestamp directory name
-            timestampDir = subHead if subHead.isdigit() else heading
+            timestampDir = subHead if subHead[0:13].isdigit() else heading
+
             
 
             if(len(headingValue) == 1):
