@@ -418,7 +418,9 @@ function updateCheckedNumber(that) {
 function checkFileType(that) {
     var checked_files = ($(".fileTable :checkbox[id]:checked"));
     if(!checked_files.length){return;};
-    
+    var nmonDir = document.getElementById("selected_directory").innerText;
+
+
     if(checked_files.length == 1) { // if only one file is selected
         // then open the file
         var nmonDir = document.getElementById("selected_directory").innerText;
@@ -436,42 +438,43 @@ function checkFileType(that) {
         };
 };
 
-    var condition = false; // condition to check is the file type and directory are single
-
-    checked_files.toArray().every(function(element){
-        return element.className == checked_files[0].className && element.closest("div[id]").id == (checked_files[0]).closest("div[id]").id ? condition = true: condition = false; 
-    });
-
-
-    if(condition) { // if the file type and directory are single
-        // then the sorting method is filetypewise
-        // construct the object with respect to the selected sorting method
-        sendData("filetypewise");
-    } else {
-        // display modal
-        modalToggle();
-        // ask the user for selecting a sorting method -> filetype or runwise
-        
-        // for that callbacks are used
-        $("#filetypewise").unbind().click(sendData);
-        $("#runwise").unbind().click(sendData);
-    };
+    // prepare the object
+    var filesDetails = {};
+    filesDetails["runwise"] = makeFileObject(checked_files,"runwise")
+    filesDetails["typewise"] = makeFileObject(checked_files,"typewise")
     
-    function sendData(e) {
-        var sortingMethod;
-        e.target != undefined ? sortingMethod = e.target.id : sortingMethod = e;
-        // construct the object with respect to the selected sorting method
-        var fileData = makeFileObject(checked_files,sortingMethod);
-        // submit the form
-        $("#submitInput").attr('value',JSON.stringify(fileData));
-        $("#postForm").submit();
-        console.log(fileData);
-    };
-    return;    
-};
+    // add the nmon directory loc
 
-function modalToggle (value) {
-    $("#formModal").toggleClass("show");
+    /// temp fix
+    filesDetails["nmon"] = "."+nmonDir;
+
+    // add the nmon directory type : absolute or relative
+
+    if(true) { // check if the condition is relative
+
+        /// code
+
+    } else { // for absolute
+
+        // make it
+
+        /// code
+
+    };
+
+    // send data object to make charts
+    sendData(filesDetails)
+
+    function sendData(filesDetails) {
+
+        // insert the object in the value
+        $("#submitInput").attr('value',JSON.stringify(filesDetails));
+
+        // submit the form
+        $("#postForm").submit();
+        
+    };
+
 };
 
 function makeFileObject (checked_files,sortingMethod) {
@@ -513,5 +516,5 @@ function makeFileObject (checked_files,sortingMethod) {
 
     }); 
     // return the object upon completion
-    return {files:fileObject, sortingMethod:sortingMethod};
+    return fileObject;
 };
