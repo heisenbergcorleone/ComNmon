@@ -57,26 +57,12 @@
           <!-- this tab will be built up by the javascript function -->
         </div>
 <!-- optional conditon page -->
-        <div id="formModal" class="modal">
-
-          <div class ="modal-content">
-            <span onclick="modalToggle()" class="close">&times;</span>
-              <form action="chartMaker.php" target="_blank" id="postForm" method="POST">
-                Select a sorting mechanism:
-                <br><br>
-                <input style="display:none;" id ="submitInput" name="filesData" value="" type="text">
-                <div style="width:35%; float:left">
-                  <button type="button" id="filetypewise" class="submit">FILE-TYPE WISE</button>
-                </div>
-                <div style="width:35%; float:right">
-                  <button type="button" id="runwise" class="submit">RUN WISE</button>
-                </div>
-                <div style="clear:both;"></div>
-              </form>
-            </div>
+        <div id="form" style="display:none;">
+          <form action="chartMaker.php" target="_blank" method="POST" id="postForm">
+            <input type="text" id="submitInput" name="filesDetails" value="">
+          </form>
         </div>
 
-          
       </div> <!-- content -->
 
       <div class="button bottom">
