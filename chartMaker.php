@@ -1,6 +1,6 @@
 <?php
-if(isset($_POST['filesData'])){
-    $filesData= json_encode($_POST['filesData']);
+if(isset($_POST['filesDetails'])){
+    $filesDetails= json_encode($_POST['filesDetails']);
 } else {
     echo "<h1>INVALID REQUEST</h1>";
     die;
@@ -32,7 +32,23 @@ if(isset($_POST['filesData'])){
         </style>
     </head>
     <body>
-    <div>files sorting method: <span id="sortingMethod"></span></div>
+    <div>select view type :
+        
+        <select id="viewDropDown" onchange="chartView(this)">
+            <option value="A">Type-wise average for all types in a single chart per run</option>
+            <option value="B">Type-wise with a single average for each type in specific chart</option>
+            <option value="C">Type-wise but individually for each server - one chart for each type</option>
+            <option value="D">All servers in a single chart</option>
+            <option value="E">All servers in a separate charts</option>
+        </select>
+
+
+
+    </div>
+
+
+
+
     <div class = "chartbuttons hide">
         <button id="draw_TOPSUM" style="color:black;"><b>Top Summary</b></button>
         <button id="draw_TOPCMD" style="color:black;"><b>Top Commands</b></button>
@@ -75,12 +91,37 @@ if(isset($_POST['filesData'])){
 
     <script src="chartMakerScript.js"></script>
     <script>
-        var filesData = <?php echo "JSON.parse($filesData);" ?>;
+        var filesDetails = <?php echo "JSON.parse($filesDetails)"; ?>;
+        
+        console.log(filesDetails)
+        
+        var filesChartData;
+
         $(document).ready(function(){
-            // name the sorting method
-            $("#sortingMethod").text(filesData.sortingMethod);            
-            // make the default chart type
-            parseFilesData("CPU_UTIL"); // takes in the default chart Id
+
+            // update the nmon dir location
+            nmonDir = filesDetails.nmon;
+
+            // update the currentChartId
+            currentChartId = "CPU_UTIL";
+
+            // stores all the chart data array
+            filesChartData =  ajaxCall("readFile",filesDetails.runwise);
+
+            console.log(filesChartData);
+
+            // console.log(JSON.parse(filesChartData));
+
+            // for (n in JSON.parse(filesChartData)){
+            //     console.log(n)
+            //     console.log((JSON.parse(filesChartData))[n]);
+            //     console.log("")
+            // }
+
+
+            // make chart according the view type
+            chartView();
+
         });
 
 
