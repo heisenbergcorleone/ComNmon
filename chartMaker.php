@@ -35,8 +35,8 @@ if(isset($_POST['filesDetails'])){
     <div>select view type :
         
         <select id="viewDropDown" onchange="chartView(this)">
-            <option value="A">Type-wise average for all types in a single chart per run</option>
-            <option value="B">Type-wise with a single average for each type in specific chart</option>
+            <option value="A">Type-wise averages - one chart for each type</option>
+            <option value="B">Type-wise average for all types in a single chart</option>
             <option value="C">Type-wise but individually for each server - one chart for each type</option>
             <option value="D">All servers in a single chart</option>
             <option value="E">All servers in a separate charts</option>
@@ -108,7 +108,7 @@ if(isset($_POST['filesDetails'])){
             // stores all the chart data array
             filesChartData =  ajaxCall("readFile",filesDetails.runwise);
 
-            console.log(filesChartData);
+            // console.log(filesChartData);
 
             // console.log(JSON.parse(filesChartData));
 

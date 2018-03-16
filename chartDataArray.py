@@ -35,7 +35,7 @@ def getContent(filelocation,chartId):
         # fix the list by removing the last element -> i.e \t 
         linesList.pop()
         
-        chartDataArray[filelocation+"/"+chartId] = json.dumps(linesList)
+        chartDataArray[filelocation+"/"+chartId] = linesList
 
 
 

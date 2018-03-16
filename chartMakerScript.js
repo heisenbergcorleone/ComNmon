@@ -1,9 +1,9 @@
 var chartIds = ["CPU_UTIL"];
 var nmonDir;
-var currentChartId;
+var currentChartId = "CPU_UTIL";
 
 // ajax call function
-function ajaxCall(task,filesObj) {
+function ajaxCall(task,filesObj,chartDataArray,chartType) {
 
     var ajaxResponse;
     var postData;
@@ -14,7 +14,8 @@ function ajaxCall(task,filesObj) {
         pyurl = "./chartDataArray.py";
     } else {
         
-
+        postData = {'filesObj': JSON.stringify(filesObj), 'chartDataArray': JSON.stringify(chartDataArray), 'chartType': chartType};
+        pyurl = "./chartLines.py";
     
     };
 
@@ -35,24 +36,30 @@ function ajaxCall(task,filesObj) {
 };
 
 
-function chartMaker(){
-
-
-};
-
-
-
 
 function chartView(control={value:"A"}) {
-    console.log(control.value);
 
     // disable the drop down
     // $("#viewDropDown").prop("disabled",true);
 
+    // create the sorted chartData to send only the relevant data corresponding to the current chart id
+    var sortedChartData = {}
+
+    // return data array of only the current chart id
+    Object.keys(JSON.parse(filesChartData)).filter(function (k) { return RegExp(currentChartId).test(k); }).forEach(function (k) { return sortedChartData[k] = JSON.parse(filesChartData)[k]; });
 
 
+    // call ajaxCall to make the chartsLines obj for chart formation
+    var chartsObj = JSON.parse(ajaxCall("chartlines",filesDetails.typewise,sortedChartData,control.value));
     
+    // each key in chartsLines represents the chartHeading and the data inside the key includes the chart data
+    // console.log(chartsObj)
 
+    for(n in chartsObj){
+        console.log(n)
+        console.log(JSON.stringify(chartsObj[n].chart))
+        console.log(chartsObj[n].blacklist)
+    }
 
 
     //console.log(filesChartData)
