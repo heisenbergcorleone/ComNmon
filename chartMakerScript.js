@@ -50,17 +50,18 @@ function chartView(control={value:"A"}) {
 
 
     // call ajaxCall to make the chartsLines obj for chart formation
-    var chartsObj = JSON.parse(ajaxCall("chartlines",filesDetails.typewise,sortedChartData,control.value));
+    var chartsObj = (ajaxCall("chartlines",filesDetails.typewise,sortedChartData,control.value));
     
     // each key in chartsLines represents the chartHeading and the data inside the key includes the chart data
     // console.log(chartsObj)
 
-    for(n in chartsObj){
-        console.log(n)
-        console.log(JSON.stringify(chartsObj[n].chart))
-        console.log(chartsObj[n].blacklist)
-    }
+    // for(n in chartsObj){
+    //     console.log(n)
+    //     console.log(JSON.stringify(chartsObj[n].chart))
+    //     console.log(chartsObj[n].blacklist)
+    // }
 
+    console.log(chartsObj)
 
     //console.log(filesChartData)
 

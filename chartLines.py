@@ -137,8 +137,31 @@ def combineFiles(structure,structurePoints):
 
 
 
+def makeRunsAverage(averageRunsList,averageList):
+
+    if(len(averageRunsList) == 0): # checks if the list is empty
+        
+        for line in averageList:
+            date = line[:1]
+            point = [round((sum(line[1:]))/(len(line[1:])),1)]
+            newLine = date + point
+            averageRunsList.append(newLine)            
 
 
+    else: # if the list is not empty
+        # checks if the length isn't equal then crop either of the two lists
+        if(len(averageRunsList)>len(averageList)):
+            averageRunsList = averageRunsList[:(len(averageList))]
+        elif(len(averageRunsList)<len(averageList)):
+            averageList = averageList[:(len(averageRunsList))]
+
+        # append the point
+        for i,line in enumerate(averageList):
+            point = round((sum(line[1:]))/(len(line[1:])),1)
+            # append next to the line i.e the last point for the line
+            averageRunsList[i].append(point)
+
+            
 
 
 
@@ -389,13 +412,81 @@ def makeChartData():
                     chartSet["blacklist"] = blacklist
                     
                     # update the jsonDict
+                    
                     jsonDict[server] = chartSet
+                    
             
             
             if(indexServer == (len(filesDict)-1)): # dump the json file when the list ends
                 dumpJSON(jsonDict)
             
                     
+
+    elif(chartType == "B"): # type-wise average for all types in a single chart
+
+        # contains the average of the runs
+        averageRunsList = list()
+        # label is used for the new chart data array
+        labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
+        # contains list of files that cannot be processed
+        blacklist = list()
+
+        # fileDict is the object with the selected filenames
+        for indexServer,server in enumerate(filesDict):
+            # each server refer to the runs
+            serverRuns = filesDict[server]
+
+
+            # needed variables
+            # contains the newChartData array
+            averageList = list()
+            
+       
+
+            for indexRun,run in enumerate(serverRuns):                
+
+                # clear the contents of the lists
+                del chartLinesList[:]
+                del chartDatesList[:]
+
+                # list of the filenames
+                fileList = sorted(serverRuns[run])
+
+                
+                # make chart lines
+                makeChartLists(run,fileList,"CPU_UTIL")
+
+
+                # variables for alignDataPoints
+                step = 1
+                structurePoints = list()
+                structure = list()
+                
+                # align the date points
+                alignDatePoints(step,structurePoints,structure,run,fileList,blacklist)
+
+                # make averages
+                makeAverage(structure,structurePoints,averageList)
+
+                
+                # append the legend name
+                # labelValue[0].append(run)
+                
+
+                if(indexRun == (len(serverRuns)-1)): # when the last file of the server is processed
+                    # append the legend name
+                    labelValue[0].append(server)
+
+                    makeRunsAverage(averageRunsList,averageList) # or make average of all the runs of a type i.e to make a single average that represents a single type consisting of all the runs
+                    
+            if(indexServer == (len(filesDict)-1)): # dump the json file when the list ends
+                #dumpJSON(jsonDict)
+                
+                newChartData = labelValue + averageRunsList
+
+                jsonDict["All Types"] = newChartData
+
+                dumpJSON(jsonDict)
 
     else:
         print("wip")
