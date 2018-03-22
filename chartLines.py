@@ -291,6 +291,104 @@ def alignDatePoints(step,structurePoints,structure,run,fileList,blacklist):
 
 
 
+def mergeFiles(fileList,run,labelValue,mergeList):
+    # sort the list first
+    # clear the contents of the lists
+    del chartLinesList[:]
+    del chartDatesList[:]
+
+    # make chart list to append values in chartLinesList and chartDatesList for the listed/selected file group/list
+    makeChartLists(run,fileList,"CPU_UTIL")
+
+
+    structurePoints = list()
+    structure = list()
+
+    # coombine the data of the files to form a single chart
+    combineFiles(structure,structurePoints)
+
+
+
+    mergeDates = list()
+
+    i = 0
+    for index,dateRow in enumerate(structure):
+        if(dateRow[i] == "x"):
+            i = i + 1
+            mergeDates.append([dateRow[i]])
+        else:    
+            mergeDates.append([dateRow[i]])
+
+
+
+
+    for index,dateRow in enumerate(mergeDates):
+        mergeList.append(dateRow+(structurePoints[index]))
+
+
+    # add the run name along the files to differentiate between the lists
+    def addRunName(filename):
+        return run+"/"+filename
+
+    filenamelist = list(map(addRunName,fileList))
+
+    # update the filenamelist
+    labelValue[0] = labelValue[0] + filenamelist
+
+
+
+
+def mergeSets(runMergeList):
+    
+    singleSet = list()
+
+    # update the longest merge list
+    longestList = runMergeList[0]
+    for mergeSet in runMergeList:
+        if(len(longestList) < len(mergeSet)):
+            longestList = mergeSet
+
+
+    # append the dates in the singleSet
+    for date in longestList:
+        temp = list()
+        temp.append(date[0])
+        singleSet.append(temp)
+    
+
+    # update the points now
+
+    for runMerge in runMergeList:
+        # prepare the zerolist to append the empty points
+        zeroList = [0.0] * (len((runMerge[0])[1:]))
+        for index,line in enumerate(singleSet):
+
+                try:
+                    points = (runMerge[index])[1:]
+                    for n in points:
+                        line.append(n)
+                except IndexError:
+                    for n in zeroList:
+                        line.append(n)
+
+
+    # return the singleSet for one type of server
+    return singleSet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -480,13 +578,66 @@ def makeChartData():
                     makeRunsAverage(averageRunsList,averageList) # or make average of all the runs of a type i.e to make a single average that represents a single type consisting of all the runs
                     
             if(indexServer == (len(filesDict)-1)): # dump the json file when the list ends
-                #dumpJSON(jsonDict)
                 
                 newChartData = labelValue + averageRunsList
 
                 jsonDict["All Types"] = newChartData
 
                 dumpJSON(jsonDict)
+
+    elif(chartType == "C"): # type-wise average for all types in a single chart
+        
+
+
+
+        # fileDict is the object with the selected filenames
+        for indexServer,server in enumerate(filesDict):
+
+            # merge list contains data for the particular type of server(selected)
+            runMergeList = list()
+            # label value
+            labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
+            # each server refer to the runs
+            serverRuns = filesDict[server]
+
+            for indexRun,run in enumerate(serverRuns):
+                fileList = sorted(serverRuns[run])
+
+
+                # contains the temp merge file list of particular type per run
+                curMergeList = list()
+                # mergeFiles makes the mergeList and also appends the labelValue
+                mergeFiles(fileList,run,labelValue,curMergeList)
+
+                # append the cur merge list to mergeList
+                runMergeList.append(curMergeList)
+
+
+                if(indexRun == (len(serverRuns)-1)): # when the last file of the server is processed
+
+                    # update the set or merge the set
+                    newChartlines = mergeSets(runMergeList)
+
+                    # print(labelValue)
+                    # print()
+                    # for line in newChartlines:
+                    #     print(line)
+
+                    newChartData = labelValue + newChartlines
+
+                    dataDict = OrderedDict()
+                    dataDict["chart"] = newChartData
+
+                    jsonDict[server] = dataDict
+                    
+
+        if(indexServer == (len(filesDict)-1)):
+            
+            dumpJSON(jsonDict)
+
+
+
+
 
     else:
         print("wip")
