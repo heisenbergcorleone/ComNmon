@@ -49,8 +49,21 @@ function chartView(control={value:"A"}) {
     Object.keys(JSON.parse(filesChartData)).filter(function (k) { return RegExp(currentChartId).test(k); }).forEach(function (k) { return sortedChartData[k] = JSON.parse(filesChartData)[k]; });
 
 
+    var chartFileDetails = filesDetails.typewise;
+
+    if(control.value == "D"){
+        chartFileDetails = filesDetails.runwise;
+        console.log("changed")
+        console.log("")
+        console.log(filesDetails.runwise)
+
+    }
+
+
     // call ajaxCall to make the chartsLines obj for chart formation
-    var chartsObj = (ajaxCall("chartlines",filesDetails.typewise,sortedChartData,control.value));
+    var chartsObj = (ajaxCall("chartlines",chartFileDetails,sortedChartData,control.value));
+
+
     
     // each key in chartsLines represents the chartHeading and the data inside the key includes the chart data
     // console.log(chartsObj)

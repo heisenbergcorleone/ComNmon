@@ -33,7 +33,7 @@ def combineFiles(structure,structurePoints):
         # for points
         pointList = chartLinesList[index]
 
-        if(index == 0): # if there is only one file
+        if(index == 0): # for the first selected file
             for i,date in enumerate(datelist):
                 structure.append([date])
                 # append the points in the structurePoints array 
@@ -53,8 +53,7 @@ def combineFiles(structure,structurePoints):
             fcurVal = (curList[0][curList[0].find("(")+1:curList[0].rfind(")")].replace(", ", "").replace(" ", ""))
             # last value of the prev list
             fprevVal = ((prevList[len(prevList)-1])[(prevList[len(prevList)-1]).find("(")+1:(prevList[len(prevList)-1]).rfind(")")].replace(", ", "").replace(" ", ""))
-            
-            
+
             if (fcurVal <= fprevVal): # means the date can be merged
                 diff = list()
                 for prevdate in prevList:
@@ -291,7 +290,7 @@ def alignDatePoints(step,structurePoints,structure,run,fileList,blacklist):
 
 
 
-def mergeFiles(fileList,run,labelValue,mergeList):
+def mergeFiles(fileList,run,mergeList):
     # sort the list first
     # clear the contents of the lists
     del chartLinesList[:]
@@ -326,14 +325,6 @@ def mergeFiles(fileList,run,labelValue,mergeList):
         mergeList.append(dateRow+(structurePoints[index]))
 
 
-    # add the run name along the files to differentiate between the lists
-    def addRunName(filename):
-        return run+"/"+filename
-
-    filenamelist = list(map(addRunName,fileList))
-
-    # update the filenamelist
-    labelValue[0] = labelValue[0] + filenamelist
 
 
 
@@ -584,6 +575,7 @@ def makeChartData():
                 jsonDict["All Types"] = newChartData
 
                 dumpJSON(jsonDict)
+                
 
     elif(chartType == "C"): # type-wise average for all types in a single chart
         
@@ -607,8 +599,22 @@ def makeChartData():
                 # contains the temp merge file list of particular type per run
                 curMergeList = list()
                 # mergeFiles makes the mergeList and also appends the labelValue
-                mergeFiles(fileList,run,labelValue,curMergeList)
+                mergeFiles(fileList,run,curMergeList)
 
+                
+                # update the labels
+                # add the run name along the files to differentiate between the lists
+                def addRunName(filename):
+                    return run+"/"+filename
+
+                filenamelist = list(map(addRunName,fileList))
+
+                # update the filenamelist
+                labelValue[0] = labelValue[0] + filenamelist
+
+                
+                
+                
                 # append the cur merge list to mergeList
                 runMergeList.append(curMergeList)
 
@@ -618,11 +624,7 @@ def makeChartData():
                     # update the set or merge the set
                     newChartlines = mergeSets(runMergeList)
 
-                    # print(labelValue)
-                    # print()
-                    # for line in newChartlines:
-                    #     print(line)
-
+                    # update the newChartData for the particular server type
                     newChartData = labelValue + newChartlines
 
                     dataDict = OrderedDict()
@@ -635,6 +637,52 @@ def makeChartData():
             
             dumpJSON(jsonDict)
 
+
+    elif(chartType == "D"): # all the servers in a single chart per run
+
+        for indexRun,run in enumerate(filesDict):
+            serverList = filesDict[run]
+            
+            # serverMergedList per run 
+            serverMergedList = list()
+
+            # label list for the selected run
+            labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
+
+            for indexServer,server in enumerate(serverList):
+                
+                fileList = sorted(serverList[server])
+                
+                
+                curMergeList = list()
+                # merging the files together 
+                mergeFiles(fileList,run,curMergeList)
+
+
+                # update the labelValue for legends
+                labelValue[0] = labelValue[0] + fileList
+                
+                # update the serverMergedList
+                serverMergedList.append(curMergeList)
+                
+
+                if(indexServer == (len(serverList)-1)):
+
+                    newChartlines = mergeSets(serverMergedList)
+
+                    # update the newChartData for the particular run
+
+                    newChartData = labelValue + newChartlines
+
+                    dataDict = OrderedDict()
+                    dataDict["chart"] = newChartData
+
+                    jsonDict[run] = dataDict
+            
+
+            if(indexRun == (len(filesDict)-1)):
+                # dump the json object
+                dumpJSON(jsonDict)
 
 
 
