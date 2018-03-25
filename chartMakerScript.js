@@ -51,7 +51,7 @@ function chartView(control={value:"A"}) {
 
     var chartFileDetails = filesDetails.typewise;
 
-    if(control.value == "D"){
+    if(control.value == "D" || control.value == "B"){ // for chart view type D and B make send the runwise sorted selected files
         chartFileDetails = filesDetails.runwise;
         console.log("changed")
         console.log("")

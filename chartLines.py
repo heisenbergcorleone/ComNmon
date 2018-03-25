@@ -475,10 +475,10 @@ def makeChartData():
                 structurePoints = list()
                 structure = list()
                 
-                # align the date points
+                # align the date points to take the average data of the selected files and also put the unprocessed files into the blacklist array
                 alignDatePoints(step,structurePoints,structure,run,fileList,blacklist)
 
-                # make averages
+                # make averages of the in the averageList
                 makeAverage(structure,structurePoints,averageList)
                 
                 # append the legend name
@@ -512,34 +512,31 @@ def makeChartData():
                     
 
     elif(chartType == "B"): # type-wise average for all types in a single chart
+    
 
-        # contains the average of the runs
-        averageRunsList = list()
-        # label is used for the new chart data array
-        labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
-        # contains list of files that cannot be processed
-        blacklist = list()
-
-        # fileDict is the object with the selected filenames
-        for indexServer,server in enumerate(filesDict):
+        # fileDict is the object with the sorted filenames
+        for indexRun,run in enumerate(filesDict):
             # each server refer to the runs
-            serverRuns = filesDict[server]
+            serverList = filesDict[run]
 
 
-            # needed variables
-            # contains the newChartData array
-            averageList = list()
-            
-       
+            # average server type list for the selected run
+            averagedServerList = list()
+            # label is used for the new chart data array
+            labelValue = [[{"type": 'datetime', "label": 'Datetime' }]]
 
-            for indexRun,run in enumerate(serverRuns):                
+            # contains list of files that cannot be processed
+            blacklist = list()
+
+
+            for indexServer,serverType in enumerate(serverList):                
 
                 # clear the contents of the lists
                 del chartLinesList[:]
                 del chartDatesList[:]
 
                 # list of the filenames
-                fileList = sorted(serverRuns[run])
+                fileList = sorted(serverList[serverType])
 
                 
                 # make chart lines
@@ -551,30 +548,36 @@ def makeChartData():
                 structurePoints = list()
                 structure = list()
                 
-                # align the date points
+                # align the date points and also put the unprocessed fils into the blackList
                 alignDatePoints(step,structurePoints,structure,run,fileList,blacklist)
 
-                # make averages
-                makeAverage(structure,structurePoints,averageList)
+                # make averages of the selected files
+                makeAverage(structure,structurePoints,averagedServerList)
 
-                
-                # append the legend name
-                # labelValue[0].append(run)
-                
+                # append the legend names
+                labelValue[0].append(serverType)
 
-                if(indexRun == (len(serverRuns)-1)): # when the last file of the server is processed
-                    # append the legend name
-                    labelValue[0].append(server)
+            
 
-                    makeRunsAverage(averageRunsList,averageList) # or make average of all the runs of a type i.e to make a single average that represents a single type consisting of all the runs
+                if(indexServer == (len(serverList)-1)): # when the last file of the server is processed
+
+                    # prepare the newChart Data
+                    newChartData = labelValue + averagedServerList
+
+                    dataDict = OrderedDict()
+                    dataDict["chart"] = newChartData
+                    dataDict["blacklist"] = blacklist
+
+                    # update the json dictionary
+                    jsonDict[run] = dataDict
+
                     
-            if(indexServer == (len(filesDict)-1)): # dump the json file when the list ends
-                
-                newChartData = labelValue + averageRunsList
+            if(indexRun == (len(filesDict)-1)): # dump the json file when the list ends
 
-                jsonDict["All Types"] = newChartData
-
+                # dump the jsonDict
                 dumpJSON(jsonDict)
+                
+                
                 
 
     elif(chartType == "C"): # type-wise average for all types in a single chart
