@@ -40,7 +40,7 @@ function ajaxCall(task,filesObj,chartDataArray,chartType) {
 function chartView(control={value:"A"}) {
 
     // disable the drop down
-    // $("#viewDropDown").prop("disabled",true);
+    $("#viewDropDown").prop("disabled",true);
 
     // create the sorted chartData to send only the relevant data corresponding to the current chart id
     var sortedChartData = {}
@@ -53,10 +53,6 @@ function chartView(control={value:"A"}) {
 
     if(control.value == "D" || control.value == "B"){ // for chart view type D and B make send the runwise sorted selected files
         chartFileDetails = filesDetails.runwise;
-        console.log("changed")
-        console.log("")
-        console.log(filesDetails.runwise)
-
     }
 
 
@@ -65,7 +61,6 @@ function chartView(control={value:"A"}) {
 
 
     
-    // each key in chartsLines represents the chartHeading and the data inside the key includes the chart data
     // console.log(chartsObj)
 
     // for(n in chartsObj){
@@ -74,15 +69,72 @@ function chartView(control={value:"A"}) {
     //     console.log(chartsObj[n].blacklist)
     // }
 
-    console.log(chartsObj)
+    // console.log(chartsObj)
 
     //console.log(filesChartData)
+
+    // call the makeCharts function    
+    makeCharts(JSON.parse(chartsObj));
 
 
 
     // enable the drop down
-    // $("#viewDropDown").attr("disabled",false);
+    setTimeout(function(){ $("#viewDropDown").attr("disabled",false); }, 1000);
+
+    
 };
+
+
+
+
+function makeCharts(chartsDataObject) {
+
+
+
+    // each key in chartsLines represents the chartHeading and the data inside the key includes the chart data
+    for(chartName in chartsDataObject){
+        // chartName is the heading of the chart
+
+        // chartName.chart is the chartData along with the legends
+        console.log(chartName)
+
+        // chartData
+        console.log(chartsDataObject[chartName])
+
+
+
+        // chartName.blacklist is not empty has the filenames that have failed to processed
+    }
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
