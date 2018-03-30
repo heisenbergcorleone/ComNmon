@@ -10,6 +10,20 @@ if(isset($_POST['filesDetails'])){
     <head>
         <title>comNmon ChartMaker</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Latest compiled Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        // Load Charts and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
+        </script>
+        <!-- google chart apis -->
+        <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script>google.load("visualization", "1.1", {packages:["corechart"]})</script> -->
         <style>
         body {
             background-color: #EEEEFF;
@@ -26,6 +40,9 @@ if(isset($_POST['filesDetails'])){
 
         .show {
             display: block;
+        }
+        #charts > div {
+            border:2px solid black;
         }
 
 
@@ -83,11 +100,15 @@ if(isset($_POST['filesDetails'])){
         <button id="draw_JFS" style="color:brown;"><b>JFS</b></button>
     </div>
     
-    <div id="chart">
-        <div id="chart_master">
-            <h2>Click on a Graph button above, to display that graph</h2>
-        </div>
+    <div id="heading">
+        <h2>Click on a Graph button above, to display that graph</h2>
     </div>
+
+    <div id="comNmonCharts">
+    </div>
+
+
+
 
     <script src="chartMakerScript.js"></script>
     <script>
