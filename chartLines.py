@@ -13,7 +13,7 @@ form = cgi.FieldStorage() #stores the get or post request values
 
 filesDict = json.loads(form['filesObj'].value, object_pairs_hook=OrderedDict) # fetch the file object/dict and fix the positions
 chartData = json.loads(form['chartDataArray'].value, object_pairs_hook=OrderedDict) # store chart data array
-chartType = form['chartType'].value
+viewType = form['viewType'].value
 
 
 # for data in chartData:
@@ -385,12 +385,12 @@ def mergeSets(runMergeList):
 
 
 # this function makes the chart list according to the given type of chart
-def makeChartLists(run,fileList,chartType):
+def makeChartLists(run,fileList,viewType):
 
 
-    if(chartType == "CPU_UTIL"): # handle the data when the chart type is cpu_util
+    if(viewType == "CPU_UTIL"): # handle the data when the chart type is cpu_util
         for filename in fileList:
-            fullname = run+"/"+filename+"/"+chartType
+            fullname = run+"/"+filename+"/"+viewType
             linesList = chartData[fullname]
             #chartDateList
             temp = list()
@@ -437,7 +437,7 @@ def makeChartData():
     # object to be dumped
     jsonDict = OrderedDict()
 
-    if(chartType == "A"): # type wise averages- one chart for each type/ average of all runs
+    if(viewType == "A"): # type wise averages- one chart for each type/ average of all runs
 
 
 
@@ -511,7 +511,7 @@ def makeChartData():
             
                     
 
-    elif(chartType == "B"): # type-wise average for all types in a single chart
+    elif(viewType == "B"): # type-wise average for all types in a single chart
     
 
         # fileDict is the object with the sorted filenames
@@ -580,7 +580,7 @@ def makeChartData():
                 
                 
 
-    elif(chartType == "C"): # type-wise average for all types in a single chart
+    elif(viewType == "C"): # type-wise average for all types in a single chart
         
 
 
@@ -641,7 +641,7 @@ def makeChartData():
             dumpJSON(jsonDict)
 
 
-    elif(chartType == "D"): # all the servers in a single chart per run
+    elif(viewType == "D"): # all the servers in a single chart per run
 
         for indexRun,run in enumerate(filesDict):
             serverList = filesDict[run]
