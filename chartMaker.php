@@ -41,9 +41,6 @@ if(isset($_POST['filesDetails'])){
         .show {
             display: block;
         }
-        #charts > div {
-            border:2px solid black;
-        }
 
 
         </style>
