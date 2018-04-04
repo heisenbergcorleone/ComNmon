@@ -130,13 +130,17 @@ function prepareHTML(){
 
     // update the html page with the div for chart and the respective heading
     for(var heading in JSON.parse(chartsObject)){
-    
+        
+        if(JSON.parse(chartsObject)[heading].blacklist != undefined && JSON.parse(chartsObject)[heading].blacklist.length != 0) {
+            alert("for chart: " + heading + "\n File(s) couldn't be processed: " + JSON.parse(chartsObject)[heading].blacklist);
+        }
+        
         var chartHTML = `<div class="${bootstrapClassName} charts">
-      <h3>${heading}</h3>
-      <div id=${heading} style="width:100%; height:75%;"></div>
+        <h3>${heading}</h3>
+        <div id=${heading} style="width:100%; height:75%;"></div>
       </div>`;
     
-      
+
       chartDiv.innerHTML += chartHTML;
       
     };
