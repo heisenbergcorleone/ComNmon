@@ -168,10 +168,6 @@ function prepareCharts(){
 // draws the selected chart
 function drawChart() {
 
-    var data_CPU_UTIL = google.visualization.arrayToDataTable(JSON.parse(chartsObject)[currentChartId].chart);
-
-    var hAxisCount = JSON.parse(chartsObject)[currentChartId].chart.length - 1;
-
 
     var options_CPU_UTIL = {
         chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
@@ -179,11 +175,10 @@ function drawChart() {
         focusTarget: "category",
         legend: {position: 'top', textStyle: {color: 'black'}},
         tooltip: {trigger: 'selection'},
-        // colors:['red','red','red'],
         hAxis: {
           gridlines: {
             color: "lightgrey",
-            count: hAxisCount
+            count: (JSON.parse(chartsObject)[currentChartId].chart.length - 1),
           }
         },
         vAxis: {
@@ -192,7 +187,7 @@ function drawChart() {
             count: 11
           }
         },
-        explorer: { actions: ["dragToZoom", "rightClickToReset"],
+        explorer: { actions: [/*"dragToZoom", "rightClickToReset"*/],
           axis: "horizontal",
           keepInBounds: true,
           maxZoomIn: 20.0
@@ -200,9 +195,28 @@ function drawChart() {
         isStacked:  1
       };
 
+      // color the servers from the same run:
+      // 
+
+      var data_CPU_UTIL = google.visualization.arrayToDataTable(JSON.parse(chartsObject)[currentChartId].chart);
+
+
+      if($("#viewDropDown")[0].value == "C" || $("#viewDropDown")[0].value == "D") {
+          var viewType = $("#viewDropDown")[0].value;
+        // add the color array
+        options_CPU_UTIL.colors = [];
+        // add colors to differentiate the server runwise
+        chartColors(data_CPU_UTIL,options_CPU_UTIL,(JSON.parse(chartsObject)[currentChartId].chart),viewType);
+      };
+
+
+
       chart = new google.visualization.AreaChart(document.getElementById(currentChartId));
       chart.draw( data_CPU_UTIL, options_CPU_UTIL);
-      googleChartData.push(chart);
+
+
+
+    googleChartData.push(chart);
 
 
     // update pointer index
@@ -211,6 +225,50 @@ function drawChart() {
     prepareCharts();
 
 };
+
+
+
+function chartColors(data,options,label,viewType) {
+
+    // get the legend names from the labels
+    var label = (JSON.parse(chartsObject)[currentChartId].chart)[0]
+    label.shift();
+    var colors = ['blue','red','yellow','green','purple','orange','seagreen'];
+
+    // previous run
+    var preVal;
+    // sorting method
+    var stringCom;
+    viewType == "C" ? stringCom = "/" : stringCom = "_";
+
+
+    label.forEach(function(val){
+
+        var curVal = val.slice(0,val.indexOf(stringCom))
+
+        if(preVal == undefined || preVal != curVal ) {
+            // push the color
+            options.colors.push(colors[0]);
+            // shift the color
+            colors.push(colors.shift());
+            
+        } else {
+            options.colors.push(colors[colors.length-1]);
+        }
+        preVal = curVal;
+
+    })
+
+};
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,6 +306,15 @@ function syncCursors() {
         })
 
     });
+
+
+    // google.visualization.events.addListener(googleChartData[0], 'onmouseover', function(entry) {
+    //     chart.setSelection([{row: entry.row}]);
+    //     //console.log("hey");
+    //     //console.log(entry)
+    //  });
+
+
 };
 
 
