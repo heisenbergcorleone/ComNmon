@@ -1,33 +1,43 @@
 # comNmon
-comNmon is a comparative tool for Nmon Charts that compares the charts in the browser itself. Users will be asked to group the charts/files in the one of the two ways to make comparison:
-### 1. Run wise
-A run is a specific time at which a bunch of nmon charts/files are created. Each run may have multiple types of files i.e files from different servers. To separate a group of files made in a particular run from another, all the file of a particular run should be placed in a particular directory named after the timestamp at the creation of that run.
+comNmon is a comparative tool for Nmon Charts that compares the charts in the browser itself.
 
-Files will be grouped considering the run.  For example: All the selected nmon charts in the same run will be compared with each other, if there are more than one file of the same type then points of the those charts will be converted into average points. 
+### View Type
+The charts/servers/nmonfiles can be handled in 5 different way to make the comparison:
 
-### 2. Server Type wise
-Server type refers to the type of server of which the nmon chart is made i.e webs server, database server etc.
+#### 1. Average Runs - One chart for Each type
+The files will be divided Server Wise, meaning each type of server will have its own chart.
+Each line in the chart will represent the Run (average value of all the files of the same type from that run).
 
-Files will be grouped considering the type. For example: All the selected webserver files/charts will be compared with each other in a single chart, if files are from different runs then points from the same run will be converted into average points.
+#### 2. Average Types - One chart for Each Run
+The files will be divided Run wise, therefore each Run will have its own chart.
+Each line in every chart will represent the Server Type (average of all the type of server of the same type).
 
-###### _Multiple iframes will be used if the sorting method is Run wise and multiple runs are selecte or if sorting method is Server Type and multiple types are selected._
+#### 3. Individual Servers - Type Wise
+The charts will be divided type wise. All the servers will be represented by a single line and differentiated on the basis of run by different colors withtin the same chart.
 
-## Naming Convention
+#### 4. Individual Servers - Run Wise
+The charts will be divided run wise. All the servers will be represented by a single line and differentiated on the basis of type by different colors withtin the same chart.
+
+#### 5. All Servers in their separate charts
+All the servers will have their own chart, divided and subdivided by run and type respectively.
+
+## Naming and maintenance
 
 ### How run-directory should be named?
-* The run directory should be named after the timestamp at the creation of the whole run or set of files.
+* The run directory should be named after the timestamp at the creation of the whole run or set of files. Users can add their info or give a unique name to the directory after the underscore symbol.
+_syntax: 1509532200000_myfirstnmonrun_
 
 ### How the files should be named?
-__type-timestamp-users-rampup.html__
-* Where type defines the type of the file, webserver or database server or cache etc. 
-* Timestamp is the time when the file was created. 
-* Users stand for the number of users or load taken by the server. 
-* rampup is the total time of execution of the program.
+* Likewise the run-directory, files should also be named in a similar manner. Notice the filename should always start with the type it belong to, and the program isn't compatible in understanding abbreviation ( databaseserver_file1.html, dbserver_file2.html and database_file3.html -  all are of different types), so stick with your native server type naming convention.
+_syntax: webserver_file1_numberofusers_anyinfo.html_
 
-## Maintenance 
-__The files should be maintained in the nested form as below:__
+### Nmon Directory 
+* All the run directories should be placed inside the parent Nmon directory and all the files belonging to the same run should be placed inside their respective run directories.
 
-![comNmon dir](https://github.com/ksdhir/comNmon/blob/master/comNmon_directory.png)
+
+## Incompatibility
+The program is not yet compatible with servers or nmon charts of whose snapshots have been captured at different intervals.
+Users are requested to atleast know if they are comparing such charts as it may lead to unexpected results.
 
 
 ## Languages\Library used:
@@ -39,3 +49,4 @@ __The files should be maintained in the nested form as below:__
 ## Setting up Python for browser
 * Refer to the link to enable cgi: [https://code-maven.com/set-up-cgi-with-apache](https://code-maven.com/set-up-cgi-with-apache)
 * Enable python for browser: [https://www.digitalocean.com/community/tutorials/how-to-set-up-an-apache-mysql-and-python-lamp-server-without-frameworks-on-ubuntu-14-04](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-apache-mysql-and-python-lamp-server-without-frameworks-on-ubuntu-14-04)
+* Do not forget to make the python script executable before running the program.
