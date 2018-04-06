@@ -66,7 +66,6 @@ function chartMaker(viewType="A",chartType="CPU_UTIL") {
     // call chartView to make the chartObject
     chartView(viewType,chartType);
 
-    console.log(chartsObject)
 
     // prepare the html structure for the charts
     prepareHTML()
@@ -130,13 +129,17 @@ function prepareHTML(){
 
     // update the html page with the div for chart and the respective heading
     for(var heading in JSON.parse(chartsObject)){
+
+        var chartHeading;
+        // check if the heading is a string then add the suffix "s"
+        isNaN(heading.slice(0,13))? chartHeading = heading + "s": chartHeading = heading;
         
         if(JSON.parse(chartsObject)[heading].blacklist != undefined && JSON.parse(chartsObject)[heading].blacklist.length != 0) {
             alert("for chart: " + heading + "\n File(s) couldn't be processed: " + JSON.parse(chartsObject)[heading].blacklist);
         }
         
         var chartHTML = `<div class="${bootstrapClassName} charts">
-        <h3>${heading}</h3>
+        <h3>${chartHeading}</h3>
         <div id=${heading} style="width:100%; height:75%;"></div>
       </div>`;
     

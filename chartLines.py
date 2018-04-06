@@ -498,7 +498,8 @@ def makeChartData():
                     # make the chartSet
                     chartSet = OrderedDict()
                     chartSet["chart"] = newChartData
-                    chartSet["blacklist"] = blacklist
+                    if(len(blacklist) != 0):
+                        chartSet["blacklist"] = blacklist
                     
                     # update the jsonDict
                     

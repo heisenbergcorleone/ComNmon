@@ -123,7 +123,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
     }
     // toggle the display
     if(currentTab > 0){
-        $(".header").addClass("show");
+        //$(".header").addClass("show");
         $(".button").addClass("show");
     } else if (currentTab == 0) {
         $(".header").removeClass("show");
