@@ -37,7 +37,7 @@ _syntax: webserver_file1_numberofusers_anyinfo.html_
 
 ## Incompatibility
 The program is not yet compatible with servers or nmon charts of whose snapshots have been captured at different intervals.
-Users are requested to atleast know if they are comparing such charts as it may lead to unexpected results.
+Users are requested to have prior knowledge if they are comparing such charts as it may lead to unexpected results.
 
 
 ## Languages\Library used:
