@@ -21,9 +21,6 @@ if(isset($_POST['filesDetails'])){
         // Load Charts and the corechart package.
             google.charts.load('current', {'packages':['corechart']});
         </script>
-        <!-- google chart apis -->
-        <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script>google.load("visualization", "1.1", {packages:["corechart"]})</script> -->
         <style>
         body {
             background-color: #EEEEFF;
@@ -41,8 +38,6 @@ if(isset($_POST['filesDetails'])){
         .show {
             display: block;
         }
-
-
         </style>
     </head>
     
@@ -54,10 +49,10 @@ if(isset($_POST['filesDetails'])){
             </div>
             <select id="viewDropDown" style="width:100%;">
                 <option value="A">Type-wise averages - one chart for each type</option>
-                <option value="B">Type-wise average for all types in a single chart</option>
+                <option value="B">Type-wise average for all types in a single chart per run</option>
                 <option value="C">Type-wise but individually for each server - one chart for each type</option>
-                <option value="D">All servers in a single chart</option>
-                <option value="E">All servers in a separate charts</option>
+                <option value="D">All servers in a single chart per run</option>
+                <option value="E" disabled >All servers in a separate charts</option>
             </select>
         </div>
 
