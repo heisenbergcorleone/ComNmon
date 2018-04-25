@@ -136,37 +136,6 @@ def combineFiles(structure,structurePoints):
 
 
 
-def makeRunsAverage(averageRunsList,averageList):
-
-    if(len(averageRunsList) == 0): # checks if the list is empty
-        
-        for line in averageList:
-            date = line[:1]
-            point = [round((sum(line[1:]))/(len(line[1:])),1)]
-            newLine = date + point
-            averageRunsList.append(newLine)            
-
-
-    else: # if the list is not empty
-        # checks if the length isn't equal then crop either of the two lists
-        if(len(averageRunsList)>len(averageList)):
-            averageRunsList = averageRunsList[:(len(averageList))]
-        elif(len(averageRunsList)<len(averageList)):
-            averageList = averageList[:(len(averageRunsList))]
-
-        # append the point
-        for i,line in enumerate(averageList):
-            point = round((sum(line[1:]))/(len(line[1:])),1)
-            # append next to the line i.e the last point for the line
-            averageRunsList[i].append(point)
-
-            
-
-
-
-
-
-
 
 def makeAverage(structure,structurePoints,averageValue):
 
@@ -197,10 +166,11 @@ def makeAverage(structure,structurePoints,averageValue):
         elif((len(averageValue)) < (len(commonStructurePoints))): # means the common Structure has more elements, then crop it
             commonStructurePoints = commonStructurePoints[:(len(averageValue))]
 
-    
+
     for i,value in enumerate(commonStructurePoints):
         averageValue[i].append(value)
 
+    return averageValue
 
 
 
@@ -479,8 +449,12 @@ def makeChartData():
                 alignDatePoints(step,structurePoints,structure,run,fileList,blacklist)
 
                 # make averages of the in the averageList
-                makeAverage(structure,structurePoints,averageList)
                 
+                newAvgList = makeAverage(structure,structurePoints,averageList)
+
+                # update the average list with the new list
+                averageList = list(newAvgList)
+
                 # append the legend name
                 labelValue[0].append(run)
                 
@@ -553,7 +527,10 @@ def makeChartData():
                 alignDatePoints(step,structurePoints,structure,run,fileList,blacklist)
 
                 # make averages of the selected files
-                makeAverage(structure,structurePoints,averagedServerList)
+                newAvgList = makeAverage(structure,structurePoints,averagedServerList)
+
+                # update the average list with the new list
+                averagedServerList = list(newAvgList)
 
                 # append the legend names
                 labelValue[0].append(serverType)

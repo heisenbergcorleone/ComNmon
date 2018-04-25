@@ -204,6 +204,7 @@ function drawChart() {
 
       // color the servers from the same run:
       // 
+      console.log(JSON.parse(chartsObject)[currentChartId].chart)
 
       var data_CPU_UTIL = google.visualization.arrayToDataTable(JSON.parse(chartsObject)[currentChartId].chart);
 
