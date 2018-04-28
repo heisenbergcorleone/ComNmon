@@ -34,8 +34,8 @@
         <div class="tab" id="secondtab"><br>
             <div class="main">
               <div class="directorylist" style="width:35%; float:left">
-                <button  id="loadall" onclick="addDirectory(this)">Load All</button>
-                <br><br>
+                <div style="text-align: center;">Run Directories Table</div>
+                <br>
                 <table id="directory_list_table">
                   <tr>
                     <th>Directory List</th>

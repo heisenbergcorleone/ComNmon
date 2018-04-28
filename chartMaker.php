@@ -48,10 +48,10 @@ if(isset($_POST['filesDetails'])){
                 <h4>Select view type :</h4>
             </div>
             <select id="viewDropDown" style="width:100%;">
-                <option value="A">Type-wise averages - one chart for each type</option>
-                <option value="B">Type-wise average for all types in a single chart per run</option>
-                <option value="C">Type-wise but individually for each server - one chart for each type</option>
-                <option value="D">All servers in a single chart per run</option>
+                <option value="A">Average Runs - Type Wise</option>
+                <option value="B">Average Types - Run Wise</option>
+                <option value="C">Individual Servers - Type Wise</option>
+                <option value="D">Individual Servers - Run Wise</option>
                 <option value="E" disabled >All servers in a separate charts</option>
             </select>
         </div>

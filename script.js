@@ -168,7 +168,7 @@ function handleCurrentTab(currentTab,n,directory_path) {
             // alert the excluded directories name
 
             if(excludedDirs.length){
-                alert("The excluded directories that don't fit the naming convention are: \n\n"+excludedDirs.join("\n"))
+                alert("Run Directories that don't fit the naming convention are excluded from the list: \n\n"+excludedDirs.join("\n"))
             }
             
             $("#secondtab").replaceWith(secondTab.clone()); // clear the tab
