@@ -86,7 +86,9 @@ function chartView(viewType,chartType) {
 
     // create the sorted chartData to send only the relevant data corresponding to the current chart id
     var sortedChartData = {}
+    console.log(chartType)
 
+    console.log(filesChartData)
     // return data array of only the current chart id
     Object.keys(JSON.parse(filesChartData)).filter(function (k) { return RegExp(chartType).test(k); }).forEach(function (k) { return sortedChartData[k] = JSON.parse(filesChartData)[k]; });
 
