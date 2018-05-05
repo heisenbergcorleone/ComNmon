@@ -1,0 +1,1778 @@
+<html>
+	<head>
+		<title>nmonChart</title>
+<script>
+function config() {
+    var myWindow = window.open("", "MsgWindow", "width=1024, height=800");
+    myWindow.document.write("<h2>Configuration data for cacheserver_1.nmon <br>Use PageDown or Scroll bar (if available)</h2><br>\
+<b>progname</b> = nmon<br>\
+<b>command</b> = nmon -F cacheserver_1.nmon -t -s 30 -c 20 <br>\
+<b>version</b> = 16g<br>\
+<b>disks_per_line</b> = 150<br>\
+<b>max_disks</b> = 256<br>\
+<b>disks</b> = 19<br>\
+<b>host</b> = ksdhir-Lenovo-G50-80<br>\
+<b>user</b> = ksdhir<br>\
+<b>OS</b> = Linux<br>\
+<b>runname</b> = ksdhir-Lenovo-G50-80<br>\
+<b>time</b> = 02:32.24<br>\
+<b>date</b> = 05-MAY-2018<br>\
+<b>interval</b> = 30<br>\
+<b>snapshots</b> = 20<br>\
+<b>cpus</b> = 4<br>\
+<b>proc_stat_variables</b> = 8<br>\
+<b>boottime</b> = 04:43 PM 02-May-2018<br>\
+000 <b>/etc/release</b> <br>\
+001 <b>/etc/release</b> DISTRIB_ID=Ubuntu<br>\
+002 <b>/etc/release</b> DISTRIB_RELEASE=18.04<br>\
+003 <b>/etc/release</b> DISTRIB_CODENAME=bionic<br>\
+004 <b>/etc/release</b> DISTRIB_DESCRIPTION=QUbuntu 18.04 LTSQ<br>\
+005 <b>/etc/release</b> NAME=QUbuntuQ<br>\
+006 <b>/etc/release</b> VERSION=Q18.04 LTS (Bionic Beaver)Q<br>\
+007 <b>/etc/release</b> ID=ubuntu<br>\
+008 <b>/etc/release</b> ID_LIKE=debian<br>\
+009 <b>/etc/release</b> PRETTY_NAME=QUbuntu 18.04 LTSQ<br>\
+010 <b>/etc/release</b> VERSION_ID=Q18.04Q<br>\
+011 <b>/etc/release</b> HOME_URL=Qhttps://www.ubuntu.com/Q<br>\
+012 <b>/etc/release</b> SUPPORT_URL=Qhttps://help.ubuntu.com/Q<br>\
+013 <b>/etc/release</b> BUG_REPORT_URL=Qhttps://bugs.launchpad.net/ubuntu/Q<br>\
+014 <b>/etc/release</b> PRIVACY_POLICY_URL=Qhttps://www.ubuntu.com/legal/terms-and-policies/privacy-policyQ<br>\
+015 <b>/etc/release</b> VERSION_CODENAME=bionic<br>\
+016 <b>/etc/release</b> UBUNTU_CODENAME=bionic<br>\
+017 <b>lsb_release</b> <br>\
+018 <b>fdisk-l</b> <br>\
+019 <b>lsblk</b> <br>\
+020 <b>lscpu</b> <br>\
+021 <b>lscpu</b> Architecture:        x86_64<br>\
+022 <b>lscpu</b> CPU op-mode(s):      32-bit<br>\
+023 <b>lscpu</b> Byte Order:          Little Endian<br>\
+024 <b>lscpu</b> CPU(s):              4<br>\
+025 <b>lscpu</b> On-line CPU(s) list: 0-3<br>\
+026 <b>lscpu</b> Thread(s) per core:  2<br>\
+027 <b>lscpu</b> Core(s) per socket:  2<br>\
+028 <b>lscpu</b> Socket(s):           1<br>\
+029 <b>lscpu</b> NUMA node(s):        1<br>\
+030 <b>lscpu</b> Vendor ID:           GenuineIntel<br>\
+031 <b>lscpu</b> CPU family:          6<br>\
+032 <b>lscpu</b> Model:               61<br>\
+033 <b>lscpu</b> Model name:          Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+034 <b>lscpu</b> Stepping:            4<br>\
+035 <b>lscpu</b> CPU MHz:             798.348<br>\
+036 <b>lscpu</b> CPU max MHz:         2700.0000<br>\
+037 <b>lscpu</b> CPU min MHz:         500.0000<br>\
+038 <b>lscpu</b> BogoMIPS:            4389.76<br>\
+039 <b>lscpu</b> Virtualization:      VT-x<br>\
+040 <b>lscpu</b> L1d cache:           32K<br>\
+041 <b>lscpu</b> L1i cache:           32K<br>\
+042 <b>lscpu</b> L2 cache:            256K<br>\
+043 <b>lscpu</b> L3 cache:            3072K<br>\
+044 <b>lscpu</b> NUMA node0 CPU(s):   0-3<br>\
+045 <b>lscpu</b> Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts<br>\
+046 <b>lshw</b> <br>\
+047 <b>lshw</b> ksdhir-lenovo-g50-80<br>\
+048 <b>lshw</b>     description: Computer<br>\
+049 <b>lshw</b>     width: 64 bits<br>\
+050 <b>lshw</b>     capabilities: smp vsyscall32<br>\
+051 <b>lshw</b>   *-core<br>\
+052 <b>lshw</b>        description: Motherboard<br>\
+053 <b>lshw</b>        physical id: 0<br>\
+054 <b>lshw</b>      *-memory<br>\
+055 <b>lshw</b>           description: System memory<br>\
+056 <b>lshw</b>           physical id: 0<br>\
+057 <b>lshw</b>           size: 7897MiB<br>\
+058 <b>lshw</b>      *-cpu<br>\
+059 <b>lshw</b>           product: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+060 <b>lshw</b>           vendor: Intel Corp.<br>\
+061 <b>lshw</b>           physical id: 1<br>\
+062 <b>lshw</b>           bus info: cpu@0<br>\
+063 <b>lshw</b>           size: 1908MHz<br>\
+064 <b>lshw</b>           capacity: 2700MHz<br>\
+065 <b>lshw</b>           width: 64 bits<br>\
+066 <b>lshw</b>           capabilities: fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp x86-64 constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts cpufreq<br>\
+067 <b>lshw</b>      *-pci<br>\
+068 <b>lshw</b>           description: Host bridge<br>\
+069 <b>lshw</b>           product: Broadwell-U Host Bridge -OPI<br>\
+070 <b>lshw</b>           vendor: Intel Corporation<br>\
+071 <b>lshw</b>           physical id: 100<br>\
+072 <b>lshw</b>           bus info: pci@0000:00:00.0<br>\
+073 <b>lshw</b>           version: 09<br>\
+074 <b>lshw</b>           width: 32 bits<br>\
+075 <b>lshw</b>           clock: 33MHz<br>\
+076 <b>lshw</b>           configuration: driver=bdw_uncore<br>\
+077 <b>lshw</b>           resources: irq:0<br>\
+078 <b>lshw</b>         *-display<br>\
+079 <b>lshw</b>              description: VGA compatible controller<br>\
+080 <b>lshw</b>              product: HD Graphics 5500<br>\
+081 <b>lshw</b>              vendor: Intel Corporation<br>\
+082 <b>lshw</b>              physical id: 2<br>\
+083 <b>lshw</b>              bus info: pci@0000:00:02.0<br>\
+084 <b>lshw</b>              version: 09<br>\
+085 <b>lshw</b>              width: 64 bits<br>\
+086 <b>lshw</b>              clock: 33MHz<br>\
+087 <b>lshw</b>              capabilities: vga_controller bus_master cap_list rom<br>\
+088 <b>lshw</b>              configuration: driver=i915 latency=0<br>\
+089 <b>lshw</b>              resources: irq:49 memory:d0000000-d0ffffff memory:c0000000-cfffffff ioport:5000(size=64) memory:c0000-dffff<br>\
+090 <b>lshw</b>         *-multimedia:0<br>\
+091 <b>lshw</b>              description: Audio device<br>\
+092 <b>lshw</b>              product: Broadwell-U Audio Controller<br>\
+093 <b>lshw</b>              vendor: Intel Corporation<br>\
+094 <b>lshw</b>              physical id: 3<br>\
+095 <b>lshw</b>              bus info: pci@0000:00:03.0<br>\
+096 <b>lshw</b>              version: 09<br>\
+097 <b>lshw</b>              width: 64 bits<br>\
+098 <b>lshw</b>              clock: 33MHz<br>\
+099 <b>lshw</b>              capabilities: bus_master cap_list<br>\
+100 <b>lshw</b>              configuration: driver=snd_hda_intel latency=0<br>\
+101 <b>lshw</b>              resources: irq:51 memory:d1310000-d1313fff<br>\
+102 <b>lshw</b>         *-usb<br>\
+103 <b>lshw</b>              description: USB controller<br>\
+104 <b>lshw</b>              product: Wildcat Point-LP USB xHCI Controller<br>\
+105 <b>lshw</b>              vendor: Intel Corporation<br>\
+106 <b>lshw</b>              physical id: 14<br>\
+107 <b>lshw</b>              bus info: pci@0000:00:14.0<br>\
+108 <b>lshw</b>              version: 03<br>\
+109 <b>lshw</b>              width: 64 bits<br>\
+110 <b>lshw</b>              clock: 33MHz<br>\
+111 <b>lshw</b>              capabilities: xhci bus_master cap_list<br>\
+112 <b>lshw</b>              configuration: driver=xhci_hcd latency=0<br>\
+113 <b>lshw</b>              resources: irq:46 memory:d1300000-d130ffff<br>\
+114 <b>lshw</b>         *-communication<br>\
+115 <b>lshw</b>              description: Communication controller<br>\
+116 <b>lshw</b>              product: Wildcat Point-LP MEI Controller #1<br>\
+117 <b>lshw</b>              vendor: Intel Corporation<br>\
+118 <b>lshw</b>              physical id: 16<br>\
+119 <b>lshw</b>              bus info: pci@0000:00:16.0<br>\
+120 <b>lshw</b>              version: 03<br>\
+121 <b>lshw</b>              width: 64 bits<br>\
+122 <b>lshw</b>              clock: 33MHz<br>\
+123 <b>lshw</b>              capabilities: bus_master cap_list<br>\
+124 <b>lshw</b>              configuration: driver=mei_me latency=0<br>\
+125 <b>lshw</b>              resources: irq:53 memory:d131a000-d131a01f<br>\
+126 <b>lshw</b>         *-multimedia:1<br>\
+127 <b>lshw</b>              description: Audio device<br>\
+128 <b>lshw</b>              product: Wildcat Point-LP High Definition Audio Controller<br>\
+129 <b>lshw</b>              vendor: Intel Corporation<br>\
+130 <b>lshw</b>              physical id: 1b<br>\
+131 <b>lshw</b>              bus info: pci@0000:00:1b.0<br>\
+132 <b>lshw</b>              version: 03<br>\
+133 <b>lshw</b>              width: 64 bits<br>\
+134 <b>lshw</b>              clock: 33MHz<br>\
+135 <b>lshw</b>              capabilities: bus_master cap_list<br>\
+136 <b>lshw</b>              configuration: driver=snd_hda_intel latency=64<br>\
+137 <b>lshw</b>              resources: irq:54 memory:d1314000-d1317fff<br>\
+138 <b>lshw</b>         *-pci:0<br>\
+139 <b>lshw</b>              description: PCI bridge<br>\
+140 <b>lshw</b>              product: Wildcat Point-LP PCI Express Root Port #1<br>\
+141 <b>lshw</b>              vendor: Intel Corporation<br>\
+142 <b>lshw</b>              physical id: 1c<br>\
+143 <b>lshw</b>              bus info: pci@0000:00:1c.0<br>\
+144 <b>lshw</b>              version: e3<br>\
+145 <b>lshw</b>              width: 32 bits<br>\
+146 <b>lshw</b>              clock: 33MHz<br>\
+147 <b>lshw</b>              capabilities: pci normal_decode bus_master cap_list<br>\
+148 <b>lshw</b>              configuration: driver=pcieport<br>\
+149 <b>lshw</b>              resources: irq:42 ioport:2000(size=4096) memory:a0100000-a02fffff ioport:a0300000(size=2097152)<br>\
+150 <b>lshw</b>         *-pci:1<br>\
+151 <b>lshw</b>              description: PCI bridge<br>\
+152 <b>lshw</b>              product: Wildcat Point-LP PCI Express Root Port #3<br>\
+153 <b>lshw</b>              vendor: Intel Corporation<br>\
+154 <b>lshw</b>              physical id: 1c.2<br>\
+155 <b>lshw</b>              bus info: pci@0000:00:1c.2<br>\
+156 <b>lshw</b>              version: e3<br>\
+157 <b>lshw</b>              width: 32 bits<br>\
+158 <b>lshw</b>              clock: 33MHz<br>\
+159 <b>lshw</b>              capabilities: pci normal_decode bus_master cap_list<br>\
+160 <b>lshw</b>              configuration: driver=pcieport<br>\
+161 <b>lshw</b>              resources: irq:43 ioport:4000(size=4096) memory:d1200000-d12fffff ioport:a0500000(size=2097152)<br>\
+162 <b>lshw</b>            *-network<br>\
+163 <b>lshw</b>                 description: Ethernet interface<br>\
+164 <b>lshw</b>                 product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller<br>\
+165 <b>lshw</b>                 vendor: Realtek Semiconductor Co.<br>\
+166 <b>lshw</b>                 physical id: 0<br>\
+167 <b>lshw</b>                 bus info: pci@0000:02:00.0<br>\
+168 <b>lshw</b>                 logical name: enp2s0<br>\
+169 <b>lshw</b>                 version: 10<br>\
+170 <b>lshw</b>                 serial: c8:5b:76:40:1b:2f<br>\
+171 <b>lshw</b>                 size: 10Mbit/s<br>\
+172 <b>lshw</b>                 capacity: 1Gbit/s<br>\
+173 <b>lshw</b>                 width: 64 bits<br>\
+174 <b>lshw</b>                 clock: 33MHz<br>\
+175 <b>lshw</b>                 capabilities: bus_master cap_list ethernet physical tp mii 10bt 10bt-fd 100bt 100bt-fd 1000bt 1000bt-fd autonegotiation<br>\
+176 <b>lshw</b>                 configuration: autonegotiation=on broadcast=yes driver=r8169 driverversion=2.3LK-NAPI duplex=half firmware=rtl8168g-3_0.0.1 04/23/13 latency=0 link=no multicast=yes port=MII speed=10Mbit/s<br>\
+177 <b>lshw</b>                 resources: irq:47 ioport:4000(size=256) memory:d1204000-d1204fff memory:d1200000-d1203fff<br>\
+178 <b>lshw</b>         *-pci:2<br>\
+179 <b>lshw</b>              description: PCI bridge<br>\
+180 <b>lshw</b>              product: Wildcat Point-LP PCI Express Root Port #4<br>\
+181 <b>lshw</b>              vendor: Intel Corporation<br>\
+182 <b>lshw</b>              physical id: 1c.3<br>\
+183 <b>lshw</b>              bus info: pci@0000:00:1c.3<br>\
+184 <b>lshw</b>              version: e3<br>\
+185 <b>lshw</b>              width: 32 bits<br>\
+186 <b>lshw</b>              clock: 33MHz<br>\
+187 <b>lshw</b>              capabilities: pci normal_decode bus_master cap_list<br>\
+188 <b>lshw</b>              configuration: driver=pcieport<br>\
+189 <b>lshw</b>              resources: irq:44 ioport:6000(size=4096) memory:d1100000-d11fffff ioport:a0700000(size=2097152)<br>\
+190 <b>lshw</b>            *-network<br>\
+191 <b>lshw</b>                 description: Wireless interface<br>\
+192 <b>lshw</b>                 product: Wireless 3160<br>\
+193 <b>lshw</b>                 vendor: Intel Corporation<br>\
+194 <b>lshw</b>                 physical id: 0<br>\
+195 <b>lshw</b>                 bus info: pci@0000:03:00.0<br>\
+196 <b>lshw</b>                 logical name: wlp3s0<br>\
+197 <b>lshw</b>                 version: 93<br>\
+198 <b>lshw</b>                 serial: a0:d3:7a:84:8a:78<br>\
+199 <b>lshw</b>                 width: 64 bits<br>\
+200 <b>lshw</b>                 clock: 33MHz<br>\
+201 <b>lshw</b>                 capabilities: bus_master cap_list ethernet physical wireless<br>\
+202 <b>lshw</b>                 configuration: broadcast=yes driver=iwlwifi driverversion=4.15.0-20-generic firmware=17.608620.0 ip=192.168.1.100 latency=0 link=yes multicast=yes wireless=IEEE 802.11<br>\
+203 <b>lshw</b>                 resources: irq:52 memory:d1100000-d1101fff<br>\
+204 <b>lshw</b>         *-pci:3<br>\
+205 <b>lshw</b>              description: PCI bridge<br>\
+206 <b>lshw</b>              product: Wildcat Point-LP PCI Express Root Port #5<br>\
+207 <b>lshw</b>              vendor: Intel Corporation<br>\
+208 <b>lshw</b>              physical id: 1c.4<br>\
+209 <b>lshw</b>              bus info: pci@0000:00:1c.4<br>\
+210 <b>lshw</b>              version: e3<br>\
+211 <b>lshw</b>              width: 32 bits<br>\
+212 <b>lshw</b>              clock: 33MHz<br>\
+213 <b>lshw</b>              capabilities: pci normal_decode bus_master cap_list<br>\
+214 <b>lshw</b>              configuration: driver=pcieport<br>\
+215 <b>lshw</b>              resources: irq:45 ioport:3000(size=4096) memory:d1000000-d10fffff ioport:b0000000(size=268435456)<br>\
+216 <b>lshw</b>            *-display<br>\
+217 <b>lshw</b>                 description: Display controller<br>\
+218 <b>lshw</b>                 product: Sun XT [Radeon HD 8670A/8670M/8690M / R5 M330 / M430]<br>\
+219 <b>lshw</b>                 vendor: Advanced Micro Devices<br>\
+220 <b>lshw</b>                 physical id: 0<br>\
+221 <b>lshw</b>                 bus info: pci@0000:04:00.0<br>\
+222 <b>lshw</b>                 version: 83<br>\
+223 <b>lshw</b>                 width: 64 bits<br>\
+224 <b>lshw</b>                 clock: 33MHz<br>\
+225 <b>lshw</b>                 capabilities: bus_master cap_list rom<br>\
+226 <b>lshw</b>                 configuration: driver=radeon latency=0<br>\
+227 <b>lshw</b>                 resources: irq:50 memory:b0000000-bfffffff memory:d1000000-d103ffff ioport:3000(size=256) memory:d1040000-d105ffff<br>\
+228 <b>lshw</b>         *-isa<br>\
+229 <b>lshw</b>              description: ISA bridge<br>\
+230 <b>lshw</b>              product: Wildcat Point-LP LPC Controller<br>\
+231 <b>lshw</b>              vendor: Intel Corporation<br>\
+232 <b>lshw</b>              physical id: 1f<br>\
+233 <b>lshw</b>              bus info: pci@0000:00:1f.0<br>\
+234 <b>lshw</b>              version: 03<br>\
+235 <b>lshw</b>              width: 32 bits<br>\
+236 <b>lshw</b>              clock: 33MHz<br>\
+237 <b>lshw</b>              capabilities: isa bus_master cap_list<br>\
+238 <b>lshw</b>              configuration: driver=lpc_ich latency=0<br>\
+239 <b>lshw</b>              resources: irq:0<br>\
+240 <b>lshw</b>         *-storage<br>\
+241 <b>lshw</b>              description: SATA controller<br>\
+242 <b>lshw</b>              product: Wildcat Point-LP SATA Controller [AHCI Mode]<br>\
+243 <b>lshw</b>              vendor: Intel Corporation<br>\
+244 <b>lshw</b>              physical id: 1f.2<br>\
+245 <b>lshw</b>              bus info: pci@0000:00:1f.2<br>\
+246 <b>lshw</b>              version: 03<br>\
+247 <b>lshw</b>              width: 32 bits<br>\
+248 <b>lshw</b>              clock: 66MHz<br>\
+249 <b>lshw</b>              capabilities: storage ahci_1.0 bus_master cap_list<br>\
+250 <b>lshw</b>              configuration: driver=ahci latency=0<br>\
+251 <b>lshw</b>              resources: irq:48 ioport:5088(size=8) ioport:5094(size=4) ioport:5080(size=8) ioport:5090(size=4) ioport:5060(size=32) memory:d1318000-d13187ff<br>\
+252 <b>lshw</b>         *-serial UNCLAIMED<br>\
+253 <b>lshw</b>              description: SMBus<br>\
+254 <b>lshw</b>              product: Wildcat Point-LP SMBus Controller<br>\
+255 <b>lshw</b>              vendor: Intel Corporation<br>\
+256 <b>lshw</b>              physical id: 1f.3<br>\
+257 <b>lshw</b>              bus info: pci@0000:00:1f.3<br>\
+258 <b>lshw</b>              version: 03<br>\
+259 <b>lshw</b>              width: 64 bits<br>\
+260 <b>lshw</b>              clock: 33MHz<br>\
+261 <b>lshw</b>              configuration: latency=0<br>\
+262 <b>lshw</b>              resources: memory:d1319000-d13190ff ioport:5040(size=32)<br>\
+263 <b>lshw</b>      *-scsi<br>\
+264 <b>lshw</b>           physical id: 2<br>\
+265 <b>lshw</b>           logical name: scsi1<br>\
+266 <b>lshw</b>           capabilities: emulated<br>\
+267 <b>lshw</b>         *-cdrom<br>\
+268 <b>lshw</b>              description: DVD-RAM writer<br>\
+269 <b>lshw</b>              product: DVDRAM GUE0N<br>\
+270 <b>lshw</b>              vendor: HL-DT-ST<br>\
+271 <b>lshw</b>              physical id: 0.0.0<br>\
+272 <b>lshw</b>              bus info: scsi@1:0.0.0<br>\
+273 <b>lshw</b>              logical name: /dev/cdrom<br>\
+274 <b>lshw</b>              logical name: /dev/cdrw<br>\
+275 <b>lshw</b>              logical name: /dev/dvd<br>\
+276 <b>lshw</b>              logical name: /dev/dvdrw<br>\
+277 <b>lshw</b>              logical name: /dev/sr0<br>\
+278 <b>lshw</b>              version: T.02<br>\
+279 <b>lshw</b>              capabilities: removable audio cd-r cd-rw dvd dvd-r dvd-ram<br>\
+280 <b>lshw</b>              configuration: ansiversion=5 status=nodisc<br>\
+281 <b>/proc/cpuinfo</b> <br>\
+282 <b>/proc/cpuinfo</b> processor	: 0<br>\
+283 <b>/proc/cpuinfo</b> vendor_id	: GenuineIntel<br>\
+284 <b>/proc/cpuinfo</b> cpu family	: 6<br>\
+285 <b>/proc/cpuinfo</b> model		: 61<br>\
+286 <b>/proc/cpuinfo</b> model name	: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+287 <b>/proc/cpuinfo</b> stepping	: 4<br>\
+288 <b>/proc/cpuinfo</b> microcode	: 0x1d<br>\
+289 <b>/proc/cpuinfo</b> cpu MHz		: 1403.953<br>\
+290 <b>/proc/cpuinfo</b> cache size	: 3072 KB<br>\
+291 <b>/proc/cpuinfo</b> physical id	: 0<br>\
+292 <b>/proc/cpuinfo</b> siblings	: 4<br>\
+293 <b>/proc/cpuinfo</b> core id		: 0<br>\
+294 <b>/proc/cpuinfo</b> cpu cores	: 2<br>\
+295 <b>/proc/cpuinfo</b> apicid		: 0<br>\
+296 <b>/proc/cpuinfo</b> initial apicid	: 0<br>\
+297 <b>/proc/cpuinfo</b> fpu		: yes<br>\
+298 <b>/proc/cpuinfo</b> fpu_exception	: yes<br>\
+299 <b>/proc/cpuinfo</b> cpuid level	: 20<br>\
+300 <b>/proc/cpuinfo</b> wp		: yes<br>\
+301 <b>/proc/cpuinfo</b> flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts<br>\
+302 <b>/proc/cpuinfo</b> bugs		: cpu_meltdown spectre_v1 spectre_v2<br>\
+303 <b>/proc/cpuinfo</b> bogomips	: 4389.76<br>\
+304 <b>/proc/cpuinfo</b> clflush size	: 64<br>\
+305 <b>/proc/cpuinfo</b> cache_alignment	: 64<br>\
+306 <b>/proc/cpuinfo</b> address sizes	: 39 bits physical<br>\
+307 <b>/proc/cpuinfo</b> power management:<br>\
+308 <b>/proc/cpuinfo</b> <br>\
+309 <b>/proc/cpuinfo</b> processor	: 1<br>\
+310 <b>/proc/cpuinfo</b> vendor_id	: GenuineIntel<br>\
+311 <b>/proc/cpuinfo</b> cpu family	: 6<br>\
+312 <b>/proc/cpuinfo</b> model		: 61<br>\
+313 <b>/proc/cpuinfo</b> model name	: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+314 <b>/proc/cpuinfo</b> stepping	: 4<br>\
+315 <b>/proc/cpuinfo</b> microcode	: 0x1d<br>\
+316 <b>/proc/cpuinfo</b> cpu MHz		: 1382.517<br>\
+317 <b>/proc/cpuinfo</b> cache size	: 3072 KB<br>\
+318 <b>/proc/cpuinfo</b> physical id	: 0<br>\
+319 <b>/proc/cpuinfo</b> siblings	: 4<br>\
+320 <b>/proc/cpuinfo</b> core id		: 1<br>\
+321 <b>/proc/cpuinfo</b> cpu cores	: 18<br>\
+322 <b>/proc/cpuinfo</b> apicid		: 2<br>\
+323 <b>/proc/cpuinfo</b> initial apicid	: 2<br>\
+324 <b>/proc/cpuinfo</b> fpu		: yes<br>\
+325 <b>/proc/cpuinfo</b> fpu_exception	: yes<br>\
+326 <b>/proc/cpuinfo</b> cpuid level	: 20<br>\
+327 <b>/proc/cpuinfo</b> wp		: yes<br>\
+328 <b>/proc/cpuinfo</b> flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts<br>\
+329 <b>/proc/cpuinfo</b> bugs		: cpu_meltdown spectre_v1 spectre_v2<br>\
+330 <b>/proc/cpuinfo</b> bogomips	: 4389.76<br>\
+331 <b>/proc/cpuinfo</b> clflush size	: 64<br>\
+332 <b>/proc/cpuinfo</b> cache_alignment	: 64<br>\
+333 <b>/proc/cpuinfo</b> address sizes	: 39 bits physical<br>\
+334 <b>/proc/cpuinfo</b> power management:<br>\
+335 <b>/proc/cpuinfo</b> <br>\
+336 <b>/proc/cpuinfo</b> processor	: 2<br>\
+337 <b>/proc/cpuinfo</b> vendor_id	: GenuineIntel<br>\
+338 <b>/proc/cpuinfo</b> cpu family	: 6<br>\
+339 <b>/proc/cpuinfo</b> model		: 61<br>\
+340 <b>/proc/cpuinfo</b> model name	: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+341 <b>/proc/cpuinfo</b> stepping	: 4<br>\
+342 <b>/proc/cpuinfo</b> microcode	: 0x1d<br>\
+343 <b>/proc/cpuinfo</b> cpu MHz		: 1405.637<br>\
+344 <b>/proc/cpuinfo</b> cache size	: 3072 KB<br>\
+345 <b>/proc/cpuinfo</b> physical id	: 0<br>\
+346 <b>/proc/cpuinfo</b> siblings	: 4<br>\
+347 <b>/proc/cpuinfo</b> core id		: 0<br>\
+348 <b>/proc/cpuinfo</b> cpu cores	: 2<br>\
+349 <b>/proc/cpuinfo</b> apicid		: 1<br>\
+350 <b>/proc/cpuinfo</b> initial apicid	: 1<br>\
+351 <b>/proc/cpuinfo</b> fpu		: yes<br>\
+352 <b>/proc/cpuinfo</b> fpu_exception	: yes<br>\
+353 <b>/proc/cpuinfo</b> cpuid level	: 20<br>\
+354 <b>/proc/cpuinfo</b> wp		: yes<br>\
+355 <b>/proc/cpuinfo</b> flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts<br>\
+356 <b>/proc/cpuinfo</b> bugs		: cpu_meltdown spectre_v1 spectre_v2<br>\
+357 <b>/proc/cpuinfo</b> bogomips	: 4389.76<br>\
+358 <b>/proc/cpuinfo</b> clflush size	: 64<br>\
+359 <b>/proc/cpuinfo</b> cache_alignment	: 64<br>\
+360 <b>/proc/cpuinfo</b> address sizes	: 39 bits physical<br>\
+361 <b>/proc/cpuinfo</b> power management:<br>\
+362 <b>/proc/cpuinfo</b> <br>\
+363 <b>/proc/cpuinfo</b> processor	: 3<br>\
+364 <b>/proc/cpuinfo</b> vendor_id	: GenuineIntel<br>\
+365 <b>/proc/cpuinfo</b> cpu family	: 6<br>\
+366 <b>/proc/cpuinfo</b> model		: 61<br>\
+367 <b>/proc/cpuinfo</b> model name	: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz<br>\
+368 <b>/proc/cpuinfo</b> stepping	: 4<br>\
+369 <b>/proc/cpuinfo</b> microcode	: 0x1d<br>\
+370 <b>/proc/cpuinfo</b> cpu MHz		: 1399.875<br>\
+371 <b>/proc/cpuinfo</b> cache size	: 3072 KB<br>\
+372 <b>/proc/cpuinfo</b> physical id	: 0<br>\
+373 <b>/proc/cpuinfo</b> siblings	: 4<br>\
+374 <b>/proc/cpuinfo</b> core id		: 1<br>\
+375 <b>/proc/cpuinfo</b> cpu cores	: 2<br>\
+376 <b>/proc/cpuinfo</b> apicid		: 3<br>\
+377 <b>/proc/cpuinfo</b> initial apicid	: 3<br>\
+378 <b>/proc/cpuinfo</b> fpu		: yes<br>\
+379 <b>/proc/cpuinfo</b> fpu_exception	: yes<br>\
+380 <b>/proc/cpuinfo</b> cpuid level	: 20<br>\
+381 <b>/proc/cpuinfo</b> wp		: yes<br>\
+382 <b>/proc/cpuinfo</b> flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap intel_pt xsaveopt dtherm ida arat pln pts<br>\
+383 <b>/proc/cpuinfo</b> bugs		: cpu_meltdown spectre_v1 spectre_v2<br>\
+384 <b>/proc/cpuinfo</b> bogomips	: 4389.76<br>\
+385 <b>/proc/cpuinfo</b> clflush size	: 64<br>\
+386 <b>/proc/cpuinfo</b> cache_alignment	: 64<br>\
+387 <b>/proc/cpuinfo</b> address sizes	: 39 bits physical<br>\
+388 <b>/proc/cpuinfo</b> power management:<br>\
+389 <b>/proc/cpuinfo</b> <br>\
+390 <b>/proc/meminfo</b> <br>\
+391 <b>/proc/meminfo</b> MemTotal:        8086560 kB<br>\
+392 <b>/proc/meminfo</b> MemFree:          184624 kB<br>\
+393 <b>/proc/meminfo</b> MemAvailable:    4074832 kB<br>\
+394 <b>/proc/meminfo</b> Buffers:          156228 kB<br>\
+395 <b>/proc/meminfo</b> Cached:          4028444 kB<br>\
+396 <b>/proc/meminfo</b> SwapCached:            0 kB<br>\
+397 <b>/proc/meminfo</b> Active:          5436560 kB<br>\
+398 <b>/proc/meminfo</b> Inactive:        1999660 kB<br>\
+399 <b>/proc/meminfo</b> Active(anon):    2793088 kB<br>\
+400 <b>/proc/meminfo</b> Inactive(anon):   611028 kB<br>\
+401 <b>/proc/meminfo</b> Active(file):    2643472 kB<br>\
+402 <b>/proc/meminfo</b> Inactive(file):  1388632 kB<br>\
+403 <b>/proc/meminfo</b> Unevictable:          72 kB<br>\
+404 <b>/proc/meminfo</b> Mlocked:              72 kB<br>\
+405 <b>/proc/meminfo</b> SwapTotal:       2097148 kB<br>\
+406 <b>/proc/meminfo</b> SwapFree:        2097148 kB<br>\
+407 <b>/proc/meminfo</b> Dirty:               348 kB<br>\
+408 <b>/proc/meminfo</b> Writeback:             0 kB<br>\
+409 <b>/proc/meminfo</b> AnonPages:       3251640 kB<br>\
+410 <b>/proc/meminfo</b> Mapped:           532716 kB<br>\
+411 <b>/proc/meminfo</b> Shmem:            459696 kB<br>\
+412 <b>/proc/meminfo</b> Slab:             233812 kB<br>\
+413 <b>/proc/meminfo</b> SReclaimable:     162964 kB<br>\
+414 <b>/proc/meminfo</b> SUnreclaim:        70848 kB<br>\
+415 <b>/proc/meminfo</b> KernelStack:       17728 kB<br>\
+416 <b>/proc/meminfo</b> PageTables:        90160 kB<br>\
+417 <b>/proc/meminfo</b> NFS_Unstable:          0 kB<br>\
+418 <b>/proc/meminfo</b> Bounce:                0 kB<br>\
+419 <b>/proc/meminfo</b> WritebackTmp:          0 kB<br>\
+420 <b>/proc/meminfo</b> CommitLimit:     6140428 kB<br>\
+421 <b>/proc/meminfo</b> Committed_AS:   13562848 kB<br>\
+422 <b>/proc/meminfo</b> VmallocTotal:   34359738367 kB<br>\
+423 <b>/proc/meminfo</b> VmallocUsed:           0 kB<br>\
+424 <b>/proc/meminfo</b> VmallocChunk:          0 kB<br>\
+425 <b>/proc/meminfo</b> HardwareCorrupted:     0 kB<br>\
+426 <b>/proc/meminfo</b> AnonHugePages:     16384 kB<br>\
+427 <b>/proc/meminfo</b> ShmemHugePages:        0 kB<br>\
+428 <b>/proc/meminfo</b> ShmemPmdMapped:        0 kB<br>\
+429 <b>/proc/meminfo</b> CmaTotal:              0 kB<br>\
+430 <b>/proc/meminfo</b> CmaFree:               0 kB<br>\
+431 <b>/proc/meminfo</b> HugePages_Total:       0<br>\
+432 <b>/proc/meminfo</b> HugePages_Free:        0<br>\
+433 <b>/proc/meminfo</b> HugePages_Rsvd:        0<br>\
+434 <b>/proc/meminfo</b> HugePages_Surp:        0<br>\
+435 <b>/proc/meminfo</b> Hugepagesize:       2048 kB<br>\
+436 <b>/proc/meminfo</b> DirectMap4k:      356288 kB<br>\
+437 <b>/proc/meminfo</b> DirectMap2M:     7950336 kB<br>\
+438 <b>/proc/meminfo</b> DirectMap1G:     1048576 kB<br>\
+439 <b>/proc/stat</b> <br>\
+440 <b>/proc/stat</b> cpu  2076098 5978 441114 19188803 88125 0 14597 0 0 0<br>\
+441 <b>/proc/stat</b> cpu0 513354 1673 107300 8915674 21719 0 7020 0 0 0<br>\
+442 <b>/proc/stat</b> cpu1 520508 1257 107492 3443101 3174 0 3012 0 0 0<br>\
+443 <b>/proc/stat</b> cpu2 521863 1568 108626 3391698 55280 0 2378 0 0 0<br>\
+444 <b>/proc/stat</b> cpu3 520372 1479 117694 3438329 7951 0 2186 0 0 0<br>\
+445 <b>/proc/stat</b> intr 64019223 35 2191 0 0 0 0 0 0 0 28979 0 0 149851 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1447598 0 464693 9448929 156 0 2555983 16 160 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0<br>\
+446 <b>/proc/stat</b> ctxt 190027707<br>\
+447 <b>/proc/stat</b> btime 1525259590<br>\
+448 <b>/proc/stat</b> processes 37202<br>\
+449 <b>/proc/stat</b> procs_running 1<br>\
+450 <b>/proc/stat</b> procs_blocked 0<br>\
+451 <b>/proc/stat</b> softirq 49559167 11620232 13939923 12542 23750 414786 24 228372 14061259 0 9258279<br>\
+452 <b>/proc/version</b> <br>\
+453 <b>/proc/version</b> Linux version 4.15.0-20-generic (buildd@lgw01-amd64-039) (gcc version 7.3.0 (Ubuntu 7.3.0-16ubuntu3)) #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018<br>\
+454 <b>/proc/net/dev</b> <br>\
+455 <b>/proc/net/dev</b> Inter-|   Receive                                                |  Transmit<br>\
+456 <b>/proc/net/dev</b>  face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed<br>\
+457 <b>/proc/net/dev</b>     lo: 2539570   26781    0    0    0     0          0         0  2539570   26781    0    0    0     0       0          0<br>\
+458 <b>/proc/net/dev</b> enp2s0:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0<br>\
+459 <b>/proc/net/dev</b> wlp3s0: 6669582290 5324856    0    0    0     0          0         0 1479262431 2624809    0    0    0     0       0          0<br>\
+460 <b>/proc/diskinfo</b> <br>\
+461 <b>/proc/diskstats</b> <br>\
+462 <b>/proc/diskstats</b>    7       0 loop0 213 0 2462 3580 0 0 0 0 0 148 2820<br>\
+463 <b>/proc/diskstats</b>    7       1 loop1 53 0 2096 2740 0 0 0 0 0 332 1340<br>\
+464 <b>/proc/diskstats</b>    7       2 loop2 58 0 700 1040 0 0 0 0 0 12 12<br>\
+465 <b>/proc/diskstats</b>    7       3 loop3 63 0 716 2016 0 0 0 0 0 12 12<br>\
+466 <b>/proc/diskstats</b>    7       4 loop4 4177 0 10352 17952 0 0 0 0 0 588 16024<br>\
+467 <b>/proc/diskstats</b>    7       5 loop5 38 0 220 1108 0 0 0 0 0 0 0<br>\
+468 <b>/proc/diskstats</b>    7       6 loop6 40 0 224 780 0 0 0 0 0 0 0<br>\
+469 <b>/proc/diskstats</b>    7       7 loop7 44 0 238 1792 0 0 0 0 0 12 12<br>\
+470 <b>/proc/diskstats</b>    8       0 sda 101456 5772 10916806 1474748 231918 152345 25456128 10447320 0 1799580 11933268<br>\
+471 <b>/proc/diskstats</b>    8       1 sda1 46 0 4176 2908 0 0 0 0 0 2752 2908<br>\
+472 <b>/proc/diskstats</b>    8       2 sda2 42 0 4144 3592 0 0 0 0 0 2624 3592<br>\
+473 <b>/proc/diskstats</b>    8       3 sda3 42 0 4144 2752 0 0 0 0 0 2596 2752<br>\
+474 <b>/proc/diskstats</b>    8       4 sda4 2 0 4 1032 0 0 0 0 0 1032 1032<br>\
+475 <b>/proc/diskstats</b>    8       5 sda5 101253 5772 10900074 1463184 221737 152345 25456128 10274180 0 1637812 11747752<br>\
+476 <b>/proc/diskstats</b>   11       0 sr0 0 0 0 0 0 0 0 0 0 0 0<br>\
+477 <b>/proc/diskstats</b>    7       8 loop8 47 0 232 1236 0 0 0 0 0 0 0<br>\
+478 <b>/proc/diskstats</b>    7       9 loop9 57 0 704 1308 0 0 0 0 0 64 64<br>\
+479 <b>/proc/diskstats</b>    7      10 loop10 52 0 694 1256 0 0 0 0 0 132 132<br>\
+480 <b>/proc/diskstats</b>    7      11 loop11 34754 0 71476 125396 0 0 0 0 0 3156 121504<br>\
+481 <b>/proc/diskstats</b>    7      12 loop12 56 0 2110 2148 0 0 0 0 0 336 1320<br>\
+482 <b>/sbin/multipath</b> <br>\
+483 <b>/dev/mapper</b> <br>\
+484 <b>/dev/mapper</b> total 0<br>\
+485 <b>/dev/mapper</b> crw------- 1 root root 10<br>\
+486 <b>/dev/mpath</b> <br>\
+487 <b>/dev/dm-*</b> <br>\
+488 <b>/dev/md*</b> <br>\
+489 <b>/dev/sd*</b> <br>\
+490 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+491 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+492 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+493 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+494 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+495 <b>/dev/sd*</b> brw-rw---- 1 root disk 8<br>\
+496 <b>/proc/partitions</b> <br>\
+497 <b>/proc/partitions</b> major minor  #blocks  name<br>\
+498 <b>/proc/partitions</b> <br>\
+499 <b>/proc/partitions</b>    7        0     144856 loop0<br>\
+500 <b>/proc/partitions</b>    7        1     143400 loop1<br>\
+501 <b>/proc/partitions</b>    7        2      21488 loop2<br>\
+502 <b>/proc/partitions</b>    7        3      22080 loop3<br>\
+503 <b>/proc/partitions</b>    7        4      88632 loop4<br>\
+504 <b>/proc/partitions</b>    7        5       3332 loop5<br>\
+505 <b>/proc/partitions</b>    7        6       3724 loop6<br>\
+506 <b>/proc/partitions</b>    7        7       2372 loop7<br>\
+507 <b>/proc/partitions</b>    8        0  976762584 sda<br>\
+508 <b>/proc/partitions</b>    8        1     102400 sda1<br>\
+509 <b>/proc/partitions</b>    8        2  259858432 sda2<br>\
+510 <b>/proc/partitions</b>    8        3  307197952 sda3<br>\
+511 <b>/proc/partitions</b>    8        4          1 sda4<br>\
+512 <b>/proc/partitions</b>    8        5  409601024 sda5<br>\
+513 <b>/proc/partitions</b>   11        0    1048575 sr0<br>\
+514 <b>/proc/partitions</b>    7        8       1652 loop8<br>\
+515 <b>/proc/partitions</b>    7        9      13276 loop9<br>\
+516 <b>/proc/partitions</b>    7       10      12504 loop10<br>\
+517 <b>/proc/partitions</b>    7       11     184836 loop11<br>\
+518 <b>/proc/partitions</b>    7       12     143400 loop12<br>\
+519 <b>/proc/1/stat</b> <br>\
+520 <b>/proc/1/stat</b> 1 (systemd) S 0 1 1 0 -1 4194560 34703 81567761 91 4257 107 3178 1373920 209729 20 0 1 0 3 230932480 2151 18446744073709551615 1 1 0 0 0 0 671173123 4096 1260 0 0 0 17 1 0 0 785 0 0 0 0 0 0 0 0 0 0<br>\
+521 <b>/proc/1/statm</b> <br>\
+522 <b>/proc/1/statm</b> 56380 2151 1515 334 0 4735 0<br>\
+523 <b>/proc/net/rpc/nfs</b> <br>\
+524 <b>/proc/net/rpc/nfsd</b> <br>\
+525 <b>/proc/modules</b> <br>\
+526 <b>/proc/modules</b> binfmt_misc 20480 1 - Live 0x0000000000000000<br>\
+527 <b>/proc/modules</b> rfcomm 77824 4 - Live 0x0000000000000000<br>\
+528 <b>/proc/modules</b> ccm 20480 6 - Live 0x0000000000000000<br>\
+529 <b>/proc/modules</b> bnep 20480 2 - Live 0x0000000000000000<br>\
+530 <b>/proc/modules</b> intel_rapl 20480 0 - Live 0x0000000000000000<br>\
+531 <b>/proc/modules</b> x86_pkg_temp_thermal 16384 0 - Live 0x0000000000000000<br>\
+532 <b>/proc/modules</b> intel_powerclamp 16384 0 - Live 0x0000000000000000<br>\
+533 <b>/proc/modules</b> coretemp 16384 0 - Live 0x0000000000000000<br>\
+534 <b>/proc/modules</b> kvm 593920 0 - Live 0x0000000000000000<br>\
+535 <b>/proc/modules</b> irqbypass 16384 1 kvm<br>\
+536 <b>/proc/modules</b> snd_hda_codec_conexant 24576 1 - Live 0x0000000000000000<br>\
+537 <b>/proc/modules</b> snd_hda_codec_hdmi 49152 1 - Live 0x0000000000000000<br>\
+538 <b>/proc/modules</b> snd_hda_codec_generic 73728 1 snd_hda_codec_conexant<br>\
+539 <b>/proc/modules</b> snd_hda_intel 40960 8 - Live 0x0000000000000000<br>\
+540 <b>/proc/modules</b> crct10dif_pclmul 16384 0 - Live 0x0000000000000000<br>\
+541 <b>/proc/modules</b> crc32_pclmul 16384 0 - Live 0x0000000000000000<br>\
+542 <b>/proc/modules</b> ghash_clmulni_intel 16384 0 - Live 0x0000000000000000<br>\
+543 <b>/proc/modules</b> pcbc 16384 0 - Live 0x0000000000000000<br>\
+544 <b>/proc/modules</b> snd_hda_codec 126976 4 snd_hda_codec_conexant<br>\
+545 <b>/proc/modules</b> snd_hda_core 81920 5 snd_hda_codec_conexant<br>\
+546 <b>/proc/modules</b> snd_hwdep 20480 1 snd_hda_codec<br>\
+547 <b>/proc/modules</b> btusb 45056 0 - Live 0x0000000000000000<br>\
+548 <b>/proc/modules</b> btrtl 16384 1 btusb<br>\
+549 <b>/proc/modules</b> btbcm 16384 1 btusb<br>\
+550 <b>/proc/modules</b> uvcvideo 86016 0 - Live 0x0000000000000000<br>\
+551 <b>/proc/modules</b> videobuf2_vmalloc 16384 1 uvcvideo<br>\
+552 <b>/proc/modules</b> rtsx_usb_ms 20480 0 - Live 0x0000000000000000<br>\
+553 <b>/proc/modules</b> videobuf2_memops 16384 1 videobuf2_vmalloc<br>\
+554 <b>/proc/modules</b> videobuf2_v4l2 24576 1 uvcvideo<br>\
+555 <b>/proc/modules</b> videobuf2_core 40960 2 uvcvideo<br>\
+556 <b>/proc/modules</b> memstick 16384 1 rtsx_usb_ms<br>\
+557 <b>/proc/modules</b> videodev 184320 3 uvcvideo<br>\
+558 <b>/proc/modules</b> media 40960 2 uvcvideo<br>\
+559 <b>/proc/modules</b> aesni_intel 188416 4 - Live 0x0000000000000000<br>\
+560 <b>/proc/modules</b> snd_pcm 98304 4 snd_hda_codec_hdmi<br>\
+561 <b>/proc/modules</b> aes_x86_64 20480 1 aesni_intel<br>\
+562 <b>/proc/modules</b> crypto_simd 16384 1 aesni_intel<br>\
+563 <b>/proc/modules</b> glue_helper 16384 1 aesni_intel<br>\
+564 <b>/proc/modules</b> arc4 16384 2 - Live 0x0000000000000000<br>\
+565 <b>/proc/modules</b> cryptd 24576 3 ghash_clmulni_intel<br>\
+566 <b>/proc/modules</b> btintel 16384 1 btusb<br>\
+567 <b>/proc/modules</b> bluetooth 548864 33 rfcomm<br>\
+568 <b>/proc/modules</b> intel_cstate 20480 0 - Live 0x0000000000000000<br>\
+569 <b>/proc/modules</b> snd_seq_midi 16384 0 - Live 0x0000000000000000<br>\
+570 <b>/proc/modules</b> snd_seq_midi_event 16384 1 snd_seq_midi<br>\
+571 <b>/proc/modules</b> iwlmvm 364544 0 - Live 0x0000000000000000<br>\
+572 <b>/proc/modules</b> mac80211 778240 1 iwlmvm<br>\
+573 <b>/proc/modules</b> iwlwifi 278528 1 iwlmvm<br>\
+574 <b>/proc/modules</b> ecdh_generic 24576 1 bluetooth<br>\
+575 <b>/proc/modules</b> intel_rapl_perf 16384 0 - Live 0x0000000000000000<br>\
+576 <b>/proc/modules</b> joydev 24576 0 - Live 0x0000000000000000<br>\
+577 <b>/proc/modules</b> input_leds 16384 0 - Live 0x0000000000000000<br>\
+578 <b>/proc/modules</b> snd_rawmidi 32768 1 snd_seq_midi<br>\
+579 <b>/proc/modules</b> serio_raw 16384 0 - Live 0x0000000000000000<br>\
+580 <b>/proc/modules</b> snd_seq 65536 2 snd_seq_midi<br>\
+581 <b>/proc/modules</b> snd_seq_device 16384 3 snd_seq_midi<br>\
+582 <b>/proc/modules</b> snd_timer 32768 2 snd_pcm<br>\
+583 <b>/proc/modules</b> cfg80211 622592 3 iwlmvm<br>\
+584 <b>/proc/modules</b> ideapad_laptop 32768 0 - Live 0x0000000000000000<br>\
+585 <b>/proc/modules</b> snd 81920 27 snd_hda_codec_conexant<br>\
+586 <b>/proc/modules</b> mac_hid 16384 0 - Live 0x0000000000000000<br>\
+587 <b>/proc/modules</b> sparse_keymap 16384 1 ideapad_laptop<br>\
+588 <b>/proc/modules</b> soundcore 16384 1 snd<br>\
+589 <b>/proc/modules</b> wmi 24576 1 ideapad_laptop<br>\
+590 <b>/proc/modules</b> shpchp 36864 0 - Live 0x0000000000000000<br>\
+591 <b>/proc/modules</b> lpc_ich 24576 0 - Live 0x0000000000000000<br>\
+592 <b>/proc/modules</b> mei_me 40960 0 - Live 0x0000000000000000<br>\
+593 <b>/proc/modules</b> mei 90112 1 mei_me<br>\
+594 <b>/proc/modules</b> acpi_pad 180224 0 - Live 0x0000000000000000<br>\
+595 <b>/proc/modules</b> sch_fq_codel 20480 6 - Live 0x0000000000000000<br>\
+596 <b>/proc/modules</b> parport_pc 36864 0 - Live 0x0000000000000000<br>\
+597 <b>/proc/modules</b> ppdev 20480 0 - Live 0x0000000000000000<br>\
+598 <b>/proc/modules</b> lp 20480 0 - Live 0x0000000000000000<br>\
+599 <b>/proc/modules</b> parport 49152 3 parport_pc<br>\
+600 <b>/proc/modules</b> ip_tables 28672 0 - Live 0x0000000000000000<br>\
+601 <b>/proc/modules</b> x_tables 40960 1 ip_tables<br>\
+602 <b>/proc/modules</b> autofs4 40960 2 - Live 0x0000000000000000<br>\
+603 <b>/proc/modules</b> rtsx_usb_sdmmc 28672 0 - Live 0x0000000000000000<br>\
+604 <b>/proc/modules</b> rtsx_usb 20480 2 rtsx_usb_ms<br>\
+605 <b>/proc/modules</b> hid_generic 16384 0 - Live 0x0000000000000000<br>\
+606 <b>/proc/modules</b> hid_logitech_hidpp 32768 0 - Live 0x0000000000000000<br>\
+607 <b>/proc/modules</b> amdgpu 2703360 0 - Live 0x0000000000000000<br>\
+608 <b>/proc/modules</b> hid_logitech_dj 20480 0 - Live 0x0000000000000000<br>\
+609 <b>/proc/modules</b> usbhid 49152 0 - Live 0x0000000000000000<br>\
+610 <b>/proc/modules</b> hid 118784 5 hid_generic<br>\
+611 <b>/proc/modules</b> chash 16384 1 amdgpu<br>\
+612 <b>/proc/modules</b> radeon 1470464 2 - Live 0x0000000000000000<br>\
+613 <b>/proc/modules</b> i915 1617920 42 - Live 0x0000000000000000<br>\
+614 <b>/proc/modules</b> ttm 106496 2 amdgpu<br>\
+615 <b>/proc/modules</b> i2c_algo_bit 16384 3 amdgpu<br>\
+616 <b>/proc/modules</b> drm_kms_helper 167936 3 amdgpu<br>\
+617 <b>/proc/modules</b> syscopyarea 16384 1 drm_kms_helper<br>\
+618 <b>/proc/modules</b> psmouse 147456 0 - Live 0x0000000000000000<br>\
+619 <b>/proc/modules</b> sysfillrect 16384 1 drm_kms_helper<br>\
+620 <b>/proc/modules</b> ahci 36864 1 - Live 0x0000000000000000<br>\
+621 <b>/proc/modules</b> sysimgblt 16384 1 drm_kms_helper<br>\
+622 <b>/proc/modules</b> libahci 32768 1 ahci<br>\
+623 <b>/proc/modules</b> fb_sys_fops 16384 1 drm_kms_helper<br>\
+624 <b>/proc/modules</b> r8169 86016 0 - Live 0x0000000000000000<br>\
+625 <b>/proc/modules</b> drm 401408 23 amdgpu<br>\
+626 <b>/proc/modules</b> mii 16384 1 r8169<br>\
+627 <b>/proc/modules</b> video 40960 2 ideapad_laptop<br>\
+628 <b>ifconfig</b> <br>\
+629 <b>/bin/df-m</b> <br>\
+630 <b>/bin/df-m</b> Filesystem     1M-blocks  Used Available Use% Mounted on<br>\
+631 <b>/bin/df-m</b> udev                3920     0      3920   0% /dev<br>\
+632 <b>/bin/df-m</b> tmpfs                790     2       788   1% /run<br>\
+633 <b>/bin/df-m</b> ddev/sda5         392687 17580    355091   5% /<br>\
+634 <b>/bin/df-m</b> tmpfs               3949    17      3933   1% /dev/shm<br>\
+635 <b>/bin/df-m</b> tmpfs                  5     1         5   1% /run/lock<br>\
+636 <b>/bin/df-m</b> tmpfs               3949     0      3949   0% /sys/fs/cgroup<br>\
+637 <b>/bin/df-m</b> ddev/loop0           142   142         0 100% /snap/minecraft/11<br>\
+638 <b>/bin/df-m</b> ddev/loop3            22    22         0 100% /snap/gnome-logs/31<br>\
+639 <b>/bin/df-m</b> ddev/loop2            21    21         0 100% /snap/gnome-logs/25<br>\
+640 <b>/bin/df-m</b> ddev/loop1           141   141         0 100% /snap/gnome-3-260.04/59<br>\
+641 <b>/bin/df-m</b> ddev/loop4            87    87         0 100% /snap/core/4486<br>\
+642 <b>/bin/df-m</b> ddev/loop5             4     4         0 100% /snap/gnome-system-monitor/36<br>\
+643 <b>/bin/df-m</b> ddev/loop8             2     2         0 100% /snap/gnome-calculator/154<br>\
+644 <b>/bin/df-m</b> ddev/loop6             4     4         0 100% /snap/gnome-system-monitor/39<br>\
+645 <b>/bin/df-m</b> ddev/loop7             3     3         0 100% /snap/gnome-calculator/167<br>\
+646 <b>/bin/df-m</b> ddev/loop9            13    13         0 100% /snap/gnome-characters/86<br>\
+647 <b>/bin/df-m</b> ddev/loop10           13    13         0 100% /snap/gnome-characters/69<br>\
+648 <b>/bin/df-m</b> ddev/loop11          181   181         0 100% /snap/vlc/190<br>\
+649 <b>/bin/df-m</b> ddev/loop12          141   141         0 100% /snap/gnome-3-260.04/62<br>\
+650 <b>/bin/df-m</b> tmpfs                790     1       790   1% /run/user/120<br>\
+651 <b>/bin/df-m</b> tmpfs                790     1       790   1% /run/user/1000<br>\
+652 <b>/bin/mount</b> <br>\
+653 <b>/bin/mount</b> sysfs on /sys type sysfs (rw<br>\
+654 <b>/bin/mount</b> proc on /proc type proc (rw<br>\
+655 <b>/bin/mount</b> udev on /dev type devtmpfs (rw<br>\
+656 <b>/bin/mount</b> devpts on /dev/pts type devpts (rw<br>\
+657 <b>/bin/mount</b> tmpfs on /run type tmpfs (rw<br>\
+658 <b>/bin/mount</b> ddev/sda5 on / type ext4 (rw<br>\
+659 <b>/bin/mount</b> securityfs on /sys/kernel/security type securityfs (rw<br>\
+660 <b>/bin/mount</b> tmpfs on /dev/shm type tmpfs (rw<br>\
+661 <b>/bin/mount</b> tmpfs on /run/lock type tmpfs (rw<br>\
+662 <b>/bin/mount</b> tmpfs on /sys/fs/cgroup type tmpfs (ro<br>\
+663 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/unified type cgroup2 (rw<br>\
+664 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/systemd type cgroup (rw<br>\
+665 <b>/bin/mount</b> pstore on /sys/fs/pstore type pstore (rw<br>\
+666 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/blkio type cgroup (rw<br>\
+667 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/net_cls<br>\
+668 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/rdma type cgroup (rw<br>\
+669 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/cpuset type cgroup (rw<br>\
+670 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/devices type cgroup (rw<br>\
+671 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/cpu<br>\
+672 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/perf_event type cgroup (rw<br>\
+673 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw<br>\
+674 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/memory type cgroup (rw<br>\
+675 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/freezer type cgroup (rw<br>\
+676 <b>/bin/mount</b> cgroup on /sys/fs/cgroup/pids type cgroup (rw<br>\
+677 <b>/bin/mount</b> systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw<br>\
+678 <b>/bin/mount</b> mqueue on /dev/mqueue type mqueue (rw<br>\
+679 <b>/bin/mount</b> configfs on /sys/kernel/config type configfs (rw<br>\
+680 <b>/bin/mount</b> fusectl on /sys/fs/fuse/connections type fusectl (rw<br>\
+681 <b>/bin/mount</b> hugetlbfs on /dev/hugepages type hugetlbfs (rw<br>\
+682 <b>/bin/mount</b> debugfs on /sys/kernel/debug type debugfs (rw<br>\
+683 <b>/bin/mount</b> tracefs on /sys/kernel/debug/tracing type tracefs (rw<br>\
+684 <b>/bin/mount</b> dvar/lib/snapd/snaps/minecraft_11.snap on /snap/minecraft/11 type squashfs (ro<br>\
+685 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-logs_31.snap on /snap/gnome-logs/31 type squashfs (ro<br>\
+686 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-logs_25.snap on /snap/gnome-logs/25 type squashfs (ro<br>\
+687 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-3-260.04_59.snap on /snap/gnome-3-260.04/59 type squashfs (ro<br>\
+688 <b>/bin/mount</b> dvar/lib/snapd/snaps/core_4486.snap on /snap/core/4486 type squashfs (ro<br>\
+689 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-system-monitor_36.snap on /snap/gnome-system-monitor/36 type squashfs (ro<br>\
+690 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-calculator_154.snap on /snap/gnome-calculator/154 type squashfs (ro<br>\
+691 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-system-monitor_39.snap on /snap/gnome-system-monitor/39 type squashfs (ro<br>\
+692 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-calculator_167.snap on /snap/gnome-calculator/167 type squashfs (ro<br>\
+693 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-characters_86.snap on /snap/gnome-characters/86 type squashfs (ro<br>\
+694 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-characters_69.snap on /snap/gnome-characters/69 type squashfs (ro<br>\
+695 <b>/bin/mount</b> dvar/lib/snapd/snaps/vlc_190.snap on /snap/vlc/190 type squashfs (ro<br>\
+696 <b>/bin/mount</b> dvar/lib/snapd/snaps/gnome-3-260.04_62.snap on /snap/gnome-3-260.04/62 type squashfs (ro<br>\
+697 <b>/bin/mount</b> tmpfs on /run/user/120 type tmpfs (rw<br>\
+698 <b>/bin/mount</b> tmpfs on /run/user/1000 type tmpfs (rw<br>\
+699 <b>/bin/mount</b> gvfsd-fuse on /run/user/1000/gvfs type fuse.gvfsd-fuse (rw<br>\
+700 <b>/bin/mount</b> tmpfs on /run/snapd/ns type tmpfs (rw<br>\
+701 <b>/bin/mount</b> nsfs on /run/snapd/ns/vlc.mnt type nsfs (rw)<br>\
+702 <b>/bin/mount</b> binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw<br>\
+703 <b>/etc/fstab</b> <br>\
+704 <b>/etc/fstab</b> # /etc/fstab: static file system information.<br>\
+705 <b>/etc/fstab</b> #<br>\
+706 <b>/etc/fstab</b> # Use 'blkid' to print the universally unique identifier for a<br>\
+707 <b>/etc/fstab</b> # device; this may be used with UUID= as a more robust way to name devices<br>\
+708 <b>/etc/fstab</b> # that works even if disks are added and removed. See fstab(5).<br>\
+709 <b>/etc/fstab</b> #<br>\
+710 <b>/etc/fstab</b> # <file system> <mount point>   <type>  <options>       <dump>  <pass><br>\
+711 <b>/etc/fstab</b> # / was on /dev/sda5 during installation<br>\
+712 <b>/etc/fstab</b> UUID=4a82ac96-4db6-43ea-890f-37f1924ae811 /               ext4    errors=remount-ro 0       1<br>\
+713 <b>/etc/fstab</b> dswapfile                                 none            swap    sw              0       0<br>\
+714 <b>netstat -r</b> <br>\
+715 <b>uptime</b> <br>\
+716 <b>uptime</b>  02:32:26 up 2 days<br>\
+717 <b>getconf PAGESIZE</b> <br>\
+718 <b>getconf PAGESIZE</b> 4096<br>\
+");
+}
+</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+		google.load("visualization", "1.1", {packages:["corechart"]});
+
+		google.setOnLoadCallback(setupCharts);
+		
+		function setupCharts() {
+		
+		var chart = null;
+
+			var data_CPU_UTIL = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'User%','Sys%','Wait%','Idle%']
+,['Date(2018,  4, 05, 02, 32, 27)',7.9,5.1,5.5,81.4]
+,['Date(2018,  4, 05, 02, 32, 57)',5.3,2.4,1.6,90.7]
+,['Date(2018,  4, 05, 02, 33, 27)',12.9,1.5,2.2,83.3]
+,['Date(2018,  4, 05, 02, 33, 57)',5.9,1.8,0.3,91.9]
+,['Date(2018,  4, 05, 02, 34, 27)',3.3,1.4,0.3,95.1]
+,['Date(2018,  4, 05, 02, 34, 57)',6.6,1.9,0.5,91.0]
+,['Date(2018,  4, 05, 02, 35, 27)',3.7,1.1,0.7,94.5]
+,['Date(2018,  4, 05, 02, 35, 57)',6.6,1.9,1.7,89.8]
+,['Date(2018,  4, 05, 02, 36, 27)',2.9,0.9,0.6,95.6]
+,['Date(2018,  4, 05, 02, 36, 57)',1.9,2.8,1.6,93.7]
+,['Date(2018,  4, 05, 02, 37, 27)',2.5,3.5,1.4,92.6]
+,['Date(2018,  4, 05, 02, 37, 57)',1.4,1.5,0.8,96.3]
+,['Date(2018,  4, 05, 02, 38, 27)',1.3,0.5,0.4,97.8]
+,['Date(2018,  4, 05, 02, 38, 57)',1.2,0.6,0.6,97.6]
+,['Date(2018,  4, 05, 02, 39, 27)',1.3,0.7,0.3,97.7]
+,['Date(2018,  4, 05, 02, 39, 57)',1.1,0.5,0.5,97.9]
+,['Date(2018,  4, 05, 02, 40, 27)',2.4,0.8,0.9,95.9]
+,['Date(2018,  4, 05, 02, 40, 57)',1.4,0.7,0.3,97.6]
+,['Date(2018,  4, 05, 02, 41, 27)',1.2,0.7,0.5,97.7]
+,['Date(2018,  4, 05, 02, 41, 57)',1.4,0.6,0.2,97.9]
+		]);
+
+		var options_CPU_UTIL = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "CPU Utilisation Percentages",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  1
+		};
+
+		document.getElementById("draw_CPU_UTIL").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_CPU_UTIL, options_CPU_UTIL);
+		});
+
+			var data_MEM_LINUX = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'memtotal','memfree','cached','active','buffers','inactive']
+,['Date(2018,  4, 05, 02, 32, 27)',7897.0,187.8,3925.2,5309.7,152.6,1943.9]
+,['Date(2018,  4, 05, 02, 32, 57)',7897.0,127.1,3948.0,5345.1,152.7,1966.5]
+,['Date(2018,  4, 05, 02, 33, 27)',7897.0,146.5,3898.7,5245.2,146.8,2043.6]
+,['Date(2018,  4, 05, 02, 33, 57)',7897.0,154.1,3891.3,5244.7,146.8,2036.2]
+,['Date(2018,  4, 05, 02, 34, 27)',7897.0,159.1,3891.9,5240.0,146.9,2036.8]
+,['Date(2018,  4, 05, 02, 34, 57)',7897.0,165.0,3896.4,5230.7,146.9,2041.2]
+,['Date(2018,  4, 05, 02, 35, 27)',7897.0,148.5,3901.9,5239.5,147.0,2048.5]
+,['Date(2018,  4, 05, 02, 35, 57)',7897.0,175.0,3872.0,5203.2,147.2,2057.1]
+,['Date(2018,  4, 05, 02, 36, 27)',7897.0,207.6,3864.8,5193.7,147.2,2035.6]
+,['Date(2018,  4, 05, 02, 36, 57)',7897.0,207.9,3864.9,5193.8,147.3,2035.7]
+,['Date(2018,  4, 05, 02, 37, 27)',7897.0,194.6,3873.8,5202.4,147.3,2044.4]
+,['Date(2018,  4, 05, 02, 37, 57)',7897.0,208.4,3865.3,5196.4,147.4,2035.9]
+,['Date(2018,  4, 05, 02, 38, 27)',7897.0,208.8,3865.3,5195.8,147.4,2036.4]
+,['Date(2018,  4, 05, 02, 38, 57)',7897.0,207.8,3865.4,5196.9,147.5,2036.4]
+,['Date(2018,  4, 05, 02, 39, 27)',7897.0,207.5,3865.4,5196.9,147.5,2036.2]
+,['Date(2018,  4, 05, 02, 39, 57)',7897.0,207.8,3865.4,5196.7,147.6,2036.3]
+,['Date(2018,  4, 05, 02, 40, 27)',7897.0,205.9,3866.9,5197.1,147.6,2037.8]
+,['Date(2018,  4, 05, 02, 40, 57)',7897.0,207.8,3865.4,5196.8,147.7,2036.3]
+,['Date(2018,  4, 05, 02, 41, 27)',7897.0,210.7,3865.5,5194.0,147.7,2036.4]
+,['Date(2018,  4, 05, 02, 41, 57)',7897.0,210.2,3865.4,5195.1,147.8,2036.3]
+		]);
+
+		var options_MEM_LINUX = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Real Memory - RAM in MB",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_MEM_LINUX").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_MEM_LINUX, options_MEM_LINUX);
+		});
+
+			var data_SWAP_LINUX = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'swaptotal','swapfree']
+,['Date(2018,  4, 05, 02, 32, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 32, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 33, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 33, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 34, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 34, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 35, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 35, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 36, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 36, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 37, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 37, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 38, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 38, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 39, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 39, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 40, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 40, 57)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 41, 27)',2048.0,2048.0]
+,['Date(2018,  4, 05, 02, 41, 57)',2048.0,2048.0]
+		]);
+
+		var options_SWAP_LINUX = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Virtual Memory - Paging Space in MB",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_SWAP_LINUX").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_SWAP_LINUX, options_SWAP_LINUX);
+		});
+
+			var data_RUNQ = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'Runnable']
+,['Date(2018,  4, 05, 02, 32, 27)',1]
+,['Date(2018,  4, 05, 02, 32, 57)',1]
+,['Date(2018,  4, 05, 02, 33, 27)',2]
+,['Date(2018,  4, 05, 02, 33, 57)',1]
+,['Date(2018,  4, 05, 02, 34, 27)',2]
+,['Date(2018,  4, 05, 02, 34, 57)',1]
+,['Date(2018,  4, 05, 02, 35, 27)',3]
+,['Date(2018,  4, 05, 02, 35, 57)',2]
+,['Date(2018,  4, 05, 02, 36, 27)',1]
+,['Date(2018,  4, 05, 02, 36, 57)',1]
+,['Date(2018,  4, 05, 02, 37, 27)',1]
+,['Date(2018,  4, 05, 02, 37, 57)',1]
+,['Date(2018,  4, 05, 02, 38, 27)',2]
+,['Date(2018,  4, 05, 02, 38, 57)',1]
+,['Date(2018,  4, 05, 02, 39, 27)',1]
+,['Date(2018,  4, 05, 02, 39, 57)',1]
+,['Date(2018,  4, 05, 02, 40, 27)',3]
+,['Date(2018,  4, 05, 02, 40, 57)',1]
+,['Date(2018,  4, 05, 02, 41, 27)',1]
+,['Date(2018,  4, 05, 02, 41, 57)',1]
+		]);
+
+		var options_RUNQ = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Run Queue - processes that running or ready to run",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_RUNQ").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_RUNQ, options_RUNQ);
+		});
+
+			var data_PSWITCH = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'pswitch']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',1770.4]
+,['Date(2018,  4, 05, 02, 33, 27)',2718.5]
+,['Date(2018,  4, 05, 02, 33, 57)',2652.7]
+,['Date(2018,  4, 05, 02, 34, 27)',1760.2]
+,['Date(2018,  4, 05, 02, 34, 57)',2824.2]
+,['Date(2018,  4, 05, 02, 35, 27)',2043.3]
+,['Date(2018,  4, 05, 02, 35, 57)',3598.3]
+,['Date(2018,  4, 05, 02, 36, 27)',1719.8]
+,['Date(2018,  4, 05, 02, 36, 57)',1344.3]
+,['Date(2018,  4, 05, 02, 37, 27)',1650.3]
+,['Date(2018,  4, 05, 02, 37, 57)',1161.3]
+,['Date(2018,  4, 05, 02, 38, 27)',1002.3]
+,['Date(2018,  4, 05, 02, 38, 57)',1002.4]
+,['Date(2018,  4, 05, 02, 39, 27)',1058.4]
+,['Date(2018,  4, 05, 02, 39, 57)',1009.9]
+,['Date(2018,  4, 05, 02, 40, 27)',1529.7]
+,['Date(2018,  4, 05, 02, 40, 57)',1100.7]
+,['Date(2018,  4, 05, 02, 41, 27)',1023.1]
+,['Date(2018,  4, 05, 02, 41, 57)',1021.7]
+		]);
+
+		var options_PSWITCH = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Process Switches per second - between processes",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_PSWITCH").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_PSWITCH, options_PSWITCH);
+		});
+
+			var data_FORKEXEC = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'fork','exec']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',3.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',5.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',1.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.8,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.5,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',1.3,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',1.1,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',1.1,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',5.2,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',6.2,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',2.2,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.4,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.7,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',2.2,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.5,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.6,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.5,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.5,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.3,0.0]
+		]);
+
+		var options_FORKEXEC = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Fork() and Exec() System Calls per second - creating processes",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_FORKEXEC").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_FORKEXEC, options_FORKEXEC);
+		});
+
+			var data_CPU_USE = google.visualization.arrayToDataTable([
+['CPU','User%','System%']
+,['CPU001',3.5,2.0]
+,['CPU002',3.4,1.7]
+,['CPU003',3.6,1.4]
+,['CPU004',3.8,1.1]
+		]);
+
+		var options_CPU_USE = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Use of Logical CPU Core Threads - POWER=SMT or x86=Hyperthreads",
+			focusTarget: "category",
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			isStacked:  1
+		};
+
+		document.getElementById("draw_CPU_USE").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.ColumnChart(document.getElementById("chart_master"));
+		chart.draw( data_CPU_USE, options_CPU_USE);
+		});
+
+			var data_TOPSUM = google.visualization.arrayToDataTable([
+['Command', 'CPU seconds', 'CharIO', 'Type', 'Memory KB' ]
+,['Xorg',    34.8,     700,'Xorg',  127216]
+,['udisksd',     0.2,       9,'udisksd',   44916]
+,['systemd',     0.5,      17,'systemd',   20276]
+,['snapd',     0.2,       5,'snapd',  182308]
+,['pulseaudio',     0.1,       8,'pulseaudio',   20244]
+,['packagekitd',     3.0,      11,'packagekitd',   82456]
+,['nautilus-deskto',     0.9,      33,'nautilus-deskto',  102224]
+,['nautilus',    15.4,     637,'nautilus',  125420]
+,['kworker/u8:4',     0.1,       0,'kworker/u8:4',       0]
+,['kworker/u8:1',     0.3,       0,'kworker/u8:1',       0]
+,['kworker/u8:0',     0.1,       0,'kworker/u8:0',       0]
+,['kworker/3:0',     0.7,       0,'kworker/3:0',       0]
+,['kworker/2:2',     5.4,       0,'kworker/2:2',       0]
+,['kworker/1:3',     2.6,       0,'kworker/1:3',       0]
+,['kworker/1:2',     6.1,       0,'kworker/1:2',       0]
+,['kworker/1:0',     2.7,       0,'kworker/1:0',       0]
+,['kworker/0:0',     4.2,       0,'kworker/0:0',       0]
+,['ibus-engine-sim',     1.0,      29,'ibus-engine-sim',   17616]
+,['ibus-daemon',     4.2,      80,'ibus-daemon',   44544]
+,['gnome-terminal-',     3.7,     164,'gnome-terminal-',   67068]
+		]);
+
+		var options_TOPSUM = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Top 20 processes by CPU correlation between CPU-seconds(Total), Character-I/O(Total), Memory-Size(Max) for each Command Name",
+			hAxis: {title: "CPU seconds in Total"},
+			vAxis: {title: "Character I/O in Total"},
+			sizeAxis: {maxSize: 200},
+			bubble: {textStyle: {fontSize: 15}}
+		};
+
+		document.getElementById("draw_TOPSUM").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.BubbleChart(document.getElementById("chart_master"));
+		chart.draw( data_TOPSUM, options_TOPSUM);
+		});
+
+			var data_TOPCMD = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'kworker/u8:1','kworker/u8:0','kworker/3:0','gnome-terminal-','kworker/2:2','kworker/1:3','kworker/1:2','kworker/1:0','kworker/0:0','ibus-engine-sim','ibus-daemon','Xorg','udisksd','systemd','snapd','pulseaudio','packagekitd','nautilus-deskto','nautilus','kworker/u8:4']
+,['Date(2018,  4, 05, 02, 32, 57)', 0.1, 0.0, 0.0, 2.7, 0.7, 0.0, 0.0, 0.0, 2.7, 0.0, 0.2, 3.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0]
+,['Date(2018,  4, 05, 02, 33, 27)', 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 5.1, 0.0, 0.2, 0.2, 0.0, 3.0, 0.9, 3.9, 0.0]
+,['Date(2018,  4, 05, 02, 33, 57)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.8, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+,['Date(2018,  4, 05, 02, 34, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+,['Date(2018,  4, 05, 02, 34, 57)', 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0]
+,['Date(2018,  4, 05, 02, 35, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 3.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0]
+,['Date(2018,  4, 05, 02, 35, 57)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 6.8, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 4.4, 0.1]
+,['Date(2018,  4, 05, 02, 36, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.8, 1.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0]
+,['Date(2018,  4, 05, 02, 36, 57)', 0.0, 0.0, 0.0, 0.6, 2.7, 2.6, 0.0, 0.0, 0.8, 0.2, 0.4, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 37, 27)', 0.0, 0.0, 0.7, 1.0, 0.0, 0.0, 6.1, 0.0, 0.8, 0.3, 0.9, 1.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0]
+,['Date(2018,  4, 05, 02, 37, 57)', 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 2.7, 0.0, 0.0, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 38, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 38, 57)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 39, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 39, 57)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 40, 27)', 0.0, 0.0, 0.0, 0.0, 1.1, 0.0, 0.0, 0.0, 0.0, 0.3, 0.9, 1.2, 0.2, 0.0, 0.0, 0.1, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 40, 57)', 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 41, 27)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+,['Date(2018,  4, 05, 02, 41, 57)', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0]
+		]);
+
+		var options_TOPCMD = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Top Process Commands by CPU (Percentage of a CPU core)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_TOPCMD").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_TOPCMD, options_TOPCMD);
+		});
+
+			var data_NET = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'lo-read-KB/s','enp2s0-read-KB/s','wlp3s0-read-KB/s','lo-write-KB/s','enp2s0-write-KB/s','wlp3s0-write-KB/s']
+,['Date(2018,  4, 05, 02, 32, 27)',0.3,0.0,0.0,-0.3,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',0.5,0.0,0.0,-0.5,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.5,0.0,8.6,-0.5,-0.0,-0.9]
+,['Date(2018,  4, 05, 02, 33, 57)',0.5,0.0,0.5,-0.5,-0.0,-0.4]
+,['Date(2018,  4, 05, 02, 34, 27)',0.5,0.0,0.0,-0.5,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.5,0.0,0.2,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 35, 27)',0.5,0.0,5.9,-0.5,-0.0,-1.6]
+,['Date(2018,  4, 05, 02, 35, 57)',0.5,0.0,27.2,-0.5,-0.0,-1.8]
+,['Date(2018,  4, 05, 02, 36, 27)',0.5,0.0,0.1,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 36, 57)',0.5,0.0,0.1,-0.5,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.5,0.0,0.1,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 37, 57)',0.5,0.0,0.0,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 38, 27)',0.5,0.0,0.0,-0.5,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.5,0.0,0.1,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 39, 27)',0.5,0.0,1.1,-0.5,-0.0,-0.7]
+,['Date(2018,  4, 05, 02, 39, 57)',0.5,0.0,0.2,-0.5,-0.0,-0.1]
+,['Date(2018,  4, 05, 02, 40, 27)',0.5,0.0,0.3,-0.5,-0.0,-0.2]
+,['Date(2018,  4, 05, 02, 40, 57)',0.5,0.0,0.0,-0.5,-0.0,-0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.5,0.0,0.2,-0.5,-0.0,-0.4]
+,['Date(2018,  4, 05, 02, 41, 57)',0.5,0.0,0.4,-0.5,-0.0,-0.3]
+		]);
+
+		var options_NET = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Network Receive(read) & Send(write shown negatively) in KB per second",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_NET").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_NET, options_NET);
+		});
+
+			var data_NETPACKET = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'lo-read/s','enp2s0-read/s','wlp3s0-read/s','lo-write/s','enp2s0-write/s','wlp3s0-write/s']
+,['Date(2018,  4, 05, 02, 32, 27)',5.7,0.0,0.0,5.7,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',8.0,0.0,0.3,8.0,0.0,0.2]
+,['Date(2018,  4, 05, 02, 33, 27)',8.8,0.0,8.1,8.8,0.0,4.1]
+,['Date(2018,  4, 05, 02, 33, 57)',8.2,0.0,1.5,8.2,0.0,1.3]
+,['Date(2018,  4, 05, 02, 34, 27)',8.0,0.0,0.4,8.0,0.0,0.3]
+,['Date(2018,  4, 05, 02, 34, 57)',8.1,0.0,0.8,8.1,0.0,0.8]
+,['Date(2018,  4, 05, 02, 35, 27)',8.9,0.0,9.1,8.9,0.0,8.0]
+,['Date(2018,  4, 05, 02, 35, 57)',8.3,0.0,24.9,8.3,0.0,10.2]
+,['Date(2018,  4, 05, 02, 36, 27)',8.1,0.0,1.1,8.1,0.0,1.0]
+,['Date(2018,  4, 05, 02, 36, 57)',8.0,0.0,0.5,8.0,0.0,0.4]
+,['Date(2018,  4, 05, 02, 37, 27)',8.0,0.0,1.0,8.0,0.0,0.9]
+,['Date(2018,  4, 05, 02, 37, 57)',8.0,0.0,0.6,8.0,0.0,0.8]
+,['Date(2018,  4, 05, 02, 38, 27)',8.0,0.0,0.4,8.0,0.0,0.3]
+,['Date(2018,  4, 05, 02, 38, 57)',8.1,0.0,1.0,8.1,0.0,0.8]
+,['Date(2018,  4, 05, 02, 39, 27)',8.1,0.0,2.9,8.1,0.0,2.8]
+,['Date(2018,  4, 05, 02, 39, 57)',8.0,0.0,0.9,8.0,0.0,0.6]
+,['Date(2018,  4, 05, 02, 40, 27)',8.2,0.0,1.1,8.2,0.0,1.0]
+,['Date(2018,  4, 05, 02, 40, 57)',8.0,0.0,0.4,8.0,0.0,0.2]
+,['Date(2018,  4, 05, 02, 41, 27)',8.1,0.0,0.9,8.1,0.0,1.0]
+,['Date(2018,  4, 05, 02, 41, 57)',8.1,0.0,1.2,8.1,0.0,1.0]
+		]);
+
+		var options_NETPACKET = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Network packet count per second",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_NETPACKET").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_NETPACKET, options_NETPACKET);
+		});
+
+			var data_DISKBUSY = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'loop0','loop1','loop2','loop3','loop4','loop5','loop6','loop7','sda','sda1','sda2','sda3','sda4','sda5','loop8','loop9','loop10','loop11','loop12']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',0.9,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.7,0.0,0.0,0.0,0.0,3.7,0.0,0.2,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.3,0.0,0.0,0.0,0.0,7.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.7,0.0,0.0,0.0,0.0,1.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.1,0.0,0.0,0.0,0.0,0.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.3,0.0,0.0,0.0,0.0,3.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.2,0.0,0.0,0.0,0.0,5.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.5,0.0,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.2,0.0,0.0,0.0,0.0,1.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,2.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.5,0.0,0.0,0.0,0.0,1.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.4,0.0,0.0,0.0,0.0,2.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.2,0.0,0.0,0.0,0.0,0.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.8,0.0,0.0,0.0,0.0,1.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.8,0.0,0.0,0.0,0.0,2.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.2,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,1.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.8,0.0,0.0,0.0,0.0,0.8,0.0,0.0,0.0,0.0,0.0]
+		]);
+
+		var options_DISKBUSY = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Busy Percentage of the time (Stacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  1
+		};
+
+		document.getElementById("draw_DISKBUSY").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKBUSY, options_DISKBUSY);
+		});
+
+		var options_DISKBUSYu = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Busy Percentage of the time (UnStacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			isStacked: 0
+		};
+
+		document.getElementById("draw_DISKBUSYu").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKBUSY, options_DISKBUSYu);
+		});
+
+			var data_DISKREAD = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'loop0','loop1','loop2','loop3','loop4','loop5','loop6','loop7','sda','sda1','sda2','sda3','sda4','sda5','loop8','loop9','loop10','loop11','loop12']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',1.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,144.9,0.0,0.0,0.0,0.0,144.9,0.0,1.5,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,185.9,0.0,0.0,0.0,0.0,185.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.7,0.0,0.0,0.0,0.0,3.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0,0.0,0.0,0.0,0.0,14.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.2,0.0,0.0,0.0,0.0,3.2,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.9,0.0,0.0,0.0,0.0,0.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+		]);
+
+		var options_DISKREAD = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Read KB per second (Stacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  1
+		};
+
+		document.getElementById("draw_DISKREAD").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKREAD, options_DISKREAD);
+		});
+
+		var options_DISKREADu = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Read KB per second (UnStacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			isStacked: 0
+		};
+
+		document.getElementById("draw_DISKREADu").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKREAD, options_DISKREADu);
+		});
+
+			var data_DISKWRITE = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'loop0','loop1','loop2','loop3','loop4','loop5','loop6','loop7','sda','sda1','sda2','sda3','sda4','sda5','loop8','loop9','loop10','loop11','loop12']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.4,0.0,0.0,0.0,0.0,10.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,114.7,0.0,0.0,0.0,0.0,114.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,68.8,0.0,0.0,0.0,0.0,68.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,20.0,0.0,0.0,0.0,0.0,20.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,29.5,0.0,0.0,0.0,0.0,29.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,16.0,0.0,0.0,0.0,0.0,16.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,128.6,0.0,0.0,0.0,0.0,128.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,73.8,0.0,0.0,0.0,0.0,73.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,37.2,0.0,0.0,0.0,0.0,37.2,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,33.7,0.0,0.0,0.0,0.0,33.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,44.8,0.0,0.0,0.0,0.0,44.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,16.5,0.0,0.0,0.0,0.0,16.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,12.9,0.0,0.0,0.0,0.0,12.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,31.3,0.0,0.0,0.0,0.0,31.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.6,0.0,0.0,0.0,0.0,35.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.9,0.0,0.0,0.0,0.0,15.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,27.5,0.0,0.0,0.0,0.0,27.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.4,0.0,0.0,0.0,0.0,28.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,290.4,0.0,0.0,0.0,0.0,290.4,0.0,0.0,0.0,0.0,0.0]
+		]);
+
+		var options_DISKWRITE = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Write KB per second (Stacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  1
+		};
+
+		document.getElementById("draw_DISKWRITE").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKWRITE, options_DISKWRITE);
+		});
+
+		var options_DISKWRITEu = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Write KB per second (UnStacked)",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			isStacked: 0
+		};
+
+		document.getElementById("draw_DISKWRITEu").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKWRITE, options_DISKWRITEu);
+		});
+
+			var data_DISKBSIZE = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'loop0','loop1','loop2','loop3','loop4','loop5','loop6','loop7','sda','sda1','sda2','sda3','sda4','sda5','loop8','loop9','loop10','loop11','loop12']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,44.8,0.0,0.0,0.0,0.0,44.8,0.0,1.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,19.0,0.0,0.0,0.0,0.0,19.2,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.1,0.0,0.0,0.0,0.0,8.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.3,0.0,0.0,0.0,0.0,7.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.9,0.0,0.0,0.0,0.0,10.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9.9,0.0,0.0,0.0,0.0,10.2,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.7,0.0,0.0,0.0,0.0,17.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,13.1,0.0,0.0,0.0,0.0,13.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.5,0.0,0.0,0.0,0.0,10.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.5,0.0,0.0,0.0,0.0,7.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.0,0.0,0.0,0.0,0.0,8.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.9,0.0,0.0,0.0,0.0,7.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,0.0,0.0,0.0,0.0,7.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.3,0.0,0.0,0.0,0.0,10.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.1,0.0,0.0,0.0,0.0,7.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.8,0.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.3,0.0,0.0,0.0,0.0,10.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.1,0.0,0.0,0.0,0.0,8.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100.2,0.0,0.0,0.0,0.0,101.3,0.0,0.0,0.0,0.0,0.0]
+		]);
+
+		var options_DISKBSIZE = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Block Size KB",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_DISKBSIZE").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKBSIZE, options_DISKBSIZE);
+		});
+
+			var data_DISKXFER = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'loop0','loop1','loop2','loop3','loop4','loop5','loop6','loop7','sda','sda1','sda2','sda3','sda4','sda5','loop8','loop9','loop10','loop11','loop12']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 32, 57)',1.8,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.5,0.0,0.0,0.0,0.0,3.5,0.0,1.5,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.8,0.0,0.0,0.0,0.0,15.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.5,0.0,0.0,0.0,0.0,8.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.7,0.0,0.0,0.0,0.0,2.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.7,0.0,0.0,0.0,0.0,2.7,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,1.9,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.2,0.0,0.0,0.0,0.0,7.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,6.7,0.0,0.0,0.0,0.0,6.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.8,0.0,0.0,0.0,0.0,3.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,4.5,0.0,0.0,0.0,0.0,4.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.6,0.0,0.0,0.0,0.0,5.5,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.4,0.0,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.8,0.0,0.0,0.0,0.0,1.8,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.1,0.0,0.0,0.0,0.0,3.1,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.0,0.0,0.0,0.0,0.0,5.0,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,2.3,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.7,0.0,0.0,0.0,0.0,2.6,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.5,0.0,0.0,0.0,0.0,3.4,0.0,0.0,0.0,0.0,0.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.9,0.0,0.0,0.0,0.0,2.9,0.0,0.0,0.0,0.0,0.0]
+		]);
+
+		var options_DISKXFER = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Disk Transfers per second",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_DISKXFER").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_DISKXFER, options_DISKXFER);
+		});
+
+			var data_JFS = google.visualization.arrayToDataTable([
+[{type: 'datetime', label: 'Datetime' },'/dev','/run','/','/snap/minecraft/11','/snap/gnome-logs/31','/snap/gnome-logs/25','/snap/gnome-3-260.04/59','/snap/core/4486','/snap/gnome-system-monitor/36','/snap/gnome-calculator/154','/snap/gnome-system-monitor/39','/snap/gnome-calculator/167','/snap/gnome-characters/86','/snap/gnome-characters/69','/snap/vlc/190','/snap/gnome-3-260.04/62']
+,['Date(2018,  4, 05, 02, 32, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 32, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 33, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 33, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 34, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 34, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 35, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 35, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 36, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 36, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 37, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 37, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 38, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 38, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 39, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 39, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 40, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 40, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 41, 27)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+,['Date(2018,  4, 05, 02, 41, 57)',0.0,0.2,4.5,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0]
+		]);
+
+		var options_JFS = {
+			chartArea: {left: "5%", width: "85%", top: "10%", height: "80%"},
+			title: "Journal File System Percent Full",
+			focusTarget: "category",
+			hAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 30
+				}
+			},
+			vAxis: {
+				gridlines: {
+					color: "lightgrey",
+					count: 11
+				}
+			},
+			explorer: { actions: ["dragToZoom", "rightClickToReset"],
+				axis: "horizontal",
+				keepInBounds: true,
+				maxZoomIn: 20.0
+			},
+			isStacked:  0
+		};
+
+		document.getElementById("draw_JFS").addEventListener("click", function() {
+		if (chart && chart.clearChart) chart.clearChart();
+
+		chart = new google.visualization.AreaChart(document.getElementById("chart_master"));
+		chart.draw( data_JFS, options_JFS);
+		});
+
+		}
+		</script>
+	</head>
+	 <body bgcolor="#EEEEFF">
+	nmon data file: <b>cacheserver_1.nmon</b>  
+	<button onclick="config()"><b>Configuration</b></button> 
+	<button id="draw_TOPSUM" style="color:black;"><b>Top Summary</b></button>
+	<button id="draw_TOPCMD" style="color:black;"><b>Top Commands</b></button>
+	<br>
+	<button id="draw_CPU_UTIL" style="color:red;"><b>CPU Util.</b></button>
+	<button id="draw_CPU_USE" style="color:red;"><b>CPU Use</b></button>
+	<button id="draw_RUNQ" style="color:red;"><b>RunQ</b></button>
+	<button id="draw_PSWITCH" style="color:red;"><b>pSwitch</b></button>
+	<button id="draw_FORKEXEC" style="color:red;"><b>ForkExec</b></button>
+	<button id="draw_MEM_LINUX" style="color:blue;"><b>Memory</b></button>
+	<button id="draw_SWAP_LINUX" style="color:blue;"><b>Swap</b></button>
+<br>
+	<button id="draw_NET" style="color:purple;"><b>Network</b></button>
+	<button id="draw_NETPACKET" style="color:purple;"><b>Net Packet</b></button>
+	<button id="draw_DISKBUSY" style="color:brown;"><b>Disk Busy</b></button>
+	<button id="draw_DISKBUSYu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKREAD" style="color:brown;"><b>Disk Read</b></button>
+	<button id="draw_DISKREADu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKWRITE" style="color:brown;"><b>Disk Write</b></button>
+	<button id="draw_DISKWRITEu" style="color:brown;"><b>Unstacked</b></button>
+	<button id="draw_DISKBSIZE" style="color:brown;"><b>Disk BSize</b></button>
+	<button id="draw_DISKXFER" style="color:brown;"><b>Disk Xfers</b></button>
+	<button id="draw_JFS" style="color:brown;"><b>JFS</b></button>
+
+	<div id="chart_master" style="width:100%; height:75%;">
+	<h2 style="color:blue">Click on a Graph button above, to display that graph</h2>
+	</div>
+
+<table><tr><td>
+<li>Host:ksdhir-Lenovo-G50-80
+<li>Date:05-MAY-2018
+<li>Time:02:32.24
+<li>Interval:30
+<li>Snapshots: 20
+<td>
+<li>Number of CPUs:4
+<li>Number of Disks:19
+<li>Linux Kernel 4.15.0-20-generic
+<li>Linux Version "QUbuntu 18.04 LTSQ"
+<td valign=top>
+<hr>
+<li>Graphed by <a href=http://nmon.sourceforge.net/pmwiki.php?n=Site.Nmonchart>nmonchart</a> v 30
+<li>Developer: Nigel Griffiths @mr_nmon
+<li>Zoom=ON Left-click & Drag=Zoom-in. Right-click=Reset.
+</table>
+	</body>
+</html>
