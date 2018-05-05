@@ -66,7 +66,7 @@ function chartMaker(viewType="A",chartType="CPU_UTIL") {
     // call chartView to make the chartObject
     chartView(viewType,chartType);
 
-
+    
     // prepare the html structure for the charts
     prepareHTML()
 
@@ -86,9 +86,9 @@ function chartView(viewType,chartType) {
 
     // create the sorted chartData to send only the relevant data corresponding to the current chart id
     var sortedChartData = {}
-    console.log(chartType)
+    //console.log(chartType)
 
-    console.log(filesChartData)
+    //console.log(filesChartData)
     // return data array of only the current chart id
     Object.keys(JSON.parse(filesChartData)).filter(function (k) { return RegExp(chartType).test(k); }).forEach(function (k) { return sortedChartData[k] = JSON.parse(filesChartData)[k]; });
 
@@ -102,6 +102,8 @@ function chartView(viewType,chartType) {
 
     // call ajaxCall to make the chartsLines obj for chart formation
     chartsObject = (ajaxCall("chartlines",chartFileDetails,sortedChartData,viewType));
+    
+    console.log(chartsObject)
     
     // update the chartIds that are the headings or the charts
     chartIds = Object.keys(JSON.parse(chartsObject))

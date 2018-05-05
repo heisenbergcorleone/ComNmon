@@ -278,7 +278,7 @@ def mergeFiles(fileList,run,mergeList):
     structurePoints = list()
     structure = list()
 
-    # coombine the data of the files to form a single chart
+    # combine the data of the files to form a single chart
     combineFiles(structure,structurePoints)
 
 
@@ -288,7 +288,12 @@ def mergeFiles(fileList,run,mergeList):
     i = 0
     for index,dateRow in enumerate(structure):
         if(dateRow[i] == "x"):
-            i = i + 1
+            
+            for correctIndex,validDate in enumerate(dateRow):
+                if(validDate != "x"):
+                    i = correctIndex
+                    break
+
             mergeDates.append([dateRow[i]])
         else:    
             mergeDates.append([dateRow[i]])
@@ -566,8 +571,6 @@ def makeChartData():
     elif(viewType == "C"): # type-wise average for all types in a single chart
         
 
-
-
         # fileDict is the object with the selected filenames
         for indexServer,server in enumerate(filesDict):
 
@@ -617,10 +620,10 @@ def makeChartData():
                     dataDict["chart"] = newChartData
 
                     jsonDict[server] = dataDict
-                    
 
+                    
         if(indexServer == (len(filesDict)-1)):
-            
+
             dumpJSON(jsonDict)
 
 
