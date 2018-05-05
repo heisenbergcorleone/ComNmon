@@ -61,7 +61,12 @@ def combineFiles(structure,structurePoints):
                     diff.append(int(fcurVal)-int(fprevdate))                
                 
                 closestZero = min((abs(x),x) for x in diff)[0]
-                indexclosestZero = diff.index(closestZero)
+                try:
+                    indexclosestZero = diff.index(closestZero)
+                except ValueError:
+                    closestZero = closestZero*-1
+                    indexclosestZero = diff.index(closestZero)
+
 
                 # store the breakpoint or the point of closest matching time
                 breakpoint = ""
